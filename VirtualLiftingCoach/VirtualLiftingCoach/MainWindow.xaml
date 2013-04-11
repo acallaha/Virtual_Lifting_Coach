@@ -57,19 +57,53 @@
             <Image Name="Image" Width="640" Height="480" Margin="5" />
         </Viewbox>
         <StatusBar Grid.Row="1" HorizontalAlignment="Stretch" Name="statusBar" VerticalAlignment="Top" Background="White" Foreground="{StaticResource MediumGreyBrush}">
-            <StatusBarItem Padding="0 0 0 10" FontSize="36">
-                <TextBlock Name="squatDepthLabel" Margin="-1 0 0 0" FontSize="48">Squat Depth:</TextBlock>
+            <StatusBarItem Padding="0 0 0 10" FontSize="24">
+                <TextBlock Name="squatDepthLabel" Margin="-1 0 0 0" FontSize="36">Squat Depth:</TextBlock>
             </StatusBarItem>
-            <StatusBarItem Padding="10 0 0 10" FontSize="48">
+            <StatusBarItem Padding="10 0 0 10" FontSize="36">
                 <TextBlock Name="squatDepthText" Margin="-1 0 0 0"></TextBlock>
+            </StatusBarItem>
+            <StatusBarItem Padding="10 0 0 10" FontSize="24">
+                <TextBlock Name="repCountLabel" Margin="-1 0 0 0" FontSize="36">Rep Count:</TextBlock>
+            </StatusBarItem>
+            <StatusBarItem Padding="10 0 0 10" FontSize="36">
+                <TextBlock Name="repCountText" Margin="-1 0 0 0"></TextBlock>
             </StatusBarItem>
         </StatusBar>
         <StatusBar Grid.Row="2" HorizontalAlignment="Stretch" Name="statusBar2" VerticalAlignment="Top" Background="White" Foreground="{StaticResource MediumGreyBrush}">
             <StatusBarItem Padding="0 0 0 10" FontSize="36">
-                <TextBlock Name="kneeWidthLabel" Margin="-1 0 0 0" FontSize="48" Text="Knee Width:"></TextBlock>
+                <TextBlock Name="kneeWidthLabel" Margin="-1 0 0 0" FontSize="36" Text="Knee Width:"></TextBlock>
             </StatusBarItem>
             <StatusBarItem Padding="10 0 0 10" FontSize="48">
                 <TextBlock Name="kneeWidthText" Margin="-1 0 0 0"></TextBlock>
+            </StatusBarItem>
+            <StatusBarItem Padding="10 0 0 10" FontSize="36">
+                <TextBlock Name="goodRepsLabel" Margin="-1 0 0 0" FontSize="36" Text="Good Reps:"></TextBlock>
+            </StatusBarItem>
+            <StatusBarItem Padding="10 0 0 10" FontSize="48">
+                <TextBlock Name="goodRepsText" Margin="-1 0 0 0"></TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+        <StatusBar Grid.Row="3" HorizontalAlignment="Stretch" Name="statusBar3" VerticalAlignment="Top" Background="White" Foreground="{StaticResource MediumGreyBrush}">
+            <StatusBarItem Padding="0 0 0 10" FontSize="36">
+                <TextBlock Name="currentDepthLabel" Margin="-1 0 0 0" FontSize="36" Text="Current Depth:"></TextBlock>
+            </StatusBarItem>
+            <StatusBarItem Padding="10 0 0 10" FontSize="48">
+                <TextBlock Name="currentDepthText" Margin="-1 0 0 0"></TextBlock>
+            </StatusBarItem>
+            <StatusBarItem Padding="10 0 0 10" FontSize="36">
+                <TextBlock Name="maxDepthLabel" Margin="-1 0 0 0" FontSize="36" Text="Max depth:"></TextBlock>
+            </StatusBarItem>
+            <StatusBarItem Padding="10 0 0 10" FontSize="48">
+                <TextBlock Name="maxDepthText" Margin="-1 0 0 0"></TextBlock>
+            </StatusBarItem>
+        </StatusBar>
+        <StatusBar Grid.Row="4" HorizontalAlignment="Stretch" Name="statusBar4" VerticalAlignment="Top" Background="White" Foreground="{StaticResource MediumGreyBrush}">
+            <StatusBarItem Padding="0 0 0 10" FontSize="36">
+                <TextBlock Name="currentStateLabel" Margin="-1 0 0 0" FontSize="36" Text="Current State:"></TextBlock>
+            </StatusBarItem>
+            <StatusBarItem Padding="10 0 0 10" FontSize="48">
+                <TextBlock Name="currentStateText" Margin="-1 0 0 0"></TextBlock>
             </StatusBarItem>
         </StatusBar>
     </Grid>

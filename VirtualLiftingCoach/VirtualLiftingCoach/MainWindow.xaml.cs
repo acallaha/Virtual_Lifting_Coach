@@ -18,6 +18,35 @@ namespace VirtualLiftingCoach
         private const float RenderWidth = 640.0f;
 
         /// <summary>
+        /// Width of output drawing
+        /// </summary>
+        private int repCount = 0;
+
+        /// <summary>
+        /// Possible squat states
+        /// </summary>
+        enum SquatState { SQUAT_TOP, SQUAT_IN_PROGRESS, SQUAT_START};
+
+        /// <summary>
+        /// Current squat state
+        /// </summary>
+        SquatState curSquatState = SquatState.SQUAT_START;
+
+        /// <summary>
+        /// Number of good reps
+        /// </summary>
+        int goodReps = 0;
+
+        double curMilliseconds = 0;
+
+        double squatStartTime = 0;
+
+        /// <summary>
+        /// Number of bad reps
+        /// </summary>
+        int badReps = 0;
+
+        /// <summary>
         /// Height of our output drawing
         /// </summary>
         private const float RenderHeight = 480.0f;
@@ -308,23 +337,67 @@ namespace VirtualLiftingCoach
             double hipHeight = skeleton.Joints[JointType.HipCenter].Position.Y;
             double kneeHeight = (skeleton.Joints[JointType.KneeLeft].Position.Y + skeleton.Joints[JointType.KneeRight].Position.Y) / 2.0;
             double squatDepth = hipHeight - kneeHeight;
+            double hipZCoord = skeleton.Joints[JointType.HipCenter].Position.Z;
             this.squatDepthText.Text = squatDepth.ToString("0.000");
+            double maxSquatDepth = double.PositiveInfinity;
 
-
-            if (squatDepth < .25)
+            this.currentDepthText.Text = hipZCoord.ToString("0.000");
+            curMilliseconds = System.DateTime.Now.TimeOfDay.TotalMilliseconds;
+            if (hipZCoord > 1.5)
             {
-                this.squatDepthText.Foreground = Brushes.Green;
-                if (kneeWidth > .5)
-                    this.kneeWidthText.Foreground = Brushes.Green;
-                else
-                    this.kneeWidthText.Foreground = Brushes.Red;
-            }
-            else
-            {
-                this.squatDepthText.Foreground = Brushes.Red;
-                this.kneeWidthText.Foreground = Brushes.Black;
-            }
+                
+                if (squatDepth < 0.45 && curSquatState == SquatState.SQUAT_START)
+                {
+                    // squat has begun
+                    curSquatState = SquatState.SQUAT_IN_PROGRESS;
+                    this.currentStateText.Text = "Squat in Progress";
+                    squatStartTime = System.DateTime.Now.TimeOfDay.TotalMilliseconds;
+                }
 
+                if (squatDepth < 0.45 && curSquatState == SquatState.SQUAT_IN_PROGRESS )
+                {
+                    // keep track of max depth
+                    if (squatDepth < maxSquatDepth)
+                    {
+                        maxSquatDepth = squatDepth;
+                        this.maxDepthText.Text = maxSquatDepth.ToString("0.000");
+                    }
+
+                    // set colors for live display
+                    if (squatDepth < .25)
+                    {
+                        this.squatDepthText.Foreground = Brushes.Green;
+                        if (kneeWidth > .5)
+                            this.kneeWidthText.Foreground = Brushes.Green;
+                        else
+                            this.kneeWidthText.Foreground = Brushes.Red;
+                    }
+                    else
+                    {
+                        this.squatDepthText.Foreground = Brushes.Red;
+                        this.kneeWidthText.Foreground = Brushes.Black;
+                    }
+                }
+
+                if (squatDepth >= 0.45 && curSquatState == SquatState.SQUAT_IN_PROGRESS && (curMilliseconds - squatStartTime) > 1500)
+                {
+                    // squat has ended
+                    curSquatState = SquatState.SQUAT_START;
+                    this.currentStateText.Text = "Squat over, begin squat";
+                    repCount++;
+                    this.squatDepthText.Text = squatDepth.ToString("0.000");
+                    this.repCountText.Text = repCount.ToString("0");
+                    if (maxSquatDepth < 0.3)
+                    {
+                        goodReps++;
+                        this.goodRepsText.Text = goodReps.ToString("0.000");
+                    }
+                    else
+                    {
+                        badReps++;
+                    }
+                }
+            }
         }
 
         /// <summary>
