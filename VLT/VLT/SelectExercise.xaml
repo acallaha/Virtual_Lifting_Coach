@@ -1,0 +1,21 @@
+﻿<Page x:Class="VLT.SelectExercise"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="400" d:DesignWidth="525"
+	Title="SelectExercise">
+
+    <Grid>
+        <Button Content="Dead Lift" Height="23" HorizontalAlignment="Left" Margin="87,108,0,0" Name="deadLiftButton" VerticalAlignment="Top" Width="100" Click="exerciseButtonClick" />
+        <Button Content="Front Squat" Height="23" HorizontalAlignment="Left" Margin="87,181,0,0" Name="frontSquatButton" VerticalAlignment="Top" Width="100" Click="exerciseButtonClick" />
+        <Button Content="Back Squat" Height="23" HorizontalAlignment="Left" Margin="87,254,0,0" Name="backSquatButton" VerticalAlignment="Top" Width="100" Click="exerciseButtonClick" />
+        <Button Content="Bent Over Row" Height="23" HorizontalAlignment="Left" Margin="319,108,0,0" Name="bentOverRowButton" VerticalAlignment="Top" Width="100" Click="exerciseButtonClick" />
+        <Button Content="Overhead Press" Height="23" HorizontalAlignment="Left" Margin="319,181,0,0" Name="overheadPressButton" VerticalAlignment="Top" Width="100" Click="exerciseButtonClick" />
+        <Button Content="Hang Clean" Height="23" HorizontalAlignment="Left" Margin="319,254,0,0" Name="hangCleanButton" VerticalAlignment="Top" Width="100" Click="exerciseButtonClick" />
+        <Label Content="Select an Exercise" Height="42" HorizontalAlignment="Left" Margin="158,31,0,0" Name="label1" VerticalAlignment="Top" FontSize="22" />
+        <Rectangle Height="41" HorizontalAlignment="Left" Margin="151,31,0,0" Name="rectangle1" Stroke="Black" VerticalAlignment="Top" Width="190" />
+        <Button Content="System Information" Height="23" HorizontalAlignment="Left" Margin="183,335,0,0" Name="systemInfo" VerticalAlignment="Top" Width="123" Click="systemInfo_Click" />
+    </Grid>
+</Page>
