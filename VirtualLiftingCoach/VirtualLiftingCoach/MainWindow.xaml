@@ -72,13 +72,21 @@
         </StatusBar>
         <StatusBar Grid.Row="2" HorizontalAlignment="Stretch" Name="statusBar2" VerticalAlignment="Top" Background="White" Foreground="{StaticResource MediumGreyBrush}">
             <StatusBarItem Padding="0 0 0 10" FontSize="36">
-                <TextBlock Name="kneeWidthLabel" Margin="-1 0 0 0" FontSize="36" Text="Knee Width:"></TextBlock>
+                <TextBlock Name="kneeLabel" Margin="-1 0 0 0" FontSize="36" Text="Knee:"></TextBlock>
             </StatusBarItem>
             <StatusBarItem Padding="10 0 0 10" FontSize="48">
-                <TextBlock Name="kneeWidthText" Margin="-1 0 0 0"></TextBlock>
+                <TextBlock Name="kneeText" Margin="-1 0 0 0"></TextBlock>
+            </StatusBarItem>
+            <StatusBarItem Padding="0 0 0 10" FontSize="36">
+                <TextBlock Name="depthLabel" Margin="20
+                           0 0 0" FontSize="36" Text="Depth:"></TextBlock>
+            </StatusBarItem>
+            <StatusBarItem Padding="10 0 0 10" FontSize="48">
+                <TextBlock Name="depthText" Margin="-1 0 0 0"></TextBlock>
             </StatusBarItem>
             <StatusBarItem Padding="10 0 0 10" FontSize="36">
-                <TextBlock Name="goodRepsLabel" Margin="-1 0 0 0" FontSize="36" Text="Good Reps:"></TextBlock>
+                <TextBlock Name="goodRepsLabel" Margin="20
+                           0 0 0" FontSize="36" Text="Good Reps:"></TextBlock>
             </StatusBarItem>
             <StatusBarItem Padding="10 0 0 10" FontSize="48">
                 <TextBlock Name="goodRepsText" Margin="-1 0 0 0"></TextBlock>
