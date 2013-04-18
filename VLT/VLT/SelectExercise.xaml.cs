@@ -34,8 +34,8 @@ namespace VLT
 
         private void systemInfo_Click(object sender, RoutedEventArgs e)
         {
-            kinectPage kinectPage = new kinectPage();
-            this.NavigationService.Navigate(kinectPage);
+            systemInformationPage systemInformationPage = new systemInformationPage();
+            this.NavigationService.Navigate(new systemInformationPage());
         }
     }
 }

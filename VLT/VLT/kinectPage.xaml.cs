@@ -14,19 +14,18 @@ using System.Windows.Shapes;
 using System.IO;
 using Microsoft.Kinect;
 
-
 namespace VLT
 {
     /// <summary>
     /// Interaction logic for kinectPage.xaml
     /// </summary>
-    public partial class kinectPage : Page
+    public class quickLiftKinect
     {
-        public kinectPage()
+        public quickLiftKinect()
         {
-            InitializeComponent();
         }
-                /// <summary>
+
+        /// <summary>
         /// Width of output drawing
         /// </summary>
         private const float RenderWidth = 640.0f;
@@ -120,6 +119,8 @@ namespace VLT
         /// </summary>
         private DrawingImage imageSource;
 
+        private Rep curRep = new Rep();
+
         /// <summary>
         /// Draws indicators to show which edges are clipping skeleton data
         /// </summary>
@@ -210,7 +211,7 @@ namespace VLT
 
             if (null == this.sensor)
             {
-                this.squatDepthLabel.Text = "No Kinect Found";
+                //this.squatDepthLabel.Text = "No Kinect Found";
             }
         }
 
@@ -332,78 +333,9 @@ namespace VLT
                     drawingContext.DrawEllipse(drawBrush, null, this.SkeletonPointToScreen(joint.Position), JointThickness, JointThickness);
                 }
             }
-
-            double kneeRightX = skeleton.Joints[JointType.KneeRight].Position.X;
-            double kneeLeftX = skeleton.Joints[JointType.KneeLeft].Position.X;
-            double kneeWidth = kneeRightX - kneeLeftX;
-            this.kneeWidthText.Text = kneeWidth.ToString("0.000");
-
-            // this.hipDistText.Text = skeleton.Joints[JointType.HipCenter].Position.Z.ToString();
-
-            double hipHeight = skeleton.Joints[JointType.HipCenter].Position.Y;
-            double kneeHeight = (skeleton.Joints[JointType.KneeLeft].Position.Y + skeleton.Joints[JointType.KneeRight].Position.Y) / 2.0;
-            double squatDepth = hipHeight - kneeHeight;
-            double hipZCoord = skeleton.Joints[JointType.HipCenter].Position.Z;
-            this.squatDepthText.Text = squatDepth.ToString("0.000");
-            double maxSquatDepth = double.PositiveInfinity;
-
-            this.currentDepthText.Text = hipZCoord.ToString("0.000");
-            curMilliseconds = System.DateTime.Now.TimeOfDay.TotalMilliseconds;
-            if (hipZCoord > 1.5)
-            {
-                
-                if (squatDepth < 0.45 && curSquatState == SquatState.SQUAT_START)
-                {
-                    // squat has begun
-                    curSquatState = SquatState.SQUAT_IN_PROGRESS;
-                    this.currentStateText.Text = "Squat in Progress";
-                    squatStartTime = System.DateTime.Now.TimeOfDay.TotalMilliseconds;
-                }
-
-                if (squatDepth < 0.45 && curSquatState == SquatState.SQUAT_IN_PROGRESS )
-                {
-                    // keep track of max depth
-                    if (squatDepth < maxSquatDepth)
-                    {
-                        maxSquatDepth = squatDepth;
-                        this.maxDepthText.Text = maxSquatDepth.ToString("0.000");
-                    }
-
-                    // set colors for live display
-                    if (squatDepth < .25)
-                    {
-                        this.squatDepthText.Foreground = Brushes.Green;
-                        if (kneeWidth > .5)
-                            this.kneeWidthText.Foreground = Brushes.Green;
-                        else
-                            this.kneeWidthText.Foreground = Brushes.Red;
-                    }
-                    else
-                    {
-                        this.squatDepthText.Foreground = Brushes.Red;
-                        this.kneeWidthText.Foreground = Brushes.Black;
-                    }
-                }
-
-                if (squatDepth >= 0.45 && curSquatState == SquatState.SQUAT_IN_PROGRESS && (curMilliseconds - squatStartTime) > 1500)
-                {
-                    // squat has ended
-                    curSquatState = SquatState.SQUAT_START;
-                    this.currentStateText.Text = "Squat over, begin squat";
-                    repCount++;
-                    this.squatDepthText.Text = squatDepth.ToString("0.000");
-                    this.repCountText.Text = repCount.ToString("0");
-                    if (maxSquatDepth < 0.3)
-                    {
-                        goodReps++;
-                        this.goodRepsText.Text = goodReps.ToString("0.000");
-                    }
-                    else
-                    {
-                        badReps++;
-                    }
-                }
-            }
+            
+            scoreThings(skeleton);
+            setState(skeleton);
         }
 
         /// <summary>
@@ -455,5 +387,146 @@ namespace VLT
             drawingContext.DrawLine(drawPen, this.SkeletonPointToScreen(joint0.Position), this.SkeletonPointToScreen(joint1.Position));
         }
 
+        private void setState(Skeleton skeleton)
+        {
+            // this.hipDistText.Text = skeleton.Joints[JointType.HipCenter].Position.Z.ToString();
+
+            double kneeRightX = skeleton.Joints[JointType.KneeRight].Position.X;
+            double kneeLeftX = skeleton.Joints[JointType.KneeLeft].Position.X;
+            double kneeWidth = kneeRightX - kneeLeftX;
+
+
+            double hipHeight = skeleton.Joints[JointType.HipCenter].Position.Y;
+            double kneeHeight = (skeleton.Joints[JointType.KneeLeft].Position.Y + skeleton.Joints[JointType.KneeRight].Position.Y) / 2.0;
+            double squatDepth = hipHeight - kneeHeight;
+            double hipZCoord = skeleton.Joints[JointType.HipCenter].Position.Z;
+            //this.squatDepthText.Text = squatDepth.ToString("0.000");
+            double maxSquatDepth = double.PositiveInfinity;
+
+            curMilliseconds = System.DateTime.Now.TimeOfDay.TotalMilliseconds;
+            if (hipZCoord > 1.5)
+            {
+
+                if (squatDepth < 0.45 && curSquatState == SquatState.SQUAT_START)
+                {
+                    // squat has begun
+                    curSquatState = SquatState.SQUAT_IN_PROGRESS;
+                    //this.currentStateText.Text = "Squat in Progress";
+                    squatStartTime = System.DateTime.Now.TimeOfDay.TotalMilliseconds;
+                }
+
+                if (squatDepth < 0.45 && curSquatState == SquatState.SQUAT_IN_PROGRESS)
+                {
+                    // keep track of max depth
+                    if (squatDepth < maxSquatDepth)
+                    {
+                        maxSquatDepth = squatDepth;
+                        //this.maxDepthText.Text = maxSquatDepth.ToString("0.000");
+                    }
+
+                    // set colors for live display
+                    if (squatDepth < .25)
+                    {
+                        //this.squatDepthText.Foreground = Brushes.Green;
+                        if (kneeWidth > .5) { }
+                        //this.kneeText.Foreground = Brushes.Green;
+                        else { }
+                            //this.kneeText.Foreground = Brushes.Red;
+                    }
+                    else
+                    {
+                       // this.squatDepthText.Foreground = Brushes.Red;
+                        //this.kneeText.Foreground = Brushes.Black;
+                    }
+                }
+
+                if (squatDepth >= 0.45 && curSquatState == SquatState.SQUAT_IN_PROGRESS && (curMilliseconds - squatStartTime) > 1500)
+                {
+                    // squat has ended
+                    curSquatState = SquatState.SQUAT_START;
+                    //this.currentStateText.Text = "Squat over, begin squat";
+                    repCount++;
+                    //this.squatDepthText.Text = squatDepth.ToString("0.000");
+                    //this.repCountText.Text = repCount.ToString("0");
+                    if (maxSquatDepth < 0.3)
+                    {
+                        goodReps++;
+                        //this.goodRepsText.Text = goodReps.ToString("0.000");
+                    }
+                    else
+                    {
+                        badReps++;
+                    }
+                }
+            }
+        }
+
+        private void scoreThings(Skeleton skeleton)
+        {
+            if (curSquatState == SquatState.SQUAT_START)
+            {
+                curRep = new Rep();
+            }
+
+            int kneeScore, depthScore;
+            kneeScore  = scoreKneeWidth(skeleton);
+            depthScore = scoreDepth(skeleton);
+
+            if (kneeScore > curRep.scores[0])
+            {
+                curRep.scores[0] = kneeScore;
+            }
+            if (depthScore > curRep.scores[1])
+            {
+                curRep.scores[1] = depthScore;
+            }
+
+
+            //kneeText.Text = curRep.scores[0].ToString();
+            //depthText.Text = curRep.scores[1].ToString();
+
+        }
+
+
+
+        private int scoreKneeWidth(Skeleton skeleton)
+        {
+            
+            double hipHeight = skeleton.Joints[JointType.HipCenter].Position.Y;
+            double kneeHeight = (skeleton.Joints[JointType.KneeLeft].Position.Y + skeleton.Joints[JointType.KneeRight].Position.Y) / 2.0;
+            double squatDepth = hipHeight - kneeHeight;
+            
+            double kneeRightX = skeleton.Joints[JointType.KneeRight].Position.X;
+            double kneeLeftX = skeleton.Joints[JointType.KneeLeft].Position.X;
+            double kneeWidth = kneeRightX - kneeLeftX;
+
+            if (squatDepth > .3)
+                return -1;
+            
+            if (kneeWidth > .6)
+                return 100;
+            else if (kneeWidth < .3)
+                return 0;
+            else
+                return (int)((kneeWidth - .3) * 100.0 / .3);
+        }
+
+        private int scoreDepth(Skeleton skeleton)
+        {
+            double hipHeight = skeleton.Joints[JointType.HipCenter].Position.Y;
+            double kneeHeight = (skeleton.Joints[JointType.KneeLeft].Position.Y + skeleton.Joints[JointType.KneeRight].Position.Y) / 2.0;
+            double squatDepth = hipHeight - kneeHeight;
+            double hipZCoord = skeleton.Joints[JointType.HipCenter].Position.Z;
+            //this.squatDepthText.Text = squatDepth.ToString("0.000");
+
+            //this.currentDepthText.Text = hipZCoord.ToString("0.000");
+
+            if (squatDepth < .2)
+                return 100;
+            else if (squatDepth > .35)
+                return 0;
+            else
+                return (int)((.35 - squatDepth) * 100.0 / .15);
+        }
     }
 }

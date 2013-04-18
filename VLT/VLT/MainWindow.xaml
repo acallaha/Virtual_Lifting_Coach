@@ -1,6 +1,8 @@
-﻿<NavigationWindow x:Class="VLT.MainWindow"
+﻿<Window x:Class="VLT.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="VLT" Height="600" Width="800" Source="SelectExercise.xaml">
+        Title="VLT" Height="600" Width="800" >
 
-</NavigationWindow>
+            <Frame Name="mainFrame" />
+
+</Window>

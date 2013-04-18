@@ -6,7 +6,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800"
 	Title="quickLiftPage">
-
     <Grid Height="600" Width="800">
         <Label Content="Label" Height="34" HorizontalAlignment="Left" Margin="167,22,0,0" Name="exerciseName" VerticalAlignment="Top" Width="164" />
         <Button Content="Rep" Height="23" HorizontalAlignment="Left" Margin="594,549,0,0" Name="repButton" VerticalAlignment="Top" Width="75" Click="repButtonClick" />
@@ -16,8 +15,13 @@
         <Grid Height="454" HorizontalAlignment="Left" Margin="198,70,0,0" Name="quickLiftGrid" VerticalAlignment="Top" Width="558">
             <ListBox Height="304" HorizontalAlignment="Left" Margin="0,1,0,0" Name="issueBox" VerticalAlignment="Top" Width="225" />
             <TextBlock Height="143" HorizontalAlignment="Left" Margin="0,311,0,0" Name="adviceBox" Text="Advice" VerticalAlignment="Top" Width="558" />
-            <Canvas Height="296" HorizontalAlignment="Left" Margin="225,8,0,0" Name="canvas1" VerticalAlignment="Top" Width="329" />
+            
+            <Viewbox Height="304" HorizontalAlignment="Left" Margin="223,1,0,0" Name="viewbox1" VerticalAlignment="Top" Width="334">
+                <Image Height="182" Name="Image" Stretch="Fill" Width="200" />
+            </Viewbox>
+            
         </Grid>
+            
     </Grid>
 
 </Page>
