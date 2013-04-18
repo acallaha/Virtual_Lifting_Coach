@@ -23,40 +23,62 @@ namespace VLT
     {
         private int currentSet = 1;
         private int currentRep = 0;
+        private int position = 0;
+        private static int DECENT = 40;
+        private static int GOOD = 80;
+        private static int MAX_SETS = 100;
+        private int[] locationOfSetLabels = new int[MAX_SETS];
+        private int cumlativeScore = 0;
         public quickLiftPage()
         {
             InitializeComponent();
+
         }
-        public void makeRep() {
+        public void makeRep(int quality) {
             Label setLabel;
+            Color c;
+            cumlativeScore += quality;
+            if (quality < DECENT) c = Colors.Red;
+            else if (quality < GOOD) c = Colors.Yellow;
+            else c = Colors.Green;
+            c.A = 127; 
             //RowDefinition newSet;
             if (currentRep == 0) {
+                locationOfSetLabels[currentSet] = position;
                 // Make set row
                 Console.WriteLine("Making new set row");
                 setLabel = new Label();
+                setLabel.Background = new SolidColorBrush(c);
                 setLabel.Content = "Set " + currentSet;
                 setLabel.Name = "Set" + currentSet;
                 setLabel.MouseLeftButtonDown += showData;
                 setRepList.Items.Add(setLabel);
             }
             currentRep++;
-
             setLabel = new Label();
             setLabel.Content = "\tRep " + currentRep;
+            setLabel.Background = new SolidColorBrush(c);
             setLabel.Name = "Rep" + currentRep;
             setLabel.MouseLeftButtonDown += showData;
             setRepList.Items.Add(setLabel);
 
+            if (cumlativeScore/currentRep < DECENT) c = Colors.Red;
+            else if (quality/currentRep < GOOD) c = Colors.Yellow;
+            else c = Colors.Green;
+            // Update the color for the set
             Console.WriteLine("Increase current Rep: " + currentRep);
         }
         public void endSet()
         {
-            currentRep = 0;
-            currentSet++;
+            if (currentRep != 0)
+            {
+                currentRep = 0;
+                currentSet++;
+            }
         }
         public void repButtonClick(object sender, RoutedEventArgs e)
         {
-            makeRep();
+            makeRep(50);
         }
 
         public void setButtonClick(object sender, RoutedEventArgs e)
@@ -182,6 +204,8 @@ namespace VLT
 
         private Rep curRep = new Rep();
 
+        private bool hasSkeleton = false;
+
 
 
         /// <summary>
@@ -229,7 +253,7 @@ namespace VLT
         /// </summary>
         /// <param name="sender">object sending the event</param>
         /// <param name="e">event arguments</param>
-        private void WindowLoaded(object sender, RoutedEventArgs e)
+        private void PageLoaded(object sender, RoutedEventArgs e)
         {
             // Create the drawing group we'll use for drawing
             this.drawingGroup = new DrawingGroup();
@@ -255,6 +279,9 @@ namespace VLT
 
             if (null != this.sensor)
             {
+                
+                Console.WriteLine("yay it worked");
+                
                 // Turn on the skeleton stream to receive skeleton frames
                 this.sensor.SkeletonStream.Enable();
 
@@ -274,6 +301,7 @@ namespace VLT
 
             if (null == this.sensor)
             {
+                Console.WriteLine("boo it failed");
                 //this.squatDepthLabel.Text = "No Kinect Found";
             }
         }
@@ -283,7 +311,7 @@ namespace VLT
         /// </summary>
         /// <param name="sender">object sending the event</param>
         /// <param name="e">event arguments</param>
-        private void WindowClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void PageClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (null != this.sensor)
             {
@@ -300,13 +328,16 @@ namespace VLT
         {
             Skeleton[] skeletons = new Skeleton[0];
 
+
             using (SkeletonFrame skeletonFrame = e.OpenSkeletonFrame())
             {
                 if (skeletonFrame != null)
                 {
                     skeletons = new Skeleton[skeletonFrame.SkeletonArrayLength];
                     skeletonFrame.CopySkeletonDataTo(skeletons);
+  
                 }
+
             }
 
             using (DrawingContext dc = this.drawingGroup.Open())
@@ -323,9 +354,19 @@ namespace VLT
                         if (skel.TrackingState == SkeletonTrackingState.Tracked)
                         {
                             this.DrawBonesAndJoints(skel, dc);
+
+                            if (!this.hasSkeleton)
+                            {
+                                this.curSquatState = SquatState.SQUAT_START;
+                                Console.WriteLine("has skel grr");
+                                this.endSet();
+                                this.hasSkeleton = true;
+                            }
                         }
                         else if (skel.TrackingState == SkeletonTrackingState.PositionOnly)
                         {
+                            Console.WriteLine("no skeleton here");
+                            this.hasSkeleton = false;
                             dc.DrawEllipse(
                             this.centerPointBrush,
                             null,
@@ -340,6 +381,7 @@ namespace VLT
                 this.drawingGroup.ClipGeometry = new RectangleGeometry(new Rect(0.0, 0.0, RenderWidth, RenderHeight));
             }
         }
+
 
         /// <summary>
         /// Draws a skeleton's bones and joints
@@ -396,9 +438,18 @@ namespace VLT
                     drawingContext.DrawEllipse(drawBrush, null, this.SkeletonPointToScreen(joint.Position), JointThickness, JointThickness);
                 }
             }
-
+            //Console.WriteLine("Calling scoreThings");
             scoreThings(skeleton);
+            //Console.WriteLine("Calling setState");
+            SquatState prevSquatState = this.curSquatState;
             setState(skeleton);
+            //Console.WriteLine(this.curSquatState);
+            if (prevSquatState == SquatState.SQUAT_IN_PROGRESS &&
+                this.curSquatState == SquatState.SQUAT_START)
+            {
+                int average = (this.curRep.scores[0] + this.curRep.scores[1]) / 2;
+                this.makeRep(average);
+            }
         }
 
         /// <summary>
@@ -544,6 +595,7 @@ namespace VLT
                 curRep.scores[1] = depthScore;
             }
 
+            //Console.WriteLine("Scores: " + kneeScore + " " + depthScore);
 
             //kneeText.Text = curRep.scores[0].ToString();
             //depthText.Text = curRep.scores[1].ToString();
