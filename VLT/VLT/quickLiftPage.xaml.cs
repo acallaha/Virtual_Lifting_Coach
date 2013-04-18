@@ -35,38 +35,46 @@ namespace VLT
             InitializeComponent();
 
         }
+        /// <summary>
+        /// Adds a rep and set count to the user interface
+        /// </summary>
+        /// <param name="quality">A score from 1 to 100 of the current rep</param>
         public void makeRep(int quality) {
             Label setLabel;
             Color c;
             cumlativeScore += quality;
+            // adjust color based on the quality of the rep. 
             if (quality < DECENT) c = Colors.Red;
             else if (quality < GOOD) c = Colors.Yellow;
             else c = Colors.Green;
             c.A = 127; 
-            //RowDefinition newSet;
+            // If the first rep of a set, add a set label before making a rep
             if (currentRep == 0) {
-                locationOfSetLabels[currentSet] = position;
+                locationOfSetLabels[currentSet-1] = position; // save location of set label
                 // Make set row
                 Console.WriteLine("Making new set row");
                 setLabel = new Label();
-                setLabel.Background = new SolidColorBrush(c);
-                setLabel.Content = "Set " + currentSet;
+                setLabel.Background = new SolidColorBrush(c); // paint the set
+                setLabel.Content = "Set " + currentSet + "\t";
                 setLabel.Name = "Set" + currentSet;
                 setLabel.MouseLeftButtonDown += showData;
                 setRepList.Items.Add(setLabel);
             }
             currentRep++;
-            setLabel = new Label();
-            setLabel.Content = "\tRep " + currentRep;
-            setLabel.Background = new SolidColorBrush(c);
-            setLabel.Name = "Rep" + currentRep;
-            setLabel.MouseLeftButtonDown += showData;
-            setRepList.Items.Add(setLabel);
-
+            Label repLabel = new Label();
+            repLabel.Content = "\tRep " + currentRep + "\t\t";
+            repLabel.Background = new SolidColorBrush(c); // paint the set
+            repLabel.Name = "Rep" + currentRep;
+            repLabel.MouseLeftButtonDown += showData;
+            setRepList.Items.Add(repLabel);
+            // adjust color based on average score for the set
             if (cumlativeScore/currentRep < DECENT) c = Colors.Red;
-            else if (quality/currentRep < GOOD) c = Colors.Yellow;
+            else if (cumlativeScore/currentRep < GOOD) c = Colors.Yellow;
             else c = Colors.Green;
+            c.A = 127; 
             // Update the color for the set
+            setLabel = (Label)setRepList.Items.GetItemAt(locationOfSetLabels[currentSet - 1]);
+            setLabel.Background = new SolidColorBrush(c);
             Console.WriteLine("Increase current Rep: " + currentRep);
         }
         public void endSet()
@@ -79,7 +87,7 @@ namespace VLT
         }
         public void repButtonClick(object sender, RoutedEventArgs e)
         {
-            makeRep(50);
+            makeRep(Convert.ToInt32(qualityScoreBox.Text));
         }
 
         public void setButtonClick(object sender, RoutedEventArgs e)

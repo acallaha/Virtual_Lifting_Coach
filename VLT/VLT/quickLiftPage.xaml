@@ -23,7 +23,7 @@
             </Viewbox>
             
         </Grid>
-            
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="421,549,0,0" Name="qualityScoreBox" VerticalAlignment="Top" Width="47" Text="50"/>
     </Grid>
 
 </Page>
