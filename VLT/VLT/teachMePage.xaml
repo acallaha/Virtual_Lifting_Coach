@@ -5,14 +5,21 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
       d:DesignHeight="1200" d:DesignWidth="1600"
-	Title="teachMePage">
+	  Title="teachMePage"
+      Loaded="PageLoaded">
 
     <Grid>
         <Label Content="Label" Height="34" HorizontalAlignment="Left" Margin="82,145,0,0" Name="exerciseName" VerticalAlignment="Top" Width="212" />
-        <ListBox Height="320" HorizontalAlignment="Left" Margin="54,229,0,0" Name="instructionList" VerticalAlignment="Top" Width="215" />
+        <ListBox Height="320" HorizontalAlignment="Left" Margin="54,229,0,0" Name="instructionList" VerticalAlignment="Top" Width="215"  />
         <Label Content="Steps" Height="25" HorizontalAlignment="Left" Margin="58,203,0,0" Name="instructionLabel" VerticalAlignment="Top" Width="164" />
         <Label Content="Video Demonstration" Height="32" HorizontalAlignment="Left" Margin="510,211,0,0" Name="videoLabel" VerticalAlignment="Top" Width="188" />
-        <WebBrowser Height="229" HorizontalAlignment="Left" Margin="459,249,0,0" Name="webBrowser1" VerticalAlignment="Top" Width="250" />
+        <Viewbox Height="229" HorizontalAlignment="Left" Margin="459,249,0,0" Name="viewbox1" VerticalAlignment="Top" Width="250">
+            <Image Height="182" Name="Image" Stretch="Fill" Width="200" />
+        </Viewbox>
         <Label Content="* Click a step to view a demonstration" Height="32" HorizontalAlignment="Left" Margin="54,556,0,0" Name="label1" VerticalAlignment="Top" Width="227" />
+        <TextBlock HorizontalAlignment="Center" Margin="287,494,1092,0" Name="currentInstruction" FontSize="14" TextWrapping="Wrap" Text="" Width="221" Height="150" VerticalAlignment="Top" MaxWidth="221" />
+        <TextBlock HorizontalAlignment="Center" Margin="526,494,842,0" Name="currentFeedback" FontSize="14" TextWrapping="Wrap" Text="" Width="232" Height="150" VerticalAlignment="Top" MaxWidth="232" />
+        <TextBlock HorizontalAlignment="Center" Margin="287,294,1242,0" Name="goodRepsLabel"  FontSize="14" TextWrapping="Wrap" Text="a" Width="71" Height="41" VerticalAlignment="Top" />
+        <TextBlock HorizontalAlignment="Center" Margin="287,359,1248,0" Name="goodRepsText" FontSize="14" TextWrapping="Wrap" Text="b" Width="65" Height="39" VerticalAlignment="Top" />
     </Grid>
 </Page>
