@@ -86,32 +86,33 @@ namespace VLT
                 currentSet++;
             }
         }
-        public void repButtonClick(object sender, RoutedEventArgs e)
-        {
-            makeRep(Convert.ToInt32(qualityScoreBox.Text));
-        }
-
-        public void setButtonClick(object sender, RoutedEventArgs e)
-        {
-            endSet();
-        }
         public void showData(object sender, RoutedEventArgs e)
         {
             issueBox.Items.Clear();
-            Label issueLabel = new Label();
-            issueLabel.Name = ((Label)sender).Name;
-            if (issueLabel.Name.Contains("Rep"))
-                issueLabel.Content = ((Label)sender).Name + ((Rep)((Label) sender).Tag).scores[0].ToString();
-            issueLabel.MouseLeftButtonDown += showAdvice;
+            adviceBox.Text = "";
+            if (((Label)sender).Name.Contains("Rep"))
+            {
+                List<Label> issues = ((Rep)((Label)sender).Tag).getProblems();
+                foreach (Label l in issues)
+                {
+                    l.MouseLeftButtonDown += showAdvice;
+                    issueBox.Items.Add(l);
+                }
 
-            issueBox.Items.Add(issueLabel);
+            }
+
+            //Label issueLabel = new Label();
+            //issueLabel.Name = ((Label)sender).Name;
+            //if (issueLabel.Name.Contains("Rep"))
+            //    adviceBox.Text = ((Label)sender).Name + ": " + ((Rep)((Label)sender).Tag).getFeedback();
+            //issueLabel.MouseLeftButtonDown += showAdvice;
+
+            //issueBox.Items.Add(issueLabel);
 
         }
-        private int counter = 0;
         public void showAdvice(object sender, RoutedEventArgs e)
         {
-            counter++;
-            adviceBox.Text = counter.ToString();
+            adviceBox.Text = ((String) ((Label) sender).Tag);
         }
 
 

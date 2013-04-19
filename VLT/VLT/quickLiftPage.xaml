@@ -10,20 +10,17 @@
      >
     <Grid Height="600" Width="800">
         <Label  Content="Label" Height="34" HorizontalAlignment="Left" Margin="167,22,0,0" Name="exerciseName" VerticalAlignment="Top" Width="164" />
-        <Button Content="Rep" Height="23" HorizontalAlignment="Left" Margin="594,549,0,0" Name="repButton" VerticalAlignment="Top" Width="75" Click="repButtonClick" />
         <ListBox Height="453" HorizontalAlignment="Left" Margin="12,71,0,0" Name="setRepList" VerticalAlignment="Top" Width="156" />
-        <Button Content="Set" Height="23" HorizontalAlignment="Left" Margin="502,549,0,0" Name="setButton" VerticalAlignment="Top" Width="75" Click="setButtonClick" />
         <CheckBox Content="Audio Cues" Height="16" HorizontalAlignment="Left" Margin="675,556,0,0" Name="audioCues" VerticalAlignment="Top" />
         <Grid Height="454" HorizontalAlignment="Left" Margin="198,70,0,0" Name="quickLiftGrid" VerticalAlignment="Top" Width="558">
-            <ListBox Height="304" HorizontalAlignment="Left" Margin="0,1,0,0" Name="issueBox" VerticalAlignment="Top" Width="225" />
-            <TextBlock Height="143" HorizontalAlignment="Left" Margin="0,311,0,0" Name="adviceBox" Text="Advice" VerticalAlignment="Top" Width="558" />
-            
+            <ListBox Height="281" HorizontalAlignment="Left" Margin="0,24,0,0" Name="issueBox" VerticalAlignment="Top" Width="225" />
+            <TextBlock Height="22" HorizontalAlignment="Left" Margin="0,311,0,0" Name="advicelabelBox" Text="Advice:" VerticalAlignment="Top" Width="558" FontSize="18" FontWeight="Bold" />
+            <TextBlock Height="115" HorizontalAlignment="Left" Margin="0,339,0,0" Name="adviceBox" Text="" VerticalAlignment="Top" Width="558" TextWrapping="WrapWithOverflow" FontSize="16" />
             <Viewbox Height="304" HorizontalAlignment="Left" Margin="223,1,0,0" Name="viewbox1" VerticalAlignment="Top" Width="334">
                 <Image Height="182" Name="Image" Stretch="Fill" Width="200" />
             </Viewbox>
-            
+            <TextBlock FontSize="18" FontWeight="Bold" Height="22" HorizontalAlignment="Left" Margin="6,0,0,0" Name="textBlock1" Text="Issues" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Width="219" />
         </Grid>
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="421,549,0,0" Name="qualityScoreBox" VerticalAlignment="Top" Width="47" Text="50"/>
     </Grid>
 
 </Page>
