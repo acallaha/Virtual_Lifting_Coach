@@ -62,6 +62,7 @@ namespace VLT
             }
             currentRep++;
             Label repLabel = new Label();
+            repLabel.Tag = this.curRep;
             repLabel.Content = "\tRep " + currentRep + "\t\t";
             repLabel.Background = new SolidColorBrush(c); // paint the set
             repLabel.Name = "Rep" + currentRep;
@@ -99,7 +100,8 @@ namespace VLT
             issueBox.Items.Clear();
             Label issueLabel = new Label();
             issueLabel.Name = ((Label)sender).Name;
-            issueLabel.Content = ((Label)sender).Name;
+            if (issueLabel.Name.Contains("Rep"))
+                issueLabel.Content = ((Label)sender).Name + ((Rep)((Label) sender).Tag).scores[0].ToString();
             issueLabel.MouseLeftButtonDown += showAdvice;
 
             issueBox.Items.Add(issueLabel);
@@ -213,6 +215,8 @@ namespace VLT
 
         private Rep curRep = new Rep();
 
+        //private List<List<Rep>> sets = new List<List<Rep>>();
+
         private bool hasSkeleton = false;
 
 
@@ -264,6 +268,8 @@ namespace VLT
         /// <param name="e">event arguments</param>
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
+            //this.sets.Add(new List<Rep>());
+
             // Create the drawing group we'll use for drawing
             this.drawingGroup = new DrawingGroup();
 
@@ -369,6 +375,7 @@ namespace VLT
                                 this.curSquatState = SquatState.SQUAT_START;
                                 Console.WriteLine("has skel grr");
                                 this.endSet();
+                                //this.sets.Add(new List<Rep>());
                                 this.hasSkeleton = true;
                             }
                         }
@@ -453,12 +460,7 @@ namespace VLT
             SquatState prevSquatState = this.curSquatState;
             setState(skeleton);
             //Console.WriteLine(this.curSquatState);
-            if (prevSquatState == SquatState.SQUAT_IN_PROGRESS &&
-                this.curSquatState == SquatState.SQUAT_START)
-            {
-                int average = (this.curRep.scores[0] + this.curRep.scores[1]) / 2;
-                this.makeRep(average);
-            }
+
         }
 
         /// <summary>
@@ -566,6 +568,10 @@ namespace VLT
                 if (squatDepth >= 0.45 && curSquatState == SquatState.SQUAT_IN_PROGRESS && (curMilliseconds - squatStartTime) > 1500)
                 {
                     // squat has ended
+                    int average = (this.curRep.scores[0] + this.curRep.scores[1]) / 2;
+                    this.makeRep(average);
+                    curRep = new Rep();
+                    //this.sets[sets.Count - 1].Add(curRep); // add curRep to the current set
                     curSquatState = SquatState.SQUAT_START;
                     //this.currentStateText.Text = "Squat over, begin squat";
                     repCount++;
@@ -586,11 +592,6 @@ namespace VLT
 
         private void scoreThings(Skeleton skeleton)
         {
-            if (curSquatState == SquatState.SQUAT_START)
-            {
-                curRep = new Rep();
-            }
-
             int kneeScore, depthScore;
             kneeScore = scoreKneeWidth(skeleton);
             depthScore = scoreDepth(skeleton);
