@@ -1,0 +1,29 @@
+﻿<Page x:Class="VLT.quickLiftPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="1200" d:DesignWidth="1600"
+	Title="quickLiftPage"
+     Loaded="PageLoaded"
+     >
+    <Grid Height="600" Width="800">
+        <Label  Content="Label" Height="34" HorizontalAlignment="Left" Margin="167,22,0,0" Name="exerciseName" VerticalAlignment="Top" Width="164" />
+        <Button Content="Rep" Height="23" HorizontalAlignment="Left" Margin="594,549,0,0" Name="repButton" VerticalAlignment="Top" Width="75" Click="repButtonClick" />
+        <ListBox Height="453" HorizontalAlignment="Left" Margin="12,71,0,0" Name="setRepList" VerticalAlignment="Top" Width="156" />
+        <Button Content="Set" Height="23" HorizontalAlignment="Left" Margin="502,549,0,0" Name="setButton" VerticalAlignment="Top" Width="75" Click="setButtonClick" />
+        <CheckBox Content="Audio Cues" Height="16" HorizontalAlignment="Left" Margin="675,556,0,0" Name="audioCues" VerticalAlignment="Top" />
+        <Grid Height="454" HorizontalAlignment="Left" Margin="198,70,0,0" Name="quickLiftGrid" VerticalAlignment="Top" Width="558">
+            <ListBox Height="304" HorizontalAlignment="Left" Margin="0,1,0,0" Name="issueBox" VerticalAlignment="Top" Width="225" />
+            <TextBlock Height="143" HorizontalAlignment="Left" Margin="0,311,0,0" Name="adviceBox" Text="Advice" VerticalAlignment="Top" Width="558" />
+            
+            <Viewbox Height="304" HorizontalAlignment="Left" Margin="223,1,0,0" Name="viewbox1" VerticalAlignment="Top" Width="334">
+                <Image Height="182" Name="Image" Stretch="Fill" Width="200" />
+            </Viewbox>
+            
+        </Grid>
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="421,549,0,0" Name="qualityScoreBox" VerticalAlignment="Top" Width="47" Text="50"/>
+    </Grid>
+
+</Page>

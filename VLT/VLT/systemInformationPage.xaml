@@ -1,0 +1,14 @@
+﻿<Page x:Class="VLT.systemInformationPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="1200" d:DesignWidth="1600"
+	Title="systemInformationPage">
+
+    <Grid>
+        <Label Content="System Information" Height="37" HorizontalAlignment="Left" Margin="304,38,0,0" Name="label1" VerticalAlignment="Top" Width="131" />
+        <TextBlock Height="229" HorizontalAlignment="Left" Margin="74,163,0,0" Name="textBlock1" Text="This is a virtual lifting trainer." VerticalAlignment="Top" Width="651" />
+    </Grid>
+</Page>
