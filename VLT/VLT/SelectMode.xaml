@@ -4,12 +4,13 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="1200" d:DesignWidth="1600"
+      d:DesignHeight="800" d:DesignWidth="1200"
 	Title="SelectMode">
 
     <Grid>
-        <TextBlock Height="33" HorizontalAlignment="Left" Margin="120,43,0,0" Name="exerciseName" Text="TextBlock" VerticalAlignment="Top" Width="264" FontSize="22" TextAlignment="Center" />
-        <Button Content="Quick Lift" Height="21" HorizontalAlignment="Left" Margin="80,142,0,0" Name="quickLift" VerticalAlignment="Top" Width="75" Click="quickLift_Click" />
-        <Button Content="Teach Me" Height="23" HorizontalAlignment="Left" Margin="80,207,0,0" Name="teachMe" VerticalAlignment="Top" Width="75" Click="teachMe_Click" />
+        <TextBlock Height="72" HorizontalAlignment="Left" Margin="347,99,0,0" Name="exerciseName" Text="TextBlock" VerticalAlignment="Top" Width="438" FontSize="44" TextAlignment="Center"/>
+        <Button Content="Quick Lift" FontSize="36" Height="90" HorizontalAlignment="Left" Margin="404,238,0,0" Name="quickLift" VerticalAlignment="Top" Width="336" Click="quickLift_Click" />
+        <Button Content="Teach Me" FontSize="36" Height="90" HorizontalAlignment="Left" Margin="404,398,0,0" Name="teachMe" VerticalAlignment="Top" Width="336" Click="teachMe_Click" />
+        <Rectangle Height="72" HorizontalAlignment="Left" Margin="347,99,0,0" Name="rectangle1" Stroke="Black" VerticalAlignment="Top" Width="438" />
     </Grid>
 </Page>

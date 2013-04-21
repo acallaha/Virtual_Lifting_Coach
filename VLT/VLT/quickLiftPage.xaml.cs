@@ -24,12 +24,11 @@ namespace VLT
     {
         private int currentSet = 1;
         private int currentRep = 0;
-        private int position = 0;
+        private int currentSetPos = 0;
         private static int DECENT = 40;
         private static int GOOD = 80;
-        private static int MAX_SETS = 100;
-        private int[] locationOfSetLabels = new int[MAX_SETS];
         private int cumlativeScore = 0;
+        private int position;
         public quickLiftPage()
         {
             InitializeComponent();
@@ -50,7 +49,7 @@ namespace VLT
             c.A = 127; 
             // If the first rep of a set, add a set label before making a rep
             if (currentRep == 0) {
-                locationOfSetLabels[currentSet-1] = position; // save location of set label
+                currentSetPos = position; // save location of set label
                 // Make set row
                 Console.WriteLine("Making new set row");
                 setLabel = new Label();
@@ -59,8 +58,10 @@ namespace VLT
                 setLabel.Name = "Set" + currentSet;
                 setLabel.MouseLeftButtonDown += showData;
                 setRepList.Items.Add(setLabel);
+                position++;
             }
             currentRep++;
+            position++;
             Label repLabel = new Label();
             repLabel.Tag = this.curRep;
             repLabel.Content = "\tRep " + currentRep + "\t\t";
@@ -74,12 +75,13 @@ namespace VLT
             else c = Colors.Green;
             c.A = 127; 
             // Update the color for the set
-            setLabel = (Label)setRepList.Items.GetItemAt(locationOfSetLabels[currentSet - 1]);
+            setLabel = (Label)setRepList.Items.GetItemAt(currentSetPos);
             setLabel.Background = new SolidColorBrush(c);
             Console.WriteLine("Increase current Rep: " + currentRep);
         }
         public void endSet()
         {
+            cumlativeScore = 0;
             if (currentRep != 0)
             {
                 currentRep = 0;
@@ -369,8 +371,6 @@ namespace VLT
 
                         if (skel.TrackingState == SkeletonTrackingState.Tracked)
                         {
-                            this.DrawBonesAndJoints(skel, dc);
-
                             if (!this.hasSkeleton)
                             {
                                 this.curSquatState = SquatState.SQUAT_START;
@@ -379,6 +379,9 @@ namespace VLT
                                 //this.sets.Add(new List<Rep>());
                                 this.hasSkeleton = true;
                             }
+                            this.DrawBonesAndJoints(skel, dc);
+
+
                         }
                         else if (skel.TrackingState == SkeletonTrackingState.PositionOnly)
                         {

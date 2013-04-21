@@ -4,22 +4,22 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       mc:Ignorable="d" 
-      d:DesignHeight="1200" d:DesignWidth="1600"
+      d:DesignHeight="800" d:DesignWidth="1200"
 	Title="quickLiftPage"
      Loaded="PageLoaded"
      >
-    <Grid Height="600" Width="800">
-        <Label  Content="Label" Height="34" HorizontalAlignment="Left" Margin="167,22,0,0" Name="exerciseName" VerticalAlignment="Top" Width="164" />
-        <ListBox Height="453" HorizontalAlignment="Left" Margin="12,71,0,0" Name="setRepList" VerticalAlignment="Top" Width="156" />
-        <CheckBox Content="Audio Cues" Height="16" HorizontalAlignment="Left" Margin="675,556,0,0" Name="audioCues" VerticalAlignment="Top" />
-        <Grid Height="454" HorizontalAlignment="Left" Margin="198,70,0,0" Name="quickLiftGrid" VerticalAlignment="Top" Width="558">
-            <ListBox Height="281" HorizontalAlignment="Left" Margin="0,24,0,0" Name="issueBox" VerticalAlignment="Top" Width="225" />
-            <TextBlock Height="22" HorizontalAlignment="Left" Margin="0,311,0,0" Name="advicelabelBox" Text="Advice:" VerticalAlignment="Top" Width="558" FontSize="18" FontWeight="Bold" />
-            <TextBlock Height="115" HorizontalAlignment="Left" Margin="0,339,0,0" Name="adviceBox" Text="" VerticalAlignment="Top" Width="558" TextWrapping="WrapWithOverflow" FontSize="16" />
-            <Viewbox Height="304" HorizontalAlignment="Left" Margin="223,1,0,0" Name="viewbox1" VerticalAlignment="Top" Width="334">
-                <Image Height="182" Name="Image" Stretch="Fill" Width="200" />
+    <Grid Height="800" Width="1200">
+        <Label  Content="Label" Height="52" HorizontalAlignment="Left" Margin="177,12,0,0" Name="exerciseName" FontSize="30" VerticalAlignment="Top" Width="419" />
+        <ListBox Height="656" HorizontalAlignment="Left" Margin="12,71,0,0" Name="setRepList" VerticalAlignment="Top" Width="220" />
+        <CheckBox Content="Audio Cues" Height="16" HorizontalAlignment="Left" Margin="1084,749,0,0" Name="audioCues" VerticalAlignment="Top" />
+        <Grid Height="657" HorizontalAlignment="Left" Margin="255,70,0,0" Name="quickLiftGrid" VerticalAlignment="Top" Width="906">
+            <ListBox Height="410" HorizontalAlignment="Left" Margin="6,52,0,0" Name="issueBox" VerticalAlignment="Top" Width="286" BorderThickness="1" />
+            <TextBlock Height="49" HorizontalAlignment="Left" Margin="6,468,0,0" Name="advicelabelBox" Text="Advice:" VerticalAlignment="Top" Width="558" FontSize="36" FontWeight="Bold" />
+            <TextBlock Height="128" HorizontalAlignment="Left" Margin="6,523,0,0" Name="adviceBox" Text="" VerticalAlignment="Top" Width="894" TextWrapping="WrapWithOverflow" FontSize="16" />
+            <Viewbox Height="516" HorizontalAlignment="Left" Margin="298,1,0,0" Name="viewbox1" VerticalAlignment="Top" Width="602">
+                <Image Height="188" Name="Image" Stretch="Fill" Width="218" />
             </Viewbox>
-            <TextBlock FontSize="18" FontWeight="Bold" Height="22" HorizontalAlignment="Left" Margin="6,0,0,0" Name="textBlock1" Text="Issues" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Width="219" />
+            <TextBlock FontSize="36" FontWeight="Bold" Height="56" HorizontalAlignment="Left" Margin="6,0,0,0" Name="textBlock1" Text="Feedback:" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Width="286" />
         </Grid>
     </Grid>
 
