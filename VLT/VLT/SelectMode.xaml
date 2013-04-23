@@ -9,7 +9,7 @@
 
     <Grid>
         <TextBlock Height="72" HorizontalAlignment="Left" Margin="347,99,0,0" Name="exerciseName" Text="TextBlock" VerticalAlignment="Top" Width="438" FontSize="44" TextAlignment="Center"/>
-        <Button Content="Quick Lift" FontSize="36" Height="90" HorizontalAlignment="Left" Margin="404,238,0,0" Name="quickLift" VerticalAlignment="Top" Width="336" Click="quickLift_Click" />
+        <Button Content="Just Lift" FontSize="36" Height="90" HorizontalAlignment="Left" Margin="404,238,0,0" Name="quickLift" VerticalAlignment="Top" Width="336" Click="quickLift_Click" />
         <Button Content="Teach Me" FontSize="36" Height="90" HorizontalAlignment="Left" Margin="404,398,0,0" Name="teachMe" VerticalAlignment="Top" Width="336" Click="teachMe_Click" />
         <Rectangle Height="72" HorizontalAlignment="Left" Margin="347,99,0,0" Name="rectangle1" Stroke="Black" VerticalAlignment="Top" Width="438" />
     </Grid>

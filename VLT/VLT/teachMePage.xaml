@@ -14,9 +14,9 @@
         <Viewbox Height="662" HorizontalAlignment="Left" Margin="646,87,0,0" Name="viewbox1" VerticalAlignment="Top" Width="516">
             <Image Height="408" Name="Image" Stretch="Fill" Width="319" />
         </Viewbox>
-        <TextBlock Text="current instruction text block" HorizontalAlignment="Right" Margin="0,87,601,0" Name="currentInstruction" FontSize="36" TextWrapping="Wrap" Width="538" Height="310" VerticalAlignment="Top" />
-        <TextBlock Text="current feedback text block" HorizontalAlignment="Center" Margin="61,422,601,0" Name="currentFeedback" FontSize="36" TextWrapping="Wrap" Width="538" Height="279" VerticalAlignment="Top" />
-        <TextBlock HorizontalAlignment="Center" Margin="42,720,1073,0" Name="goodRepsLabel"  FontSize="14" TextWrapping="Wrap" Text="a" Width="750" Height="200" VerticalAlignment="Top" />
-        <TextBlock HorizontalAlignment="Left" Margin="173,720,0,0" Name="goodRepsText" FontSize="14" TextWrapping="Wrap" Text="b" Width="750" Height="200" VerticalAlignment="Top" />
+        <TextBlock Text="current instruction text block" HorizontalAlignment="Left" Margin="33,87,0,0" Name="currentInstruction" FontSize="36" TextWrapping="Wrap" Width="557" Height="342" VerticalAlignment="Top" />
+        <TextBlock Height="286" HorizontalAlignment="Left" Margin="33,463,0,0" Name="currentFeedback" Text="current feedback textblock" FontSize="40" VerticalAlignment="Top" Width="557" TextWrapping="Wrap" />
+        <TextBlock HorizontalAlignment="Center" Margin="33,749,953,0" Name="goodRepsLabel"  FontSize="14" TextWrapping="Wrap" Text="a" Width="214" Height="39" VerticalAlignment="Top" />
+        <TextBlock HorizontalAlignment="Right" Margin="0,749,581,0" Name="goodRepsText" FontSize="14" TextWrapping="Wrap" Text="b" Width="366" Height="39" VerticalAlignment="Top" />
     </Grid>
 </Page>

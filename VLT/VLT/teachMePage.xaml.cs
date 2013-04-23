@@ -191,6 +191,12 @@ namespace VLT
             // Display the drawing using our image control
             Image.Source = this.imageSource;
 
+            // Blank the text used in editing the screen
+            this.currentFeedback.Text = "";
+            this.currentInstruction.Text = "";
+            this.goodRepsLabel.Text = "";
+            this.goodRepsText.Text = "";
+
             // Look through all sensors and start the first connected one.
             // This requires that a Kinect is connected at the time of app startup.
             // To make your app robust against plug/unplug, 
