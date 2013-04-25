@@ -331,10 +331,12 @@ namespace VLT
         /// <param name="e">event arguments</param>
         private void PageClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            Console.WriteLine("goodbye my dear quicklift page ;(");
             if (null != this.sensor)
             {
                 this.sensor.Stop();
             }
+
         }
 
         /// <summary>
@@ -656,6 +658,12 @@ namespace VLT
                 return 0;
             else
                 return (int)((.35 - squatDepth) * 100.0 / .15);
+        }
+
+        private void logData_Click(object sender, RoutedEventArgs e)
+        {
+            LiftData ld = new LiftData();
+            ld.writeLine("Adam", "back squat", 3, 30, 82);
         }
 
 

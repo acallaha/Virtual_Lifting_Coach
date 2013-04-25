@@ -17,5 +17,7 @@
         <Label Content="Select an Exercise" Height="72" HorizontalAlignment="Left" Margin="347,99,0,0" Name="label1" VerticalAlignment="Top" FontSize="44" Width="438" HorizontalContentAlignment="Center" />
         <Rectangle Height="72" HorizontalAlignment="Left" Margin="347,99,0,0" Name="rectangle1" Stroke="Black" VerticalAlignment="Top" Width="438" />
         <Button Content="System Information" Height="40" HorizontalAlignment="Left" Margin="955,728,0,0" Name="systemInfo" VerticalAlignment="Top" Width="205" Click="systemInfo_Click" FontSize="20"/>
+        <Button Content="My Progress" Height="55" HorizontalAlignment="Left" Margin="435,600,0,0" Name="myProgress" VerticalAlignment="Top" Width="270" Click="progressPage_Click" FontSize="24"/>
+
     </Grid>
 </Page>

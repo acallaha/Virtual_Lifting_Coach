@@ -34,8 +34,12 @@ namespace VLT
 
         private void systemInfo_Click(object sender, RoutedEventArgs e)
         {
-            systemInformationPage systemInformationPage = new systemInformationPage();
             this.NavigationService.Navigate(new systemInformationPage());
+        }
+
+        private void progressPage_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new ProgressPage());
         }
     }
 }
