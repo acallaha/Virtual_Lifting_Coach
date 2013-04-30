@@ -39,7 +39,7 @@ namespace VLT
 
         private void progressPage_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new ProgressPage());
+            this.NavigationService.Navigate(new SortByProgressPage());
         }
     }
 }

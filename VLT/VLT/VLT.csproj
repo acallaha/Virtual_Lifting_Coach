@@ -83,11 +83,20 @@
       <DependentUpon>quickLiftPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Rep.cs" />
+    <Compile Include="SelectDateProgressPage.xaml.cs">
+      <DependentUpon>SelectDateProgressPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SelectExercise.xaml.cs">
       <DependentUpon>SelectExercise.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SelectExerciseProgressPage.xaml.cs">
+      <DependentUpon>SelectExerciseProgressPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SelectMode.xaml.cs">
       <DependentUpon>SelectMode.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SortByProgressPage.xaml.cs">
+      <DependentUpon>SortByProgressPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="systemInformationPage.xaml.cs">
       <DependentUpon>systemInformationPage.xaml</DependentUpon>
@@ -119,13 +128,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="SelectDateProgressPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SelectExercise.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="SelectExerciseProgressPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SelectMode.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SortByProgressPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="systemInformationPage.xaml">
       <SubType>Designer</SubType>

@@ -22,6 +22,9 @@ namespace VLT
     /// </summary>
     public partial class ProgressPage : Page
     {
+        private int MAX_BAR_HEIGHT = 250; // pixels
+        private int MAX_GRAPH_WIDTH = 280; // pixels
+
         public ProgressPage()
         {
             InitializeComponent();
@@ -75,6 +78,49 @@ namespace VLT
                 lift.Content=output.Pop();
                 listBox1.Items.Add(lift);
             }
+        }
+
+        private void makeScoreScale()
+        {
+
+        }
+
+        private void makeWeightScale(int maxWeight, int minWeight) {
+
+            }
+
+        private void makeScoreBar(int score, int numOfBars)
+        {
+            Rectangle bar = new Rectangle();
+            //bar.
+        }
+
+        private void makeWeightBar(int score, int numOfBars)
+        {
+
+        }
+
+        private void nextSetButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Increment the set and refresh the graph page
+            // if it is the last set, go back to the first
+        }
+
+        private void repScoresButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Display a bar for each rep, scaled 0 to 100
+        }
+
+        private void setWeightsButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Display bars corresponding the scaled weights for each set
+
+            // If no weight data, display a message indicating that there is no data
+        }
+
+        private void setAvgButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Display a bar for each set, sized by the score (0-100)
         }
     }
 }
