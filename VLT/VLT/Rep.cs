@@ -9,6 +9,7 @@ namespace VLT
     {
         public string exercise;
         public int[] scores;
+        public double weight;
 
         public Rep()
         {

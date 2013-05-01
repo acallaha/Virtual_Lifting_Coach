@@ -21,6 +21,9 @@
             </Viewbox>
             <TextBlock FontSize="36" FontWeight="Bold" Height="56" HorizontalAlignment="Left" Margin="6,0,0,0" Name="textBlock1" Text="Feedback:" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Width="286" />
         </Grid>
+        <TextBlock FontSize="36" FontWeight="Bold" Height="49" HorizontalAlignment="Left" Margin="12,0,0,12" Name="textBlock2" Text="Weight of Next Set:" VerticalAlignment="Bottom" Width="353" />
+        <TextBox FontSize="36" FontWeight="Bold" Height="49" Margin="362,0,0,15" Name="curWeight" Text="100" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="115" />
+        <TextBlock FontSize="36"  Height="49" HorizontalAlignment="Left" Margin="483,0,0,15" Name="textBlock3" Text="lbs" VerticalAlignment="Bottom" Width="288" />
     </Grid>
 
 </Page>
