@@ -581,6 +581,7 @@ namespace VLT
                 {
                     // squat has ended
                     int average = (this.curRep.scores[0] + this.curRep.scores[1]) / 2;
+                    curRep.weight = Convert.ToDouble(curWeight.Text);
                     this.makeRep(average);
                     curRep = new Rep();
                     //this.sets[sets.Count - 1].Add(curRep); // add curRep to the current set
