@@ -95,6 +95,7 @@
     <Compile Include="SelectMode.xaml.cs">
       <DependentUpon>SelectMode.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Serialization.cs" />
     <Compile Include="SortByProgressPage.xaml.cs">
       <DependentUpon>SortByProgressPage.xaml</DependentUpon>
     </Compile>
@@ -183,9 +184,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Database1.sdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Resource Include="LiftData.txt" />
   </ItemGroup>
   <ItemGroup>

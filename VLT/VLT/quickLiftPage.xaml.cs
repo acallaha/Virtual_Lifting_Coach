@@ -14,7 +14,6 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using Microsoft.Kinect;
-using System.Xml.Serialization;
 
 namespace VLT
 {
@@ -79,6 +78,13 @@ namespace VLT
             setLabel = (Label)setRepList.Items.GetItemAt(currentSetPos);
             setLabel.Background = new SolidColorBrush(c);
             Console.WriteLine("Increase current Rep: " + currentRep);
+
+            String path = System.IO.Path.GetDirectoryName(System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName);
+            path += "/frames";
+            Console.WriteLine(path);
+            Serialization.SerializeObject<List<SkeletonFrame>>(frames, path);
+            frames = new List<SkeletonFrame>();
+            Console.WriteLine("serialized");
         }
         public void endSet()
         {
@@ -88,8 +94,6 @@ namespace VLT
                 currentRep = 0;
                 currentSet++;
             }
-            SerializeObject<List<SkeletonFrame>>(frames, "frames");
-            frames = new List<SkeletonFrame>();
         }
         public void showData(object sender, RoutedEventArgs e)
         {
@@ -276,6 +280,8 @@ namespace VLT
         /// <param name="e">event arguments</param>
         private void PageLoaded(object sender, RoutedEventArgs e)
         {
+            Skeleton s = new Skeleton();
+            Serialization.SerializeObject<Skeleton>(s, "hi");
             //this.sets.Add(new List<Rep>());
 
             // Create the drawing group we'll use for drawing
@@ -671,26 +677,6 @@ namespace VLT
         {
             LiftData ld = new LiftData();
             ld.writeLine("Adam", "back squat", 3, 30, 82);
-        }
-
-        // Save an object out to the disk
-        public static void SerializeObject<T>(this T toSerialize, String filename)
-        {
-            XmlSerializer xmlSerializer = new XmlSerializer(toSerialize.GetType());
-            TextWriter textWriter = new StreamWriter(filename);
-
-            xmlSerializer.Serialize(textWriter, toSerialize);
-            textWriter.Close();
-        }
-
-        public static T SerializeFromString<T>(string xml)
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(T));
-
-            using (StringReader reader = new StringReader(xml))
-            {
-                return (T)serializer.Deserialize(reader);
-            }
         }
 
     }
