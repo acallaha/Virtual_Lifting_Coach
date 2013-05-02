@@ -19,9 +19,40 @@ namespace VLT
     /// </summary>
     public partial class SelectDateProgressPage : Page
     {
+        private String curUser;
+
         public SelectDateProgressPage()
         {
             InitializeComponent();
+            curUser = "Matt";
+            
+        }
+
+        private void loadSessions()
+        {
+            int i = 0;
+            foreach (Session sess in MainWindow.data.sessions)
+            {
+                i++;
+                if (curUser.CompareTo(sess.username) == 0) {
+                    Label dateLabel = new Label()
+                    {
+                        Name = i.ToString(),
+                        Content = sess.date.ToString(),
+                    };
+                    dateLabel.MouseLeftButtonDown += goToProgressPage;
+                    dateSelection.Items.Add(dateLabel);
+                }
+            }
+        }
+
+        private void goToProgressPage(object sender, RoutedEventArgs e)
+        {
+            ProgressPage progressPage = new ProgressPage();
+            this.NavigationService.Navigate(progressPage);
+            int index = Convert.ToInt32(((Label)sender).Name);
+            progressPage.titleText.Text = MainWindow.data.sessions[index].date.ToString();
+            progressPage.loadWorkouts(index);
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)

@@ -10,10 +10,12 @@ namespace VLT
     {
         public String username;
         public List<Workout> workouts;
+        public DateTime date;
 
         public Session() {
             this.username = "";
             this.workouts = new List<Workout>();
+            this.date = new DateTime();
         }
     }
 }
