@@ -29,16 +29,22 @@ namespace VLT
         private static int GOOD = 80;
         private int cumlativeScore = 0;
         private int position;
+        private Workout my_workout;
+        private Set my_set;
+
         public quickLiftPage()
         {
             InitializeComponent();
-
+            this.my_workout = new Workout();
+            this.my_set = new Set();
+            this.my_workout.exercise = (String)this.exerciseName.Content;
         }
         /// <summary>
         /// Adds a rep and set count to the user interface
         /// </summary>
         /// <param name="quality">A score from 1 to 100 of the current rep</param>
-        public void makeRep(int quality) {
+        public void makeRep(int quality, Rep new_rep) {
+            this.my_set.reps.Add(new_rep);
             Label setLabel;
             Color c;
             cumlativeScore += quality;
@@ -86,6 +92,16 @@ namespace VLT
             {
                 currentRep = 0;
                 currentSet++;
+                // Add set to workout
+                this.my_workout.sets.Add(my_set);
+
+                // On page close
+                // Add workout to session
+                MainWindow.session.workouts.Add(my_workout);
+
+
+                // New Set
+                this.my_set = new Set();
             }
         }
         public void showData(object sender, RoutedEventArgs e)
@@ -575,7 +591,7 @@ namespace VLT
                 {
                     // squat has ended
                     int average = (this.curRep.scores[0] + this.curRep.scores[1]) / 2;
-                    this.makeRep(average);
+                    this.makeRep(average, curRep);
                     curRep = new Rep();
                     //this.sets[sets.Count - 1].Add(curRep); // add curRep to the current set
                     curSquatState = SquatState.SQUAT_START;

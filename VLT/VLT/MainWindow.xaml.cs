@@ -33,6 +33,7 @@ namespace VLT
             mainFrame.Navigate(new SelectExercise());
             Console.WriteLine("It initialized");
             MainWindow.session = new Session();
+            data = new AllData();
             DeserializeFromXML();
             Console.WriteLine(MainWindow.data.sessions[0].username);
         }

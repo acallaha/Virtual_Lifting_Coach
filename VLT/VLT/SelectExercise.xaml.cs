@@ -22,6 +22,7 @@ namespace VLT
         public SelectExercise()
         {
             InitializeComponent();
+            MainWindow.session.username = "AdamMatt";
 
         }
 
