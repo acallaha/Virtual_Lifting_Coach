@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 
 namespace VLT
 {
@@ -24,7 +25,8 @@ namespace VLT
         public SelectDateProgressPage()
         {
             InitializeComponent();
-            curUser = "Matt";
+            curUser = "MattAdam";
+            loadSessions();
             
         }
 
@@ -33,13 +35,15 @@ namespace VLT
             int i = 0;
             foreach (Session sess in MainWindow.data.sessions)
             {
+                Console.WriteLine("found data!");
                 i++;
-                if (curUser.CompareTo(sess.username) == 0) {
+                if (this.curUser.CompareTo(sess.username) == 0) {
                     Label dateLabel = new Label()
                     {
-                        Name = i.ToString(),
+                        Name = "session" + i.ToString(),
                         Content = sess.date.ToString(),
                     };
+                    Console.WriteLine("made label!");
                     dateLabel.MouseLeftButtonDown += goToProgressPage;
                     dateSelection.Items.Add(dateLabel);
                 }
@@ -50,9 +54,10 @@ namespace VLT
         {
             ProgressPage progressPage = new ProgressPage();
             this.NavigationService.Navigate(progressPage);
-            int index = Convert.ToInt32(((Label)sender).Name);
-            progressPage.titleText.Text = MainWindow.data.sessions[index].date.ToString();
-            progressPage.loadWorkouts(index);
+            String session = ((Label)sender).Name;
+            int sessIndex = Convert.ToInt32(Regex.Match(session, @"\d+").Value);
+            progressPage.titleText.Text = MainWindow.data.sessions[sessIndex].date.ToString();
+            progressPage.loadWorkouts(sessIndex);
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)

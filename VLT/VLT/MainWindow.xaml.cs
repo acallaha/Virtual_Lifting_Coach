@@ -122,6 +122,7 @@ namespace VLT
             for (int i = 0; i < n; i++)
             {
                 Session s = new Session();
+                s.date = s.date.AddDays((double)rand.Next(20));
                 s.username = "MattAdam";
                 s.workouts = fakeWorkoutList(1);
                 sessionList.Add(s);

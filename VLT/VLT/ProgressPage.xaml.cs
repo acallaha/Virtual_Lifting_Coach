@@ -135,7 +135,7 @@ namespace VLT
 
         private void ProgressPageLoaded(object sender, RoutedEventArgs e)
         {
-            this.showData("Adam");
+            //this.showData("Adam");
         }
 
         private void showData(String username)
