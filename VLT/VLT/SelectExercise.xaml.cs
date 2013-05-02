@@ -51,7 +51,7 @@ namespace VLT
         }
 
         private void logoutUser()
-        { 
+        {
             // Save the workout
             MainWindow.data.sessions.Add(MainWindow.session);
             MainWindow.SerializeToXML(MainWindow.data);
@@ -59,7 +59,8 @@ namespace VLT
 
         private void logout_Click(object sender, RoutedEventArgs e)
         {
-            this.logoutUser();
+            MainWindow.writeFakeData();
+            //this.logoutUser();
         }
     }
 }

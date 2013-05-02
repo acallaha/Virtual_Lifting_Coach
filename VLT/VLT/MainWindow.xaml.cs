@@ -69,5 +69,74 @@ namespace VLT
            
         }
 
+        static public List<Rep> fakeRepList(int n)
+        {
+            List<Rep> repList = new List<Rep>();
+            for (int i = 0; i < n; i++)
+            {
+                Rep r = new Rep();
+                Random rand = new Random();
+                r.exercise = "Back Squat";
+                r.scores[0] = rand.Next(0, 100);
+                r.scores[1] = rand.Next(0, 100);
+                repList.Add(r);
+            }
+            return repList;
+        }
+
+        static public List<Set> fakeSetList(int n)
+        {
+            List<Set> setList = new List<Set>();
+            Random rand = new Random();
+            for (int i = 0; i < n; i++)
+            {
+                Set s = new Set();
+                s.weight = rand.Next(100, 200);
+                s.reps = fakeRepList(rand.Next(5,16));
+                setList.Add(s);
+            }
+
+            return setList;
+        }
+
+
+        static public List<Workout> fakeWorkoutList(int n)
+        {
+            List<Workout> workoutList = new List<Workout>();
+            Random rand = new Random();
+            for (int i = 0; i < n; i++)
+            {
+                Workout w = new Workout();
+                w.exercise = "Back Squat";
+                w.sets = fakeSetList(rand.Next(3,8));
+                workoutList.Add(w);
+            }
+
+            return workoutList;
+        }
+
+        static public List<Session> fakeSessionList(int n)
+        {
+            List<Session> sessionList = new List<Session>();
+            Random rand = new Random();
+            for (int i = 0; i < n; i++)
+            {
+                Session s = new Session();
+                s.username = "MattAdam";
+                s.workouts = fakeWorkoutList(1);
+                sessionList.Add(s);
+            }
+
+            return sessionList;
+        }
+
+        static public void writeFakeData()
+        {
+            MainWindow.data = new AllData();
+            MainWindow.data.sessions = fakeSessionList(25);
+            MainWindow.SerializeToXML(MainWindow.data);
+
+        }
+
     }
 }
