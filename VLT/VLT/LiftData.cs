@@ -9,8 +9,8 @@ namespace VLT
     class LiftData
     {
 
-        private String FILE_NAME = 
-            "C:\\Users\\Matthew Drabick\\Documents\\GitHub\\Virtual_Lifting_Coach\\VLT\\VLT\\LiftData.txt";
+        private String FILE_NAME = "";
+        //    "C:\\Users\\Matthew Drabick\\Documents\\GitHub\\Virtual_Lifting_Coach\\VLT\\VLT\\LiftData.txt";
         public LiftData()
         {
 

@@ -22,7 +22,9 @@ namespace VLT
         public SelectExercise()
         {
             InitializeComponent();
-
+            // TODO: Login
+            //MainWindow.session.username = "AdamMatt";
+            MainWindow.session.username = "AdamMatt";
         }
 
         private void exerciseButtonClick(object sender, RoutedEventArgs e)
@@ -46,6 +48,18 @@ namespace VLT
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new Page1());
+        }
+
+        private void logoutUser()
+        { 
+            // Save the workout
+            MainWindow.data.sessions.Add(MainWindow.session);
+            MainWindow.SerializeToXML(MainWindow.data);
+        }
+
+        private void logout_Click(object sender, RoutedEventArgs e)
+        {
+            this.logoutUser();
         }
     }
 }

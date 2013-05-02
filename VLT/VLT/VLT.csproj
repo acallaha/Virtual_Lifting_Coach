@@ -190,6 +190,7 @@
     <Content Include="Database1.sdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="LiftData.xml" />
     <Resource Include="LiftData.txt" />
   </ItemGroup>
   <ItemGroup>

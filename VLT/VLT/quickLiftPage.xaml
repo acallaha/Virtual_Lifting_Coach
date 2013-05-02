@@ -7,6 +7,7 @@
       d:DesignHeight="800" d:DesignWidth="1200"
 	Title="quickLiftPage"
      Loaded="PageLoaded"
+     Unloaded="PageUnloaded"
      >
     <Grid Height="800" Width="1200">
         <Label  Content="Label" Height="52" HorizontalAlignment="Left" Margin="177,12,0,0" Name="exerciseName" FontSize="30" VerticalAlignment="Top" Width="419" />
@@ -21,7 +22,6 @@
             </Viewbox>
             <TextBlock FontSize="36" FontWeight="Bold" Height="56" HorizontalAlignment="Left" Margin="6,0,0,0" Name="textBlock1" Text="Feedback:" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Width="286" />
         </Grid>
-        <Button Content="Button" Height="36" HorizontalAlignment="Left" Margin="216,749,0,0" Name="logData" VerticalAlignment="Top" Width="161" Click="logData_Click" />
     </Grid>
 
 </Page>

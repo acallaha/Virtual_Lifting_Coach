@@ -19,5 +19,6 @@
         <Button Content="System Information" Height="40" HorizontalAlignment="Left" Margin="955,728,0,0" Name="systemInfo" VerticalAlignment="Top" Width="205" Click="systemInfo_Click" FontSize="20"/>
         <Button Content="My Progress" Height="55" HorizontalAlignment="Left" Margin="435,600,0,0" Name="myProgress" VerticalAlignment="Top" Width="270" Click="progressPage_Click" FontSize="24"/>
         <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="169,678,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" />
+        <Button Content="logout" Height="23" HorizontalAlignment="Left" Margin="80,678,0,0" Name="logout" VerticalAlignment="Top" Width="75" Click="logout_Click" />
     </Grid>
 </Page>

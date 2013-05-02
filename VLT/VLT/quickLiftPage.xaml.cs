@@ -29,18 +29,27 @@ namespace VLT
         private static int GOOD = 80;
         private int cumlativeScore = 0;
         private int position;
+        private Set my_set;
+        private Workout my_workout;
+
+
         public quickLiftPage()
         {
             InitializeComponent();
+
+            this.my_workout = new Workout();
+            this.my_set = new Set();
+            this.my_workout.exercise = (String)this.exerciseName.Content;
 
         }
         /// <summary>
         /// Adds a rep and set count to the user interface
         /// </summary>
         /// <param name="quality">A score from 1 to 100 of the current rep</param>
-        public void makeRep(int quality) {
+        public void makeRep(int quality, Rep new_rep) {
             Label setLabel;
             Color c;
+            this.my_set.reps.Add(new_rep);
             cumlativeScore += quality;
             // adjust color based on the quality of the rep. 
             if (quality < DECENT) c = Colors.Red;
@@ -86,6 +95,12 @@ namespace VLT
             {
                 currentRep = 0;
                 currentSet++;
+
+                // Add set to workout
+                this.my_workout.sets.Add(my_set);
+                // New Set
+                this.my_set = new Set();
+
             }
         }
         public void showData(object sender, RoutedEventArgs e)
@@ -261,6 +276,18 @@ namespace VLT
                     Brushes.Red,
                     null,
                     new Rect(RenderWidth - ClipBoundsThickness, 0, ClipBoundsThickness, RenderHeight));
+            }
+        }
+
+
+
+        private void PageUnloaded(object sender, RoutedEventArgs e)
+        {
+            // Add workout to session
+            if (this.currentSet != 1 && this.currentRep != 0)
+            {
+                MainWindow.session.workouts.Add(my_workout);
+                this.my_workout = new Workout();
             }
         }
 
@@ -575,7 +602,7 @@ namespace VLT
                 {
                     // squat has ended
                     int average = (this.curRep.scores[0] + this.curRep.scores[1]) / 2;
-                    this.makeRep(average);
+                    this.makeRep(average, curRep);
                     curRep = new Rep();
                     //this.sets[sets.Count - 1].Add(curRep); // add curRep to the current set
                     curSquatState = SquatState.SQUAT_START;

@@ -27,32 +27,46 @@ namespace VLT
     {
         public static Session session;
         public static AllData data;
+        //public static String data_filepath;
+
+
         public MainWindow()
         {
+
+            MainWindow.session = new Session();
+            MainWindow.data = new AllData();
+
+            DeserializeFromXML();
             InitializeComponent();
             mainFrame.Navigate(new SelectExercise());
             Console.WriteLine("It initialized");
-            MainWindow.session = new Session();
-            DeserializeFromXML();
-            Console.WriteLine(MainWindow.data.sessions[0].username);
-        }
 
+            /* A better way to do the filepath... not worth the time it took and still doesnt work.
+            MainWindow.data_filepath = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory().Replace(@"bin\Debug", ""), "LiftData.xml");
+            Console.WriteLine(MainWindow.data_filepath);
+             */
+        }
         static public void SerializeToXML(AllData data)
         {
             IFormatter formatter = new BinaryFormatter();
-            using (FileStream stream = new FileStream(@"C:\\Users\\Matthew Drabick\\Documents\\GitHub\\Virtual_Lifting_Coach\\VLT\\VLT\\LiftData.xml", FileMode.Create, FileAccess.Write, FileShare.None))
+            
+            using (FileStream stream = new FileStream(@"LiftData.xml", FileMode.Create, FileAccess.Write, FileShare.None))
             {
                 formatter.Serialize(stream, data);
             }
+           
         }
 
         static public void DeserializeFromXML()
         {
+            
             IFormatter formatter = new BinaryFormatter();
-            using (FileStream stream = new FileStream(@"C:\\Users\\Matthew Drabick\\Documents\\GitHub\\Virtual_Lifting_Coach\\VLT\\VLT\\LiftData.xml", FileMode.Open, FileAccess.Read, FileShare.None))
+            
+            using (FileStream stream = new FileStream(@"LiftData.xml", FileMode.Open, FileAccess.Read, FileShare.None))
             {
                 MainWindow.data = (AllData)formatter.Deserialize(stream);
             }
+           
         }
 
     }
