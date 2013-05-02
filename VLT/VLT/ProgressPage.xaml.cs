@@ -128,34 +128,36 @@ namespace VLT
         private void makeScoreBars(int[] score)
         {
             int numOfSpaces = (score.Length * 2) + 1;
-            int width = MAX_GRAPH_WIDTH / numOfSpaces; // double this will provide spacing for each bar
+            int width = MAX_GRAPH_WIDTH / numOfSpaces; // double width + width will provide spacing for each bar
+            int offset = (MAX_GRAPH_WIDTH % numOfSpaces) / 2;
             for (int i = 0; i < score.Length; i++)
             {
                 double fract = ((double)score[i]) / 100;
                 double height = fract * MAX_BAR_HEIGHT;
-                Rectangle bar = new Rectangle();
-                bar.Name = "bar" + i;
+                double margin = (double)((2 * i * width) + width + offset);
                 Color c; // set the color of the bar
                 if (score[i] < DECENT) c = Colors.Red;
                 else if (score[i] < GOOD) c = Colors.Yellow;
                 else c = Colors.Green;
-                c.A = 127;
-                bar.Height = height;
-                bar.Width = width;
-                this.graphGrid.Children.Add(bar);
-                Console.WriteLine("added! " + this.graphGrid.Children.Count);
-                bar.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
-                bar.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
-                double margin = (double)((2 * i * width) + width);
-                Console.WriteLine(margin);
-                bar.Margin = new Thickness(margin, 0.0, 0.0, 0.0);
-                bar.StrokeThickness = 1;
-                bar.Stroke = new SolidColorBrush(Colors.Black);
-                bar.Fill = new SolidColorBrush(c);
-                bar.Visibility = System.Windows.Visibility.Visible;
-                //barGrid.
-                
+                Rectangle bar = new Rectangle() {
+                    Name = "bar" + i,  
+                    Width = width,
+                    Height = height,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                    Margin = new Thickness(margin, 0.0, 0.0, 0.0),
+                    StrokeThickness = 1,
+                    Stroke = new SolidColorBrush(Colors.Black),
+                    Fill = new SolidColorBrush(c),
+                    Visibility = System.Windows.Visibility.Visible,
+                };
+                this.barGrid.Children.Add(bar);
             }
+        }
+
+        private void removeBars()
+        {
+            this.barGrid.Children.Clear();
         }
 
         private void makeWeightBar(int score, int numOfBars)
@@ -186,8 +188,9 @@ namespace VLT
         {
             // Display a bar for each set, sized by the score (0-100)
             makeScoreScale();
+            removeBars();
             Random random = new Random();
-            int num = random.Next(10);
+            int num = random.Next(20);
             Console.WriteLine("Clicked!   Number of bars: " + num);
             int[] test = new int[num];
             for (int i = 0; i < test.Length; i++)

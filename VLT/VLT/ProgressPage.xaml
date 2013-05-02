@@ -44,9 +44,7 @@
                     <Rectangle Height="25" HorizontalAlignment="Left" Margin="0,175,0,0" Name="rectangle5" Stroke="Black" VerticalAlignment="Top" Width="600" />
                     <Rectangle Height="25" HorizontalAlignment="Left" Margin="0,225,0,0" Name="rectangle6" Stroke="Black" VerticalAlignment="Top" Width="600" />
                 </Grid>
-                <Canvas Height="250" HorizontalAlignment="Left" Margin="75,24,0,0" Name="graphCanvas" VerticalAlignment="Top" Width="600">
-                    <Rectangle Canvas.Left="116" Canvas.Top="64" Height="186" Name="rectangle7" Stroke="Black" Width="150" />
-                </Canvas>
+                <Grid Height="250" HorizontalAlignment="Left" Margin="75,24,0,0" Name="barGrid" VerticalAlignment="Top" Width="600" />
             </Grid>
             <Button Content="Set Weights" Height="23" HorizontalAlignment="Left" Margin="712,168,0,0" Name="setWeightsButton" VerticalAlignment="Top" Width="120" Click="setWeightsButton_Click" />
             <Button Content="Next Set" Height="23" HorizontalAlignment="Left" Margin="712,344,0,0" Name="nextSetButton" VerticalAlignment="Top" Width="120" Click="nextSetButton_Click" />
