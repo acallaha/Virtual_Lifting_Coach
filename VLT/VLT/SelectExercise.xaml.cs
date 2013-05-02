@@ -22,6 +22,7 @@ namespace VLT
         public SelectExercise()
         {
             InitializeComponent();
+
         }
 
         private void exerciseButtonClick(object sender, RoutedEventArgs e)
@@ -40,6 +41,11 @@ namespace VLT
         private void progressPage_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new SortByProgressPage());
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new Page1());
         }
     }
 }

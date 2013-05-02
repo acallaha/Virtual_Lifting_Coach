@@ -23,5 +23,13 @@ namespace VLT
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.session.username = "Matt";
+            MainWindow.data.sessions.Add(MainWindow.session);
+            MainWindow.SerializeToXML(MainWindow.data);
+           
+        }
     }
 }

@@ -72,6 +72,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AllData.cs" />
     <Compile Include="LiftData.cs" />
     <Compile Include="Page1.xaml.cs">
       <DependentUpon>Page1.xaml</DependentUpon>
@@ -95,6 +96,8 @@
     <Compile Include="SelectMode.xaml.cs">
       <DependentUpon>SelectMode.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Session.cs" />
+    <Compile Include="Set.cs" />
     <Compile Include="SortByProgressPage.xaml.cs">
       <DependentUpon>SortByProgressPage.xaml</DependentUpon>
     </Compile>
@@ -104,6 +107,7 @@
     <Compile Include="teachMePage.xaml.cs">
       <DependentUpon>teachMePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Workout.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

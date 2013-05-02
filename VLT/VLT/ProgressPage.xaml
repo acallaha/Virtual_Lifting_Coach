@@ -11,7 +11,7 @@
 
     <Grid>
         <ListBox Height="708" HorizontalAlignment="Left" Margin="12,80,0,0" Name="listBox1" VerticalAlignment="Top" Width="315" />
-        <TextBlock Height="63" HorizontalAlignment="Left" Margin="300,30,0,0" Name="titleText" FontSize="40" TextAlignment="Center" Text="Date + Exercise" VerticalAlignment="Top" Width="600" />
+        <TextBlock Height="63" HorizontalAlignment="Left" Margin="350,30,0,0" Name="titleText" FontSize="40" TextAlignment="Center" Text="Date + Exercise" VerticalAlignment="Top" Width="838" />
         <Grid Height="293" HorizontalAlignment="Left" Margin="350,116,0,0" Name="grid1" VerticalAlignment="Top" Width="838">
             <TextBlock Height="227" HorizontalAlignment="Right" Margin="0,60,6,0" Name="adviceText" FontSize="24" Text="Advice Goes Here" VerticalAlignment="Top" Width="561" />
             <ListBox Height="227" HorizontalAlignment="Left" Margin="6,60,0,0" Name="listBox3" VerticalAlignment="Top" Width="247" />
@@ -25,9 +25,28 @@
             <Button Content="Rep Scores" Height="23" HorizontalAlignment="Left" Margin="712,219,0,0" Name="repScoresButton" VerticalAlignment="Top" Width="120" Click="repScoresButton_Click" />
             <TextBlock Height="34" HorizontalAlignment="Left" Margin="6,6,0,0" TextAlignment="Center" Name="graphTitle" Text="Graph title goes here" FontSize="22" VerticalAlignment="Top" Width="700" />
             <Grid Height="320" HorizontalAlignment="Left" Margin="6,46,0,0" Name="grid3" VerticalAlignment="Top" Width="700">
-                <Border BorderBrush="Silver" BorderThickness="1" Height="250" HorizontalAlignment="Left" Margin="65,34,0,0" Name="border2" VerticalAlignment="Top" Width="600">
-                    <Border BorderBrush="Silver" BorderThickness="1" Height="200" Name="border3" Width="600" />
-                </Border>
+                <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,263,0,0" Name="scale0" Text="0" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
+                <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,238,0,0" Name="scale1" Text="10" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
+                <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,213,0,0" Name="scale2" Text="20" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
+                <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,188,0,0" Name="scale3" Text="30" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
+                <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,163,0,0" Name="scale4" Text="40" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
+                <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,138,0,0" Name="scale5" Text="50" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
+                <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,113,0,0" Name="scale6" Text="60" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
+                <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,88,0,0" Name="scale7" Text="70" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
+                <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,63,0,0" Name="scale8" Text="80" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
+                <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,38,0,0" Name="scale9" Text="90" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
+                <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,13,0,0" Name="scale10" Text="100" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
+                <Grid Height="250" HorizontalAlignment="Left" Margin="75,24,0,0" Name="graphGrid" VerticalAlignment="Top" Width="600">
+                    <Rectangle Height="250" HorizontalAlignment="Left" Margin="0,0,0,0" Name="rectangle1" Stroke="Black" VerticalAlignment="Top" Width="600" />
+                    <Rectangle Height="25" HorizontalAlignment="Left" Margin="0,25,0,0" Name="rectangle2" Stroke="Black" VerticalAlignment="Top" Width="600" />
+                    <Rectangle Height="25" HorizontalAlignment="Left" Margin="0,75,0,0" Name="rectangle3" Stroke="Black" VerticalAlignment="Top" Width="600" />
+                    <Rectangle Height="25" HorizontalAlignment="Left" Margin="0,125,0,0" Name="rectangle4" Stroke="Black" VerticalAlignment="Top" Width="600" />
+                    <Rectangle Height="25" HorizontalAlignment="Left" Margin="0,175,0,0" Name="rectangle5" Stroke="Black" VerticalAlignment="Top" Width="600" />
+                    <Rectangle Height="25" HorizontalAlignment="Left" Margin="0,225,0,0" Name="rectangle6" Stroke="Black" VerticalAlignment="Top" Width="600" />
+                </Grid>
+                <Canvas Height="250" HorizontalAlignment="Left" Margin="75,24,0,0" Name="graphCanvas" VerticalAlignment="Top" Width="600">
+                    <Rectangle Canvas.Left="116" Canvas.Top="64" Height="186" Name="rectangle7" Stroke="Black" Width="150" />
+                </Canvas>
             </Grid>
             <Button Content="Set Weights" Height="23" HorizontalAlignment="Left" Margin="712,168,0,0" Name="setWeightsButton" VerticalAlignment="Top" Width="120" Click="setWeightsButton_Click" />
             <Button Content="Next Set" Height="23" HorizontalAlignment="Left" Margin="712,344,0,0" Name="nextSetButton" VerticalAlignment="Top" Width="120" Click="nextSetButton_Click" />

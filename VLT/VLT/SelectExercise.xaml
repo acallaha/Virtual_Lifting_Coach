@@ -18,6 +18,6 @@
         <Rectangle Height="72" HorizontalAlignment="Left" Margin="347,99,0,0" Name="rectangle1" Stroke="Black" VerticalAlignment="Top" Width="438" />
         <Button Content="System Information" Height="40" HorizontalAlignment="Left" Margin="955,728,0,0" Name="systemInfo" VerticalAlignment="Top" Width="205" Click="systemInfo_Click" FontSize="20"/>
         <Button Content="My Progress" Height="55" HorizontalAlignment="Left" Margin="435,600,0,0" Name="myProgress" VerticalAlignment="Top" Width="270" Click="progressPage_Click" FontSize="24"/>
-
+        <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="169,678,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" />
     </Grid>
 </Page>

@@ -5,7 +5,8 @@ using System.Windows.Media;
 
 namespace VLT
 {
-    class Rep
+    [Serializable]
+    public class Rep
     {
         public string exercise;
         public int[] scores;

@@ -22,12 +22,28 @@ namespace VLT
     /// </summary>
     public partial class ProgressPage : Page
     {
-        private int MAX_BAR_HEIGHT = 250; // pixels
-        private int MAX_GRAPH_WIDTH = 280; // pixels
+        private static int MAX_BAR_HEIGHT = 250; // pixels
+        private static int MAX_GRAPH_WIDTH = 600; // pixels
+        private static int NUM_OF_TICK_MARKS = 11;
+        private static int DECENT = 40;
+        private static int GOOD = 80;
+        private Queue<TextBlock> scaleText;
 
         public ProgressPage()
         {
             InitializeComponent();
+            scaleText = new Queue<TextBlock>();
+            scaleText.Enqueue(scale0);
+            scaleText.Enqueue(scale1);
+            scaleText.Enqueue(scale2);
+            scaleText.Enqueue(scale3);
+            scaleText.Enqueue(scale4);
+            scaleText.Enqueue(scale5);
+            scaleText.Enqueue(scale6);
+            scaleText.Enqueue(scale7);
+            scaleText.Enqueue(scale8);
+            scaleText.Enqueue(scale9);
+            scaleText.Enqueue(scale10);
         }
 
         private void ProgressPageLoaded(object sender, RoutedEventArgs e)
@@ -82,17 +98,64 @@ namespace VLT
 
         private void makeScoreScale()
         {
-
+            int minValue = 0;
+            int interval = 10;
+            for (int i = 0; i < NUM_OF_TICK_MARKS; i++)
+            {
+                TextBlock scale = scaleText.Dequeue();
+                int val = minValue + i * interval;
+                scale.Text = val.ToString();
+                scaleText.Enqueue(scale);
+            }
         }
 
-        private void makeWeightScale(int maxWeight, int minWeight) {
-
-            }
-
-        private void makeScoreBar(int score, int numOfBars)
+        private void makeWeightScale(int maxWeight, int minWeight)
         {
-            Rectangle bar = new Rectangle();
-            //bar.
+            int difference = maxWeight - minWeight;
+            int scaleHeight = difference;
+            if (difference < 50) scaleHeight += 50;
+            //else 
+            int interval = 10;
+            for (int i = 0; i < NUM_OF_TICK_MARKS; i++)
+            {
+                TextBlock scale = scaleText.Dequeue();
+                int val = minWeight + i * interval;
+                scale.Text = val.ToString();
+                scaleText.Enqueue(scale);
+            }
+        }
+
+        private void makeScoreBars(int[] score)
+        {
+            int numOfSpaces = (score.Length * 2) + 1;
+            int width = MAX_GRAPH_WIDTH / numOfSpaces; // double this will provide spacing for each bar
+            for (int i = 0; i < score.Length; i++)
+            {
+                double fract = ((double)score[i]) / 100;
+                double height = fract * MAX_BAR_HEIGHT;
+                Rectangle bar = new Rectangle();
+                bar.Name = "bar" + i;
+                Color c; // set the color of the bar
+                if (score[i] < DECENT) c = Colors.Red;
+                else if (score[i] < GOOD) c = Colors.Yellow;
+                else c = Colors.Green;
+                c.A = 127;
+                bar.Height = height;
+                bar.Width = width;
+                this.graphGrid.Children.Add(bar);
+                Console.WriteLine("added! " + this.graphGrid.Children.Count);
+                bar.VerticalAlignment = System.Windows.VerticalAlignment.Bottom;
+                bar.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+                double margin = (double)((2 * i * width) + width);
+                Console.WriteLine(margin);
+                bar.Margin = new Thickness(margin, 0.0, 0.0, 0.0);
+                bar.StrokeThickness = 1;
+                bar.Stroke = new SolidColorBrush(Colors.Black);
+                bar.Fill = new SolidColorBrush(c);
+                bar.Visibility = System.Windows.Visibility.Visible;
+                //barGrid.
+                
+            }
         }
 
         private void makeWeightBar(int score, int numOfBars)
@@ -109,6 +172,7 @@ namespace VLT
         private void repScoresButton_Click(object sender, RoutedEventArgs e)
         {
             // Display a bar for each rep, scaled 0 to 100
+            makeScoreScale();
         }
 
         private void setWeightsButton_Click(object sender, RoutedEventArgs e)
@@ -121,6 +185,18 @@ namespace VLT
         private void setAvgButton_Click(object sender, RoutedEventArgs e)
         {
             // Display a bar for each set, sized by the score (0-100)
+            makeScoreScale();
+            Random random = new Random();
+            int num = random.Next(10);
+            Console.WriteLine("Clicked!   Number of bars: " + num);
+            int[] test = new int[num];
+            for (int i = 0; i < test.Length; i++)
+            {
+                test[i] = random.Next(100);
+                Console.Write(test[i] + " ");
+            }
+            Console.WriteLine();
+            makeScoreBars(test);
         }
     }
 }

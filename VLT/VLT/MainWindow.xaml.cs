@@ -13,18 +13,47 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using Microsoft.Kinect;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
+
 
 namespace VLT
 {
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static Session session;
+        public static AllData data;
         public MainWindow()
         {
             InitializeComponent();
             mainFrame.Navigate(new SelectExercise());
+            Console.WriteLine("It initialized");
+            MainWindow.session = new Session();
+            DeserializeFromXML();
+            Console.WriteLine(MainWindow.data.sessions[0].username);
         }
+
+        static public void SerializeToXML(AllData data)
+        {
+            IFormatter formatter = new BinaryFormatter();
+            using (FileStream stream = new FileStream(@"C:\\Users\\Matthew Drabick\\Documents\\GitHub\\Virtual_Lifting_Coach\\VLT\\VLT\\LiftData.xml", FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                formatter.Serialize(stream, data);
+            }
+        }
+
+        static public void DeserializeFromXML()
+        {
+            IFormatter formatter = new BinaryFormatter();
+            using (FileStream stream = new FileStream(@"C:\\Users\\Matthew Drabick\\Documents\\GitHub\\Virtual_Lifting_Coach\\VLT\\VLT\\LiftData.xml", FileMode.Open, FileAccess.Read, FileShare.None))
+            {
+                MainWindow.data = (AllData)formatter.Deserialize(stream);
+            }
+        }
+
     }
 }
