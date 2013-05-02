@@ -21,8 +21,59 @@ namespace VLT
         public string getFeedback()
         {
             string advice = "Feeback: ";
-            
+
             return advice;
+        }
+
+
+        public List<String> getFeedbackList()
+        {
+            List<String> adviceList = new List<String>();
+
+            if (scores[0] > 95)
+            {
+                adviceList.Add("Good job with you knee width!");
+            }
+            else
+            {
+                adviceList.Add("Knees too close");
+            }
+
+            if (scores[0] > 95)
+            {
+                adviceList.Add("Good job with you knee depth!");
+            }
+            else
+            {
+                adviceList.Add("Insufficient Depth");
+            }
+
+            return adviceList;      
+        }
+
+        public List<String> getAdviceList()
+        {
+            List<String> adviceList = new List<String>();
+
+            if (scores[0] > 95)
+            {
+                adviceList.Add("Nice Job!");
+            }
+            else
+            {
+                adviceList.Add("Your knees are not far out enough at the bottom of the rep - you need to focus on pushing them out at the bottom. ");
+            }
+
+            if (scores[0] > 95)
+            {
+                adviceList.Add("Nice Job!");
+            }
+            else
+            {
+                adviceList.Add("You aren't getting deep enough at the bottom of your squat - try to get your hips below your knees. ");
+            }
+
+            return adviceList;
         }
 
         public List<Label> getProblems()
