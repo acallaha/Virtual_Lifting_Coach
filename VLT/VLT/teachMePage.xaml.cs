@@ -228,7 +228,7 @@ namespace VLT
 
             // Blank the text used in editing the screen
             this.currentFeedback.Text = "";
-            this.currentInstruction.Text = "";
+            this.currentInstruction.Text = "Please Stand in Front of the Kinect";
             this.goodRepsLabel.Text = "";
             this.goodRepsText.Text = "";
 
@@ -284,6 +284,7 @@ namespace VLT
                 */
                 var directions = new Choices();
                 directions.Add(new SemanticResultValue("next step", "NEXT STEP"));
+                directions.Add(new SemanticResultValue("Try Quick Lift", "TRY QUICK LIFT"));
 
                 var gb = new GrammarBuilder { Culture = ri.Culture };
                 gb.Append(directions);
@@ -371,6 +372,9 @@ namespace VLT
                                     break;
 
                         }
+                        break;
+                    case "TRY QUICK LIFT":
+                        quickLiftSwitch();
                         break;
                     default:
                         /*should never get here */
@@ -697,6 +701,7 @@ namespace VLT
         private void teachSquatDone(Skeleton skeleton)
         {
             this.currentInstruction.Text = "Congratulations! Now you know how to squat. Why don't you try a quick lift?";
+            this.currentFeedback.Text = "Say \"Try quick lift\" to give it a shot!";
             // TODO: voice instruction to return to home?
         }
 
@@ -807,6 +812,13 @@ namespace VLT
                 return 0;
             else
                 return (int)((.35 - squatDepth) * 100.0 / .15);
+        }
+
+        /* TODO: please add a hook to navigate teto the quick lift page below */
+        private void quickLiftSwitch()
+        {
+            //quickLiftPage qlPage = new quickLiftPage();
+            //this.NavigationService.Navigate(qlPage);
         }
 
     }
