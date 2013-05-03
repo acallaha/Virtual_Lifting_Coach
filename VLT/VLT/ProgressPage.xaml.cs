@@ -54,7 +54,7 @@ namespace VLT
             scaleText.Enqueue(scale8);
             scaleText.Enqueue(scale9);
             scaleText.Enqueue(scale10);
-            
+            adviceText.Text = "";
         }
 
         public void loadWorkouts(int session)
@@ -112,11 +112,14 @@ namespace VLT
 
         private void openSet(object sender, RoutedEventArgs e)
         {
-           
+            // clear advice data
+            feedbackList.Items.Clear();
+            adviceText.Text = "";
             String set = ((Label)sender).Name;
             curSet = Convert.ToInt32(Regex.Match(set, @"\d+").Value);
             // Display graph of this set's rep scores
             makeScoreBars(repScores[curSet]);
+            graphTitle.Text = "Set " + (curSet+1) + " Rep Score Averages";
         }
         private void openRep(object sender, RoutedEventArgs e)
         { 
@@ -131,6 +134,7 @@ namespace VLT
             curRep = Convert.ToInt32(Regex.Match(repStr, @"\d+").Value);
             // Display graph of this set's rep scores
             makeScoreBars(repScores[curSet]);
+            graphTitle.Text = "Set " + (curSet + 1) + " Rep Score Averages";
             // add issues to feedback list box
             List<Label> issues = MainWindow.data.sessions[sessNum].workouts[wrkoutNum].sets[curSet].reps[curRep].getProblems();
             foreach (Label l in issues)
@@ -159,8 +163,8 @@ namespace VLT
                     repScoresArr[j] = repScoresArr[j] / MainWindow.data.sessions[sessNum].workouts[wrkoutNum].sets[i].reps[j].scores.Length;
                     cumSetScores[i] += repScoresArr[j];
                 }
-                cumSetScores[i] = cumSetScores[i] / repScoresArr.Length;
                 repScores.Add(repScoresArr);
+                cumSetScores[i] = cumSetScores[i] / repScoresArr.Length;
             }
             for (int i = 0; i < numOfSets; i++) {
                 Console.Write(cumSetScores[i] + " ");
@@ -257,15 +261,15 @@ namespace VLT
 
         private void nextSetButton_Click(object sender, RoutedEventArgs e)
         {
+            // clear advice data
+            feedbackList.Items.Clear();
+            adviceText.Text = "";
             // Increment the set and refresh the graph page
             // if it is the last set, go back to the first
             if (curSet == cumSetScores.Length - 1) curSet = 0;
             else curSet++;
-
-            makeScoreScale();
-            removeBars();
-
-            
+            makeScoreBars(repScores[curSet]);
+            graphTitle.Text = "Set " + (curSet+1) + " Rep Score Averages";
         }
 
         private void repScoresButton_Click(object sender, RoutedEventArgs e)
@@ -273,6 +277,7 @@ namespace VLT
             // Display a bar for each rep, scaled 0 to 100
             // get the currently selected set
             makeScoreBars(repScores[curSet]);
+            graphTitle.Text = "Set " + (curSet+1) + " Rep Score Averages";
         }
 
         private void setWeightsButton_Click(object sender, RoutedEventArgs e)
@@ -290,7 +295,7 @@ namespace VLT
             
 
             makeScoreBars(cumSetScores);
-            
+            graphTitle.Text = "Set Score Averages";
         }
     }
 }
