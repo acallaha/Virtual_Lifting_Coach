@@ -88,17 +88,31 @@ namespace VLT
             int i = 0;
             foreach (Set s in MainWindow.data.sessions[sessNum].workouts[wrkoutNum].sets)
             {
+                int quality = cumSetScores[i];
+                Color c;
+                if (quality < DECENT) c = Colors.Red;
+                else if (quality < GOOD) c = Colors.Yellow;
+                else c = Colors.Green;
+                c.A = 127; 
                 Label setLbl = new Label() {
                     Name = "set" + i,
-                    Content = "Set " + (i+1) + " --------------------------------------"
+                    Content = "Set " + (i+1) + " --------------------------------------------------",
+                    Background = new SolidColorBrush(c)
                 };
                 setLbl.MouseLeftButtonDown += openSet;
                 setRepList.Items.Add(setLbl);
                 int j = 0;
                 foreach (Rep r in s.reps) {
+
+                    quality = (repScores[i])[j];
+                    if (quality < DECENT) c = Colors.Red;
+                    else if (quality < GOOD) c = Colors.Yellow;
+                    else c = Colors.Green;
+                    c.A = 127; 
                     Label repLbl = new Label() {
                         Name = "set" + i +"rep" + j,
-                        Content = "\t\tRep " + (j+1) + "\t\t"
+                        Content = "\t\tRep " + (j+1) + "\t\t",
+                        Background = new SolidColorBrush(c)
                     };
                     repLbl.MouseLeftButtonDown += openRep;
                     setRepList.Items.Add(repLbl);
