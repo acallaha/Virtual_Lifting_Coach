@@ -35,18 +35,17 @@ namespace VLT
             int i = 0;
             foreach (Session sess in MainWindow.data.sessions)
             {
-                Console.WriteLine("found data!");
-                i++;
+                
                 if (this.curUser.CompareTo(sess.username) == 0) {
                     Label dateLabel = new Label()
                     {
                         Name = "session" + i.ToString(),
                         Content = sess.date.ToString(),
                     };
-                    Console.WriteLine("made label!");
                     dateLabel.MouseLeftButtonDown += goToProgressPage;
                     dateSelection.Items.Add(dateLabel);
                 }
+                i++;
             }
         }
 
@@ -56,7 +55,7 @@ namespace VLT
             this.NavigationService.Navigate(progressPage);
             String session = ((Label)sender).Name;
             int sessIndex = Convert.ToInt32(Regex.Match(session, @"\d+").Value);
-            progressPage.titleText.Text = MainWindow.data.sessions[sessIndex].date.ToString();
+            progressPage.titleText.Text = MainWindow.data.sessions[sessIndex].date.ToShortDateString();
             progressPage.loadWorkouts(sessIndex);
         }
 

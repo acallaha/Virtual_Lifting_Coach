@@ -119,7 +119,7 @@ namespace VLT
             {
                 Session s = new Session();
                 s.date = s.date.AddDays((double)MainWindow.rand.Next(20));
-                s.username = "MattAdam";
+                s.username = "Guest";
                 s.workouts = fakeWorkoutList(1);
                 sessionList.Add(s);
             }
