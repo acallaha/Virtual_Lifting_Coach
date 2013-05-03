@@ -36,6 +36,7 @@ namespace VLT
         private int sessNum;
         private int wrkoutNum;
         private int curSet;
+        private int curRep;
 
 
         public ProgressPage()
@@ -64,8 +65,10 @@ namespace VLT
             foreach (Workout workout in MainWindow.data.sessions[sessNum].workouts) {
                 Label workoutLbl = new Label()
                 {
-                    Name = "workout" + Convert.ToString(i),
+                    Name = "workout" + i,
                     Content = workout.exercise,
+                    FontSize = 24,
+                    Height = 50
                 };
                 workoutLbl.MouseLeftButtonDown += loadSetData;
                 dateWorkoutList.Items.Add(workoutLbl);
@@ -73,33 +76,73 @@ namespace VLT
             }
             wrkoutNum = 0;
             curSet = 0;
-            loadScoreData();
         }
 
         private void loadSetData(object sender, RoutedEventArgs e)
         {
+            setRepList.Items.Clear();
             String workout = ((Label)sender).Name;
             wrkoutNum = Convert.ToInt32(Regex.Match(workout, @"\d+").Value);
+            loadScoreData();
+            this.titleText.Text = MainWindow.data.sessions[sessNum].date.ToShortDateString() + " -- " + ((Label)sender).Content;
             int i = 0;
             foreach (Set s in MainWindow.data.sessions[sessNum].workouts[wrkoutNum].sets)
             {
                 Label setLbl = new Label() {
                     Name = "set" + i,
-                    Content = "Set " + (i+1)
+                    Content = "Set " + (i+1) + " --------------------------------------"
                 };
+                setLbl.MouseLeftButtonDown += openSet;
+                setRepList.Items.Add(setLbl);
                 int j = 0;
                 foreach (Rep r in s.reps) {
                     Label repLbl = new Label() {
-                        Name = "rep" + j,
-                        Content = "Rep " + (j+1)
+                        Name = "set" + i +"rep" + j,
+                        Content = "\t\tRep " + (j+1) + "\t\t"
                     };
-
+                    repLbl.MouseLeftButtonDown += openRep;
+                    setRepList.Items.Add(repLbl);
                     j++;
                 }
                 i++;
             }
 
             
+        }
+
+        private void openSet(object sender, RoutedEventArgs e)
+        {
+           
+            String set = ((Label)sender).Name;
+            curSet = Convert.ToInt32(Regex.Match(set, @"\d+").Value);
+            // Display graph of this set's rep scores
+            makeScoreBars(repScores[curSet]);
+        }
+        private void openRep(object sender, RoutedEventArgs e)
+        { 
+            // clear advice data
+            feedbackList.Items.Clear();
+            adviceText.Text = "";
+            // get referenced set and rep
+            String setRep = ((Label)sender).Name;
+            String setStr = Regex.Match(setRep, @"set\d+").Value;
+            String repStr = Regex.Match(setRep, @"rep\d+").Value;
+            curSet = Convert.ToInt32(Regex.Match(setStr, @"\d+").Value);
+            curRep = Convert.ToInt32(Regex.Match(repStr, @"\d+").Value);
+            // Display graph of this set's rep scores
+            makeScoreBars(repScores[curSet]);
+            // add issues to feedback list box
+            List<Label> issues = MainWindow.data.sessions[sessNum].workouts[wrkoutNum].sets[curSet].reps[curRep].getProblems();
+            foreach (Label l in issues)
+            {
+                l.MouseLeftButtonDown += showAdvice;
+                feedbackList.Items.Add(l);
+            }
+        }
+
+        private void showAdvice(object sender, RoutedEventArgs e)
+        {
+            adviceText.Text = ((String)((Label)sender).Tag);
         }
         private void loadScoreData() {
             int numOfSets = MainWindow.data.sessions[sessNum].workouts[wrkoutNum].sets.Count;
@@ -111,9 +154,10 @@ namespace VLT
                 for (int j = 0; j < repScoresArr.Length; j++) {
                     for (int k = 0; k < MainWindow.data.sessions[sessNum].workouts[wrkoutNum].sets[i].reps[j].scores.Length; k++) {
                         repScoresArr[j] += MainWindow.data.sessions[sessNum].workouts[wrkoutNum].sets[i].reps[j].scores[k];
-                        cumSetScores[i] += repScoresArr[j];
+                        
                     }
                     repScoresArr[j] = repScoresArr[j] / MainWindow.data.sessions[sessNum].workouts[wrkoutNum].sets[i].reps[j].scores.Length;
+                    cumSetScores[i] += repScoresArr[j];
                 }
                 cumSetScores[i] = cumSetScores[i] / repScoresArr.Length;
                 repScores.Add(repScoresArr);
@@ -135,19 +179,7 @@ namespace VLT
 
         private void ProgressPageLoaded(object sender, RoutedEventArgs e)
         {
-            //this.showData("Adam");
-        }
 
-        private void showData(String username)
-        {
-            LiftData ld = new LiftData();
-            Stack<String> output = ld.getUserData(username);
-            while (output.Count != 0)
-            {
-                Label lift = new Label();
-                lift.Content = output.Pop();
-                listBox1.Items.Add(lift);
-            }
         }
 
 
@@ -182,6 +214,9 @@ namespace VLT
 
         private void makeScoreBars(int[] score)
         {
+            makeScoreScale();
+            removeBars();
+
             int numOfSpaces = (score.Length * 2) + 1;
             int width = MAX_GRAPH_WIDTH / numOfSpaces; // double width + width will provide spacing for each bar
             int offset = (MAX_GRAPH_WIDTH % numOfSpaces) / 2;
@@ -236,8 +271,6 @@ namespace VLT
         private void repScoresButton_Click(object sender, RoutedEventArgs e)
         {
             // Display a bar for each rep, scaled 0 to 100
-            makeScoreScale();
-            removeBars();
             // get the currently selected set
             makeScoreBars(repScores[curSet]);
         }
@@ -254,20 +287,7 @@ namespace VLT
         private void setAvgButton_Click(object sender, RoutedEventArgs e)
         {
             // Display a bar for each set, sized by the score (0-100)
-            makeScoreScale();
-            removeBars();
-
-            Random random = new Random();
-            int num = random.Next(20);
-            Console.WriteLine("Clicked!   Number of bars: " + num);
-            int[] test = new int[num];
-            for (int i = 0; i < test.Length; i++)
-            {
-                test[i] = random.Next(100);
-                Console.Write(test[i] + " ");
-            }
-            Console.WriteLine();
-            makeScoreBars(test);
+            
 
             makeScoreBars(cumSetScores);
             
