@@ -22,6 +22,8 @@
             </Viewbox>
             <TextBlock FontSize="36" FontWeight="Bold" Height="56" HorizontalAlignment="Left" Margin="6,0,0,0" Name="textBlock1" Text="Feedback:" TextWrapping="WrapWithOverflow" VerticalAlignment="Top" Width="286" />
         </Grid>
+        <TextBlock Height="35" HorizontalAlignment="Left" Margin="643,741,0,0" Name="enterWeightText" Text="Enter weight used for set:" FontSize="24"  VerticalAlignment="Top" Width="280" />
+        <TextBox Height="35" HorizontalAlignment="Right" Margin="0,741,195,0" Name="enterWeightBox" VerticalAlignment="Top" Width="76" />
     </Grid>
 
 </Page>
