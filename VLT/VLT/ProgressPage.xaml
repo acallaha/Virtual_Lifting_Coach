@@ -20,8 +20,8 @@
             <Border BorderBrush="DarkGray" BorderThickness="1" Height="233" HorizontalAlignment="Left" Margin="271,60,0,0" Name="border1" VerticalAlignment="Top" Width="561" />
         </Grid>
         <Grid Height="373" HorizontalAlignment="Left" Margin="350,415,0,0" Name="grid2" VerticalAlignment="Top" Width="838">
-            <Button Content="Set Avg. Scores" Height="23" HorizontalAlignment="Left" Margin="712,117,0,0" Name="setAvgButton" VerticalAlignment="Top" Width="120" Click="setAvgButton_Click" />
-            <Button Content="Rep Scores" Height="23" HorizontalAlignment="Left" Margin="712,219,0,0" Name="repScoresButton" VerticalAlignment="Top" Width="120" Click="repScoresButton_Click" />
+            <Button Content="Set Avg. Scores" IsEnabled="False"  Height="23" HorizontalAlignment="Left" Margin="712,117,0,0" Name="setAvgButton" VerticalAlignment="Top" Width="120" Click="setAvgButton_Click" />
+            <Button Content="Rep Scores" IsEnabled="False"  Height="23" HorizontalAlignment="Left" Margin="712,219,0,0" Name="repScoresButton" VerticalAlignment="Top" Width="120" Click="repScoresButton_Click" />
             <TextBlock Height="34" HorizontalAlignment="Left" Margin="6,6,0,0" TextAlignment="Center" Name="graphTitle" Text="Graph title goes here" FontSize="22" VerticalAlignment="Top" Width="700" />
             <Grid Height="320" HorizontalAlignment="Left" Margin="6,46,0,0" Name="grid3" VerticalAlignment="Top" Width="700">
                 <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,263,0,0" Name="scale0" Text="0" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
@@ -43,11 +43,13 @@
                     <Rectangle Height="25" HorizontalAlignment="Left" Margin="0,175,0,0" Name="rectangle5" Stroke="Black" VerticalAlignment="Top" Width="600" />
                     <Rectangle Height="25" HorizontalAlignment="Left" Margin="0,225,0,0" Name="rectangle6" Stroke="Black" VerticalAlignment="Top" Width="600" />
                 </Grid>
-                <Grid Height="250" HorizontalAlignment="Left" Margin="75,24,0,0" Name="barGrid" VerticalAlignment="Top" Width="600" />
-                <TextBlock Height="35" HorizontalAlignment="Left" Margin="6,138,0,0" Name="textBlock1" Text="SCORE " TextWrapping="Wrap" VerticalAlignment="Top" Width="47" />
+                <Grid Height="250" HorizontalAlignment="Left" Margin="75,24,0,0" Name="barGrid" VerticalAlignment="Top" Width="600">
+                    
+                </Grid>
+                <TextBlock Height="35" HorizontalAlignment="Left" Margin="6,147,0,0" Name="scaleLabel" Text="Score" TextWrapping="Wrap" VerticalAlignment="Top" Width="47" />
             </Grid>
-            <Button Content="Set Weights" Height="23" HorizontalAlignment="Left" Margin="712,168,0,0" Name="setWeightsButton" VerticalAlignment="Top" Width="120" Click="setWeightsButton_Click" />
-            <Button Content="Next Set" Height="23" HorizontalAlignment="Left" Margin="712,344,0,0" Name="nextSetButton" VerticalAlignment="Top" Width="120" Click="nextSetButton_Click" />
+            <Button Content="Set Weights" Height="23" IsEnabled="False" HorizontalAlignment="Left" Margin="712,168,0,0" Name="setWeightsButton" VerticalAlignment="Top" Width="120" Click="setWeightsButton_Click" />
+            <Button Content="Next Set" Height="23" IsEnabled="False" HorizontalAlignment="Left" Margin="712,344,0,0" Name="nextSetButton" VerticalAlignment="Top" Width="120" Click="nextSetButton_Click" />
         </Grid>
         <TextBlock Height="44" HorizontalAlignment="Left" Margin="12,365,0,0" Name="setRepListTitle" Text="Select a Set or Rep:" TextAlignment="Center" FontSize="28" VerticalAlignment="Top" Width="315" TextWrapping="Wrap" />
         <ListBox Height="267" HorizontalAlignment="Left" Margin="12,86,0,0" Name="dateWorkoutList" VerticalAlignment="Top" Width="315" />

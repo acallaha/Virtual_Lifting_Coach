@@ -27,12 +27,16 @@ namespace VLT
         private static int MAX_BAR_HEIGHT = 250; // pixels
         private static int MAX_GRAPH_WIDTH = 600; // pixels
         private static int NUM_OF_TICK_MARKS = 11;
-        private Queue<TextBlock> scaleText; 
         private static int DECENT = 40;
         private static int GOOD = 80;
+        private static int MIN_SCALE_VAL = 0;
+        private static int INTERVAL = 1;
+        private static int MAX_SCALE_VAL = 2;
 
+        private Queue<TextBlock> scaleText; 
         private int[] cumSetScores;
         private List<int[]> repScores;
+        private int[] setWeights;
         private int sessNum;
         private int wrkoutNum;
         private int curSet;
@@ -96,6 +100,11 @@ namespace VLT
             String workout = ((Label)sender).Name;
             wrkoutNum = Convert.ToInt32(Regex.Match(workout, @"\d+").Value);
             loadScoreData(); // get all the scoring information about that workout
+            // enable graph buttons
+            this.setWeightsButton.IsEnabled = true;
+            this.repScoresButton.IsEnabled = true;
+            this.nextSetButton.IsEnabled = true;
+            this.setAvgButton.IsEnabled = true;
             // modify title
             this.titleText.Text = MainWindow.data.sessions[sessNum].date.ToShortDateString() + " -- " + ((Label)sender).Content;
 
@@ -202,6 +211,7 @@ namespace VLT
         private void loadScoreData() {
             int numOfSets = MainWindow.data.sessions[sessNum].workouts[wrkoutNum].sets.Count;
             cumSetScores = new int[numOfSets];
+            setWeights = new int[numOfSets];
             repScores = new List<int[]>(numOfSets);
             int[] repScoresArr;
             // cycles through the sets, the reps, and the scores for a particular rep
@@ -215,6 +225,7 @@ namespace VLT
                     repScoresArr[j] = repScoresArr[j] / MainWindow.data.sessions[sessNum].workouts[wrkoutNum].sets[i].reps[j].scores.Length;
                     cumSetScores[i] += repScoresArr[j];
                 }
+                setWeights[i] = MainWindow.data.sessions[sessNum].workouts[wrkoutNum].sets[i].weight;
                 repScores.Add(repScoresArr);
                 cumSetScores[i] = cumSetScores[i] / repScoresArr.Length;
             }
@@ -235,6 +246,8 @@ namespace VLT
         /// </summary>
         private void makeScoreScale()
         {
+            // modify the graph label
+            scaleLabel.Text = "Score";
             int minValue = 0;
             int interval = 10;
             for (int i = 0; i < NUM_OF_TICK_MARKS; i++)
@@ -249,24 +262,48 @@ namespace VLT
         /// <summary>
         /// Reset the graph scale tick marks to identify weights. 
         /// Dependent on the weights used for the set 
-        /// Needs work!!!
         /// </summary>
         /// <param name="maxWeight"></param>
         /// <param name="minWeight"></param>
-        private void makeWeightScale(int maxWeight, int minWeight)
+        private int[] makeWeightScale(int maxWeight, int minWeight)
         {
+            int[] scalingValues = new int[3]; // used to return the minimum value, interval, and maximum value
             int difference = maxWeight - minWeight;
-            int scaleHeight = difference;
-            if (difference < 50) scaleHeight += 50;
-            //else 
             int interval = 10;
+            int startVal = 0;
+
+            if (difference > 50)
+            {
+                // modify scale interval
+                while ((difference / interval) >= 5)
+                    interval += 5;
+                // modify scale start value
+                startVal = minWeight - 4 * interval - (minWeight % 5); 
+            }
+            else
+            {
+                startVal = minWeight - 40 - (minWeight % 10);
+            }
+            if (minWeight < 40)
+            {
+                startVal = 0;
+            }
+            scalingValues[MIN_SCALE_VAL] = startVal;
+            scalingValues[INTERVAL] = interval;
+            int val = 0;
+            // replace the scale tick marks
             for (int i = 0; i < NUM_OF_TICK_MARKS; i++)
             {
                 TextBlock scale = scaleText.Dequeue();
-                int val = minWeight + i * interval;
+                val = startVal + i * interval;
                 scale.Text = val.ToString();
                 scaleText.Enqueue(scale);
             }
+            scalingValues[MAX_SCALE_VAL] = val;
+
+            // modify the graph label
+            scaleLabel.Text = "Weight";
+            return scalingValues;
         }
         
         /// <summary>
@@ -312,6 +349,8 @@ namespace VLT
         private void removeBars()
         {
             this.barGrid.Children.Clear();
+            
+
         }
 
         /// <summary>
@@ -319,14 +358,54 @@ namespace VLT
         /// </summary>
         /// <param name="score"></param>
         /// <param name="numOfBars"></param>
-        private void makeWeightBar(int score, int numOfBars)
+        private void makeWeightBars(int[] weights)
         {
             removeBars();
+            int maxWeight = weights[0];
+            int minWeight = weights[0];
+            for (int i = 0; i < weights.Length; i++)
+            {
+                if (weights[i] > maxWeight) maxWeight = weights[i];
+                if (weights[i] < minWeight) minWeight = weights[i];
+            }
+            int[] scalingValues = makeWeightScale(maxWeight, minWeight);
+
+            int numOfSpaces = (weights.Length * 2) + 1;
+            int width = MAX_GRAPH_WIDTH / numOfSpaces; // double width + width will provide spacing for each bar
+            int offset = (MAX_GRAPH_WIDTH % numOfSpaces) / 2;
+            int totalHeight = scalingValues[MAX_SCALE_VAL] - scalingValues[MIN_SCALE_VAL];
+            Console.WriteLine("Set Weights: ");
+            for (int i = 0; i < weights.Length; i++)
+            {
+                Console.Write("Actual weight: " + weights[i] + " ");
+                int barHeight = weights[i] - scalingValues[MIN_SCALE_VAL];
+                double fract = ((double)barHeight) / totalHeight;
+
+                double height = fract * MAX_BAR_HEIGHT;
+                Console.Write("Adjusted height (pixels): " + height);
+                double margin = (double)((2 * i * width) + width + offset);
+                Rectangle bar = new Rectangle()
+                {
+                    Name = "bar" + i,
+                    Width = width,
+                    Height = height,
+                    VerticalAlignment = System.Windows.VerticalAlignment.Bottom,
+                    HorizontalAlignment = System.Windows.HorizontalAlignment.Left,
+                    Margin = new Thickness(margin, 0.0, 0.0, 0.0),
+                    StrokeThickness = 1,
+                    Stroke = new SolidColorBrush(Colors.Black),
+                    Fill = new SolidColorBrush(Colors.Blue),
+                    Visibility = System.Windows.Visibility.Visible,
+                };
+                this.barGrid.Children.Add(bar);
+                Console.WriteLine();
+            }
+            
 
         }
 
         /// <summary>
-        /// Advance the graph to the scores (or weights - coming soon!) for the next set
+        /// Advance the graph to the scores for the next set
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -357,15 +436,45 @@ namespace VLT
         }
 
         /// <summary>
-        /// Coming soon!
+        /// Display a graph of the weights for the sets, or display a message saying there is no 
+        /// weight data for this workout.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void setWeightsButton_Click(object sender, RoutedEventArgs e)
         {
+            Boolean noData = true;
+            for (int i = 0; i < setWeights.Length; i++)
+            {
+                if (setWeights[i] != 0)
+                {
+                    noData = false;
+                    break;
+                }
+            }
             // If no weight data, display a message indicating that there is no data
-            
-            // Display bars corresponding the scaled weights for each set
+            if (noData)
+            {
+                TextBlock noDataText = new TextBlock()
+                {
+                    Height = 100,
+                    Background = new SolidColorBrush(Colors.White),
+                    Margin = new Thickness(133,63,146,0),
+                    Name = "noWeightData",
+                    TextWrapping = System.Windows.TextWrapping.Wrap,
+                    TextAlignment = System.Windows.TextAlignment.Center,
+                    FontSize = 36,
+                    Text = "No Weight Data Available",
+                    VerticalAlignment = System.Windows.VerticalAlignment.Top
+                };
+                barGrid.Children.Add(noDataText);
+            }
+            // Otherwise display bars corresponding the scaled weights for each set
+            else
+            {
+                makeWeightBars(setWeights);
+                graphTitle.Text = "Set Weights";
+            }
 
             
         }
