@@ -57,10 +57,15 @@ namespace VLT
             adviceText.Text = "";
         }
 
+        /// <summary>
+        /// Loads the workout data and sets the setNum instance variable
+        /// </summary>
+        /// <param name="session">session index</param>
         public void loadWorkouts(int session)
         {
             dateWorkoutText.Text = "Select a Workout:";
             sessNum = session;
+            // Add each workout label to the sepRepList ListBox
             int i = 0;
             foreach (Workout workout in MainWindow.data.sessions[sessNum].workouts) {
                 Label workoutLbl = new Label()
@@ -74,17 +79,27 @@ namespace VLT
                 dateWorkoutList.Items.Add(workoutLbl);
                 i++;
             }
+            // initially select workout 0, and set 0 in that workout (must be set for the Next Set button to work)
             wrkoutNum = 0;
             curSet = 0;
         }
 
+        /// <summary>
+        /// Loads the set and rep data for a particular workout when it is selected
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void loadSetData(object sender, RoutedEventArgs e)
         {
             setRepList.Items.Clear();
+            // Get the identity of the workout
             String workout = ((Label)sender).Name;
             wrkoutNum = Convert.ToInt32(Regex.Match(workout, @"\d+").Value);
-            loadScoreData();
+            loadScoreData(); // get all the scoring information about that workout
+            // modify title
             this.titleText.Text = MainWindow.data.sessions[sessNum].date.ToShortDateString() + " -- " + ((Label)sender).Content;
+
+            // Add each set label to the sepRepList ListBox
             int i = 0;
             foreach (Set s in MainWindow.data.sessions[sessNum].workouts[wrkoutNum].sets)
             {
@@ -101,9 +116,10 @@ namespace VLT
                 };
                 setLbl.MouseLeftButtonDown += openSet;
                 setRepList.Items.Add(setLbl);
+                
+                // Add each rep label to the sepRepList ListBox
                 int j = 0;
                 foreach (Rep r in s.reps) {
-
                     quality = (repScores[i])[j];
                     if (quality < DECENT) c = Colors.Red;
                     else if (quality < GOOD) c = Colors.Yellow;
@@ -120,10 +136,13 @@ namespace VLT
                 }
                 i++;
             }
-
-            
         }
 
+        /// <summary>
+        /// Opens the graphs for a particular set
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void openSet(object sender, RoutedEventArgs e)
         {
             // clear advice data
@@ -135,6 +154,13 @@ namespace VLT
             makeScoreBars(repScores[curSet]);
             graphTitle.Text = "Set " + (curSet+1) + " Rep Score Averages";
         }
+
+        /// <summary>
+        /// Opens the graphs for the set that contains this rep. Opens feedback for
+        /// that particular rep. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void openRep(object sender, RoutedEventArgs e)
         { 
             // clear advice data
@@ -158,15 +184,27 @@ namespace VLT
             }
         }
 
+        /// <summary>
+        /// Show the advice upon the click of a feeback label in the feedbackList ListBox. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void showAdvice(object sender, RoutedEventArgs e)
         {
             adviceText.Text = ((String)((Label)sender).Tag);
         }
+
+        /// <summary>
+        /// Load all the score data about a particular workout into the array 
+        /// cumSetScores and the arrays that make up the repScores List that can
+        /// be manipulated and used for graphing and coloring different labels.
+        /// </summary>
         private void loadScoreData() {
             int numOfSets = MainWindow.data.sessions[sessNum].workouts[wrkoutNum].sets.Count;
             cumSetScores = new int[numOfSets];
             repScores = new List<int[]>(numOfSets);
             int[] repScoresArr;
+            // cycles through the sets, the reps, and the scores for a particular rep
             for (int i = 0; i < numOfSets; i++) {
                 repScoresArr = new int[MainWindow.data.sessions[sessNum].workouts[wrkoutNum].sets[i].reps.Count];
                 for (int j = 0; j < repScoresArr.Length; j++) {
@@ -180,27 +218,21 @@ namespace VLT
                 repScores.Add(repScoresArr);
                 cumSetScores[i] = cumSetScores[i] / repScoresArr.Length;
             }
-            for (int i = 0; i < numOfSets; i++) {
-                Console.Write(cumSetScores[i] + " ");
-            }
-            Console.WriteLine();
-            for (int i = 0; i < numOfSets; i++)
-            {
-                repScoresArr = repScores[i];
-                for (int j = 0; j < repScoresArr.Length; j++) {
-                    
-                    Console.Write(repScoresArr[j] + " ");
-                }
-                Console.WriteLine();
-            }
         }
-
+        
+        /// <summary>
+        /// Upon the page being loaded. Not used at the moment
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ProgressPageLoaded(object sender, RoutedEventArgs e)
         {
 
         }
 
-
+        /// <summary>
+        /// Reset the graph scale tick marks to 0 - 100 by 10's
+        /// </summary>
         private void makeScoreScale()
         {
             int minValue = 0;
@@ -214,6 +246,13 @@ namespace VLT
             }
         }
 
+        /// <summary>
+        /// Reset the graph scale tick marks to identify weights. 
+        /// Dependent on the weights used for the set 
+        /// Needs work!!!
+        /// </summary>
+        /// <param name="maxWeight"></param>
+        /// <param name="minWeight"></param>
         private void makeWeightScale(int maxWeight, int minWeight)
         {
             int difference = maxWeight - minWeight;
@@ -229,7 +268,11 @@ namespace VLT
                 scaleText.Enqueue(scale);
             }
         }
-
+        
+        /// <summary>
+        /// Make bars corresponding to the scores which range from 0 - 100 
+        /// </summary>
+        /// <param name="score"></param>
         private void makeScoreBars(int[] score)
         {
             makeScoreScale();
@@ -263,16 +306,30 @@ namespace VLT
             }
         }
 
+        /// <summary>
+        /// Removes all the bars from the graph grid
+        /// </summary>
         private void removeBars()
         {
             this.barGrid.Children.Clear();
         }
 
+        /// <summary>
+        /// Make bars dependent on the weight used in a set
+        /// </summary>
+        /// <param name="score"></param>
+        /// <param name="numOfBars"></param>
         private void makeWeightBar(int score, int numOfBars)
         {
+            removeBars();
 
         }
 
+        /// <summary>
+        /// Advance the graph to the scores (or weights - coming soon!) for the next set
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void nextSetButton_Click(object sender, RoutedEventArgs e)
         {
             // clear advice data
@@ -286,6 +343,11 @@ namespace VLT
             graphTitle.Text = "Set " + (curSet+1) + " Rep Score Averages";
         }
 
+        /// <summary>
+        /// Display the graph of the reps for the current set
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void repScoresButton_Click(object sender, RoutedEventArgs e)
         {
             // Display a bar for each rep, scaled 0 to 100
@@ -294,6 +356,11 @@ namespace VLT
             graphTitle.Text = "Set " + (curSet+1) + " Rep Score Averages";
         }
 
+        /// <summary>
+        /// Coming soon!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void setWeightsButton_Click(object sender, RoutedEventArgs e)
         {
             // If no weight data, display a message indicating that there is no data
@@ -303,11 +370,14 @@ namespace VLT
             
         }
 
+        /// <summary>
+        /// Display a graph of the average scores for each set. 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void setAvgButton_Click(object sender, RoutedEventArgs e)
         {
             // Display a bar for each set, sized by the score (0-100)
-            
-
             makeScoreBars(cumSetScores);
             graphTitle.Text = "Set Score Averages";
         }
