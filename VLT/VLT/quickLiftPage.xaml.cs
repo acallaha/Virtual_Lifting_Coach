@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
 using Microsoft.Kinect;
+using System.Text.RegularExpressions;
 
 namespace VLT
 {
@@ -31,6 +32,7 @@ namespace VLT
         private int position;
         private Set my_set;
         private Workout my_workout;
+        private int setWeight = 0; 
 
 
         public quickLiftPage()
@@ -42,8 +44,10 @@ namespace VLT
             this.my_workout.exercise = (String)this.exerciseName.Content;
 
         }
+
         /// <summary>
         /// Adds a rep and set count to the user interface
+        /// Adds a weight to a set upon the start of a new set
         /// </summary>
         /// <param name="quality">A score from 1 to 100 of the current rep</param>
         public void makeRep(int quality, Rep new_rep) {
@@ -57,25 +61,31 @@ namespace VLT
             else c = Colors.Green;
             c.A = 127; 
             // If the first rep of a set, add a set label before making a rep
+            // Also get the weight of the set if available
             if (currentRep == 0) {
                 currentSetPos = position; // save location of set label
                 // Make set row
                 Console.WriteLine("Making new set row");
-                setLabel = new Label();
-                setLabel.Background = new SolidColorBrush(c); // paint the set
-                setLabel.Content = "Set " + currentSet + "\t";
-                setLabel.Name = "Set" + currentSet;
+                setLabel = new Label() {
+                    Background = new SolidColorBrush(c), // paint the set
+                    Content = "Set " + currentSet + "\t",
+                    Name = "Set" + currentSet
+                };
                 setLabel.MouseLeftButtonDown += showData;
                 setRepList.Items.Add(setLabel);
                 position++;
+                // Get and save set weight 
+                String weightStr = enterWeightBox.Text;
+                setWeight = Convert.ToInt32(Regex.Match(weightStr, @"\d+").Value);
             }
             currentRep++;
             position++;
-            Label repLabel = new Label();
-            repLabel.Tag = this.curRep;
-            repLabel.Content = "\tRep " + currentRep + "\t\t";
-            repLabel.Background = new SolidColorBrush(c); // paint the set
-            repLabel.Name = "Rep" + currentRep;
+            Label repLabel = new Label() {
+                Tag = this.curRep,
+                Content = "\tRep " + currentRep + "\t\t",
+                Background = new SolidColorBrush(c), // paint the set
+                Name = "Rep" + currentRep
+            };
             repLabel.MouseLeftButtonDown += showData;
             setRepList.Items.Add(repLabel);
             // adjust color based on average score for the set
@@ -88,6 +98,7 @@ namespace VLT
             setLabel.Background = new SolidColorBrush(c);
             Console.WriteLine("Increase current Rep: " + currentRep);
         }
+
         public void endSet()
         {
             cumlativeScore = 0;
@@ -95,6 +106,9 @@ namespace VLT
             {
                 currentRep = 0;
                 currentSet++;
+                my_set.weight = setWeight;
+                this.setWeight = 0;
+                enterWeightBox.Text = "";
 
                 // Add set to workout
                 this.my_workout.sets.Add(my_set);
@@ -103,6 +117,7 @@ namespace VLT
 
             }
         }
+
         public void showData(object sender, RoutedEventArgs e)
         {
             issueBox.Items.Clear();
