@@ -76,7 +76,9 @@ namespace VLT
                 position++;
                 // Get and save set weight 
                 String weightStr = enterWeightBox.Text;
-                setWeight = Convert.ToInt32(Regex.Match(weightStr, @"\d+").Value);
+                weightStr = Regex.Match(weightStr, @"\d+").Value;
+                if (weightStr == null) setWeight = 0;
+                else setWeight = Convert.ToInt32(weightStr);
             }
             currentRep++;
             position++;
