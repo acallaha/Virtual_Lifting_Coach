@@ -16,7 +16,7 @@
         </Viewbox>
         <TextBlock Text="current instruction text block" HorizontalAlignment="Left" Margin="33,87,0,0" Name="currentInstruction" FontSize="36" TextWrapping="Wrap" Width="557" Height="342" VerticalAlignment="Top" />
         <TextBlock Height="286" HorizontalAlignment="Left" Margin="33,463,0,0" Name="currentFeedback" Text="current feedback textblock" FontSize="40" VerticalAlignment="Top" Width="557" TextWrapping="Wrap" />
-        <TextBlock HorizontalAlignment="Center" Margin="33,749,953,0" Name="goodRepsLabel"  FontSize="14" TextWrapping="Wrap" Text="a" Width="214" Height="39" VerticalAlignment="Top" />
-        <TextBlock HorizontalAlignment="Right" Margin="0,749,581,0" Name="goodRepsText" FontSize="14" TextWrapping="Wrap" Text="b" Width="366" Height="39" VerticalAlignment="Top" />
+        <TextBlock HorizontalAlignment="Center" Margin="33,749,953,0" Name="goodRepsLabel"  FontSize="36" TextWrapping="Wrap" Text="a" Width="214" Height="39" VerticalAlignment="Top" />
+        <TextBlock HorizontalAlignment="Right" Margin="0,749,581,0" Name="goodRepsText" FontSize="36" TextWrapping="Wrap" Text="b" Width="366" Height="39" VerticalAlignment="Top" />
     </Grid>
 </Page>

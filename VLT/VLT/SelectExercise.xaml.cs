@@ -72,9 +72,12 @@ namespace VLT
         private void exerciseButtonClick(object sender, RoutedEventArgs e)
         {
             // open the selectmode page
-            SelectMode selectMode = new SelectMode();
-            this.NavigationService.Navigate(selectMode);
-            selectMode.exerciseName.Text = (String)((Button)sender).Content;
+            if (((String)((Button)sender).Content).Equals("Back Squat"))
+            {
+                SelectMode selectMode = new SelectMode();
+                this.NavigationService.Navigate(selectMode);
+                selectMode.exerciseName.Text = (String)((Button)sender).Content;
+            }
         }
 
         private void systemInfo_Click(object sender, RoutedEventArgs e)

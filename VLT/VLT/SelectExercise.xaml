@@ -8,12 +8,12 @@
 	Title="SelectExercise">
 
     <Grid>
-        <Button Content="Dead Lift" Height="55" HorizontalAlignment="Left" Margin="228,268,0,0" Name="deadLiftButton" VerticalAlignment="Top" Width="270" Click="exerciseButtonClick" FontSize="24" />
-        <Button Content="Front Squat" Height="55" HorizontalAlignment="Left" Margin="228,373,0,0" Name="frontSquatButton" VerticalAlignment="Top" Width="270" Click="exerciseButtonClick" FontSize="24" />
+        <Button Content="Dead Lift" Height="55" HorizontalAlignment="Left" Margin="228,268,0,0" Name="deadLiftButton" VerticalAlignment="Top" Width="270" Click="exerciseButtonClick" FontSize="24" Opacity="0.33333" />
+        <Button Content="Front Squat" Height="55" HorizontalAlignment="Left" Margin="228,373,0,0" Name="frontSquatButton" VerticalAlignment="Top" Width="270" Click="exerciseButtonClick" FontSize="24" Opacity="0.33333" />
         <Button Content="Back Squat" Height="55" HorizontalAlignment="Left" Margin="228,478,0,0" Name="backSquatButton" VerticalAlignment="Top" Width="270" Click="exerciseButtonClick" FontSize="24"/>
-        <Button Content="Bent Over Row" Height="55" HorizontalAlignment="Left" Margin="630,268,0,0" Name="bentOverRowButton" VerticalAlignment="Top" Width="270" Click="exerciseButtonClick" FontSize="24"/>
-        <Button Content="Overhead Press" Height="55" HorizontalAlignment="Left" Margin="630,373,0,0" Name="overheadPressButton" VerticalAlignment="Top" Width="270" Click="exerciseButtonClick" FontSize="24"/>
-        <Button Content="Hang Clean" Height="55" HorizontalAlignment="Left" Margin="630,478,0,0" Name="hangCleanButton" VerticalAlignment="Top" Width="270" Click="exerciseButtonClick" FontSize="24"/>
+        <Button Content="Bent Over Row" Height="55" HorizontalAlignment="Left" Margin="630,268,0,0" Name="bentOverRowButton" VerticalAlignment="Top" Width="270" Click="exerciseButtonClick" FontSize="24" Opacity="0.33333" />
+        <Button Content="Overhead Press" Height="55" HorizontalAlignment="Left" Margin="630,373,0,0" Name="overheadPressButton" VerticalAlignment="Top" Width="270" Click="exerciseButtonClick" FontSize="24" Opacity="0.33333" />
+        <Button Content="Hang Clean" Height="55" HorizontalAlignment="Left" Margin="630,478,0,0" Name="hangCleanButton" VerticalAlignment="Top" Width="270" Click="exerciseButtonClick" FontSize="24" Opacity="0.33333" />
         <Label Content="Select an Exercise" Height="72" HorizontalAlignment="Left" Margin="347,99,0,0" Name="label1" VerticalAlignment="Top" FontSize="44" Width="438" HorizontalContentAlignment="Center" />
         <Rectangle Height="72" HorizontalAlignment="Left" Margin="347,99,0,0" Name="rectangle1" Stroke="Black" VerticalAlignment="Top" Width="438" />
         <Button Content="System Information" Height="40" HorizontalAlignment="Left" Margin="955,728,0,0" Name="systemInfo" VerticalAlignment="Top" Width="205" Click="systemInfo_Click" FontSize="20"/>

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.IO;
 using Microsoft.Kinect;
+using Microsoft.Speech.AudioFormat;
+using Microsoft.Speech.Recognition;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -26,6 +28,11 @@ namespace VLT
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Speech recognition engine using audio data from Kinect.
+        /// </summary>
+        private SpeechRecognitionEngine speechEngine;
+
          /// <summary>
         /// Width of output drawing
         /// </summary>
@@ -45,6 +52,12 @@ namespace VLT
         /// Possible squat states
         /// </summary>
         enum SquatTeachState { ST_INTRO, ST_FEET, ST_BOTTOM, ST_INTEGRATE, ST_DONE };
+
+
+        bool moveToNextState_FEET = false;
+        bool moveToNextState_BOTTOM = false;
+        bool moveToNextState_INTEGRATE = false;
+        bool moveToNextState_DONE = false;
 
         SquatTeachState curSTState = SquatTeachState.ST_INTRO;
 
@@ -134,6 +147,28 @@ namespace VLT
         private Rep curRep = new Rep();
 
 
+        /// <summary>
+        /// Gets the metadata for the speech recognizer (acoustic model) most suitable to
+        /// process audio from Kinect device.
+        /// </summary>
+        /// <returns>
+        /// RecognizerInfo if found, <code>null</code> otherwise.
+        /// </returns>
+        private static RecognizerInfo GetKinectRecognizer()
+        {
+            foreach (RecognizerInfo recognizer in SpeechRecognitionEngine.InstalledRecognizers())
+            {
+                string value;
+                recognizer.AdditionalInfo.TryGetValue("Kinect", out value);
+                if ("True".Equals(value, StringComparison.OrdinalIgnoreCase) && "en-US".Equals(recognizer.Culture.Name, StringComparison.OrdinalIgnoreCase))
+                {
+                    return recognizer;
+                }
+            }
+
+            return null;
+        }
+
 
         /// <summary>
         /// Draws indicators to show which edges are clipping skeleton data
@@ -193,7 +228,7 @@ namespace VLT
 
             // Blank the text used in editing the screen
             this.currentFeedback.Text = "";
-            this.currentInstruction.Text = "";
+            this.currentInstruction.Text = "Please Stand in Front of the Kinect";
             this.goodRepsLabel.Text = "";
             this.goodRepsText.Text = "";
 
@@ -231,7 +266,51 @@ namespace VLT
 
             if (null == this.sensor)
             {
-                this.currentInstruction.Text = "   No Kinect Found";
+                this.currentInstruction.Text = "No Kinect Found";
+            }
+
+
+            RecognizerInfo ri = GetKinectRecognizer();
+
+            if (null != ri)
+            {
+
+                this.speechEngine = new SpeechRecognitionEngine(ri.Id);
+
+                /****************************************************************
+                * 
+                * Use this code to create grammar programmatically rather than from
+                * a grammar file.
+                */
+                var directions = new Choices();
+                directions.Add(new SemanticResultValue("next step", "NEXT STEP"));
+                directions.Add(new SemanticResultValue("Try Quick Lift", "TRY QUICK LIFT"));
+
+                var gb = new GrammarBuilder { Culture = ri.Culture };
+                gb.Append(directions);
+
+                var g = new Grammar(gb);
+                speechEngine.LoadGrammar(g);
+
+                speechEngine.SpeechRecognized += SpeechRecognized;
+                //speechEngine.SpeechRecognitionRejected += SpeechRejected;
+
+                // For long recognition sessions (a few hours or more), it may be beneficial to turn off adaptation of the acoustic model. 
+                // This will prevent recognition accuracy from degrading over time.
+                ////speechEngine.UpdateRecognizerSetting("AdaptationOn", 0);
+
+
+                var audioSource = this.sensor.AudioSource;
+                audioSource.BeamAngleMode = BeamAngleMode.Adaptive;
+                var kinectStream = audioSource.Start();
+                var formatInfo = new SpeechAudioFormatInfo(EncodingFormat.Pcm, 16000, 16, 1, 32000, 2, null);
+
+                speechEngine.SetInputToAudioStream(kinectStream, formatInfo);
+                speechEngine.RecognizeAsync(RecognizeMode.Multiple);
+            }
+            else
+            {
+                this.currentFeedback.Text = "No Speech Recognizer";
             }
         }
 
@@ -244,7 +323,63 @@ namespace VLT
         {
             if (null != this.sensor)
             {
+                this.sensor.AudioSource.Stop();
+
                 this.sensor.Stop();
+                this.sensor = null;
+            }
+
+            if (null != this.speechEngine)
+            {
+                this.speechEngine.SpeechRecognized -= SpeechRecognized;
+                this.speechEngine.RecognizeAsyncStop();
+            }
+        }
+
+
+
+        /// <summary>
+        /// Handler for recognized speech events.
+        /// </summary>
+        /// <param name="sender">object sending the event.</param>
+        /// <param name="e">event arguments.</param>
+        private void SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
+        {
+            // Speech utterance confidence below which we treat speech as if it hadn't been heard
+            const double ConfidenceThreshold = 0.3;
+
+            if (e.Result.Confidence >= ConfidenceThreshold)
+            {
+                switch (e.Result.Semantics.Value.ToString())
+                {
+
+                    case "NEXT STEP":
+                        switch (this.curSTState)
+                                {
+                        case SquatTeachState.ST_INTRO:
+                                    moveToNextState_FEET = true;
+                                    break;
+                        case SquatTeachState.ST_FEET:
+                                    moveToNextState_BOTTOM = true;
+                                    break;
+                        case SquatTeachState.ST_BOTTOM:
+                                    moveToNextState_INTEGRATE = true;
+                                    break;
+                        case SquatTeachState.ST_INTEGRATE:
+                                    moveToNextState_DONE = true;
+                                    break;
+                        default:
+                                    break;
+
+                        }
+                        break;
+                    case "TRY QUICK LIFT":
+                        quickLiftSwitch();
+                        break;
+                    default:
+                        /*should never get here */
+                        break;
+                }
             }
         }
 
@@ -412,19 +547,19 @@ namespace VLT
             curSTMilliseconds = System.DateTime.Now.TimeOfDay.TotalMilliseconds;
 
             // give extra time for the welcome
-            if (curSTState == SquatTeachState.ST_INTRO && curSTMilliseconds - STRoundStartTime < 5000)
-            {
-                return;
-            }
+            //if (curSTState == SquatTeachState.ST_INTRO && curSTMilliseconds - STRoundStartTime < 5000)
+            //{
+            //    return;
+            //}
 
             // make sure the user sees the feet state
-            if (curSTState == SquatTeachState.ST_FEET && curSTMilliseconds - STRoundStartTime < 3500)
-            {
-                return;
-            }
+            //if (curSTState == SquatTeachState.ST_FEET && curSTMilliseconds - STRoundStartTime < 3500)
+            //{
+            //    return;
+            //}
 
             // don't let the user progress through the rounds too quickkly
-            if (curSTMilliseconds - STRoundStartTime < 500)
+            if (curSTMilliseconds - STRoundStartTime < 1000)
             {
                 return;
             }
@@ -456,9 +591,12 @@ namespace VLT
 
         private void teachSquatIntro(Skeleton skeleton)
         {
-            this.currentInstruction.Text = "Welcome! We're going to teach you how to do a proper squat, one step at a time.";
+            this.currentInstruction.Text = "Welcome! We're going to teach you how to do a proper squat, one step at a time. Say \"Next Step\" when you're ready to continue";
             // System.Threading.Thread.Sleep(2000); TODO: check time each time we're called, don't sleep in UI
-            curSTState = SquatTeachState.ST_FEET;
+            if (moveToNextState_FEET)
+            {
+                curSTState = SquatTeachState.ST_FEET;
+            }
         }
         private void teachSquatFeet(Skeleton skeleton)
         {
@@ -484,8 +622,11 @@ namespace VLT
             else
             {
                 this.currentFeedback.Text = "Nice Job! Your knees are in the correct position. Onto the next step";
-
-                curSTState = SquatTeachState.ST_BOTTOM;
+                this.currentInstruction.Text = "Say \"Next Step\" to continue";
+                if (moveToNextState_BOTTOM)
+                {
+                    curSTState = SquatTeachState.ST_BOTTOM;
+                }
             }
         }
 
@@ -522,7 +663,11 @@ namespace VLT
             else
             {
                 this.currentFeedback.Text = "Nice Job! Your squat is deep enough and your knees are in the correct position. Onto the next step";
-                curSTState = SquatTeachState.ST_INTEGRATE;
+                this.currentInstruction.Text = "Say \"Next Step\" to continue";
+                if (moveToNextState_INTEGRATE)
+                {
+                    curSTState = SquatTeachState.ST_INTEGRATE;
+                }
             }
         }
 
@@ -535,17 +680,29 @@ namespace VLT
             this.goodRepsLabel.Text = "Good Reps Count:   ";
             this.goodRepsText.Text = goodReps.ToString();
             this.currentFeedback.Text = "";
+            if (goodReps == 1) {
+                this.currentInstruction.Text = "Please do three good reps to continue";
+            }
+            else if (goodReps == 2)
+            {
+                this.currentInstruction.Text = "Almost there! One more";
+            }
             if (goodReps >= 3)
             {
                 this.currentFeedback.Text = "All done!";
-                curSTState = SquatTeachState.ST_DONE;
+                this.currentInstruction.Text = "Say \"Next Step\" to continue";
+                if (moveToNextState_DONE)
+                {
+                    curSTState = SquatTeachState.ST_DONE;
+                }
             }
         }
 
         private void teachSquatDone(Skeleton skeleton)
         {
             this.currentInstruction.Text = "Congratulations! Now you know how to squat. Why don't you try a quick lift?";
-            // System.Threading.Thread.Sleep(2000); TODO: check time each time we're called, don't sleep in UI
+            this.currentFeedback.Text = "Say \"Try quick lift\" to give it a shot!";
+            // TODO: voice instruction to return to home?
         }
 
         private void setState(Skeleton skeleton)
@@ -655,6 +812,13 @@ namespace VLT
                 return 0;
             else
                 return (int)((.35 - squatDepth) * 100.0 / .15);
+        }
+
+        /* TODO: please add a hook to navigate teto the quick lift page below */
+        private void quickLiftSwitch()
+        {
+            //quickLiftPage qlPage = new quickLiftPage();
+            //this.NavigationService.Navigate(qlPage);
         }
 
     }
