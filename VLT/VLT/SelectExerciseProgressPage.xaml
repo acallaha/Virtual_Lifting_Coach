@@ -1,0 +1,20 @@
+﻿<Page x:Class="VLT.SelectExerciseProgressPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1200"
+	Title="SelectExerciseProgressPage">
+
+    <Grid>
+        <TextBlock Height="100" HorizontalAlignment="Left" Margin="200,100,0,0" Name="chooseExerciseText" TextAlignment="Center" Text="Choose an Exercise:" FontSize="72" VerticalAlignment="Top" Width="800" />
+        <Button Content="Dead Lift" FontSize="24" Height="55" HorizontalAlignment="Left" Margin="276,317,0,0" Name="deadLiftProgressButton" VerticalAlignment="Top" Width="270" Click="deadLiftProgressButton_Click" />
+        <Button Content="Front Squat" FontSize="24" Height="55" HorizontalAlignment="Left" Margin="276,422,0,0" Name="frontSquatProgressButton" VerticalAlignment="Top" Width="270" Click="frontSquatProgressButton_Click" />
+        <Button Content="Back Squat" FontSize="24" Height="55" HorizontalAlignment="Left" Margin="276,527,0,0" Name="backSquatProgressButton" VerticalAlignment="Top" Width="270" Click="backSquatProgressButton_Click" />
+        <Button Content="Bent Over Row" FontSize="24" Height="55" HorizontalAlignment="Left" Margin="678,317,0,0" Name="bentOverRowProgressButton" VerticalAlignment="Top" Width="270" Click="bentOverRowProgressButton_Click" />
+        <Button Content="Overhead Press" FontSize="24" Height="55" HorizontalAlignment="Left" Margin="678,422,0,0" Name="overheadPressProgressButton" VerticalAlignment="Top" Width="270" Click="overheadPressProgressButton_Click" />
+        <Button Content="Hang Clean" FontSize="24" Height="55" HorizontalAlignment="Left" Margin="678,527,0,0" Name="hangCleanProgressButton" VerticalAlignment="Top" Width="270" Click="hangCleanProgressButton_Click" />
+        <Border BorderBrush="Black" BorderThickness="1" Height="114" HorizontalAlignment="Left" Margin="200,100,0,0" Name="border1" VerticalAlignment="Top" Width="800" />
+    </Grid>
+</Page>

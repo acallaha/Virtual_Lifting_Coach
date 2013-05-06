@@ -1,0 +1,58 @@
+﻿<Page x:Class="VLT.ProgressPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1200"
+	Title="ProgressPage"
+    Loaded="ProgressPageLoaded"
+    >
+
+    <Grid>
+        <ListBox Height="373" HorizontalAlignment="Left" Margin="12,415,0,0" Name="setRepList" VerticalAlignment="Top" Width="315" />
+        <TextBlock Height="69" HorizontalAlignment="Left" Margin="350,24,0,0" Name="titleText" FontSize="40" TextAlignment="Center" Text="Date + Exercise" VerticalAlignment="Top" Width="838" />
+        <Grid Height="323" HorizontalAlignment="Left" Margin="350,86,0,0" Name="grid1" VerticalAlignment="Top" Width="838">
+            <TextBlock Height="227" HorizontalAlignment="Right" Margin="0,60,6,0" TextWrapping="Wrap" Name="adviceText" FontSize="24" Text="Advice Goes Here" VerticalAlignment="Top" Width="561" />
+            <ListBox Height="233" HorizontalAlignment="Left" Margin="6,60,0,0" Name="feedbackList" VerticalAlignment="Top" Width="247" />
+            <TextBlock Height="48" HorizontalAlignment="Left" Margin="6,6,0,0" Name="feedbackTitle" FontSize="32" Text=" Feedback:" VerticalAlignment="Top" Width="247" />
+            <TextBlock Height="48" HorizontalAlignment="Left" Margin="271,6,0,0" TextWrapping="Wrap"  Name="adviceTitle" FontSize="32" Text=" Advice:" VerticalAlignment="Top" Width="561" />
+            <Border BorderBrush="DarkGray" BorderThickness="1" Height="233" HorizontalAlignment="Left" Margin="271,60,0,0" Name="border1" VerticalAlignment="Top" Width="561" />
+        </Grid>
+        <Grid Height="373" HorizontalAlignment="Left" Margin="350,415,0,0" Name="grid2" VerticalAlignment="Top" Width="838">
+            <Button Content="Set Avg. Scores" IsEnabled="False"  Height="23" HorizontalAlignment="Left" Margin="712,117,0,0" Name="setAvgButton" VerticalAlignment="Top" Width="120" Click="setAvgButton_Click" />
+            <Button Content="Rep Scores" IsEnabled="False"  Height="23" HorizontalAlignment="Left" Margin="712,219,0,0" Name="repScoresButton" VerticalAlignment="Top" Width="120" Click="repScoresButton_Click" />
+            <TextBlock Height="34" HorizontalAlignment="Left" Margin="6,6,0,0" TextAlignment="Center" Name="graphTitle" Text="Graph title goes here" FontSize="22" VerticalAlignment="Top" Width="700" />
+            <Grid Height="320" HorizontalAlignment="Left" Margin="6,46,0,0" Name="grid3" VerticalAlignment="Top" Width="700">
+                <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,263,0,0" Name="scale0" Text="0" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
+                <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,238,0,0" Name="scale1" Text="10" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
+                <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,213,0,0" Name="scale2" Text="20" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
+                <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,188,0,0" Name="scale3" Text="30" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
+                <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,163,0,0" Name="scale4" Text="40" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
+                <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,138,0,0" Name="scale5" Text="50" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
+                <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,113,0,0" Name="scale6" Text="60" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
+                <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,88,0,0" Name="scale7" Text="70" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
+                <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,63,0,0" Name="scale8" Text="80" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
+                <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,38,0,0" Name="scale9" Text="90" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
+                <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,13,0,0" Name="scale10" Text="100" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
+                <Grid Height="250" HorizontalAlignment="Left" Margin="75,24,0,0" Name="graphGrid" VerticalAlignment="Top" Width="600">
+                    <Rectangle Height="250" HorizontalAlignment="Left" Margin="0,0,0,0" Name="rectangle1" Stroke="Black" VerticalAlignment="Top" Width="600" />
+                    <Rectangle Height="25" HorizontalAlignment="Left" Margin="0,25,0,0" Name="rectangle2" Stroke="Black" VerticalAlignment="Top" Width="600" />
+                    <Rectangle Height="25" HorizontalAlignment="Left" Margin="0,75,0,0" Name="rectangle3" Stroke="Black" VerticalAlignment="Top" Width="600" />
+                    <Rectangle Height="25" HorizontalAlignment="Left" Margin="0,125,0,0" Name="rectangle4" Stroke="Black" VerticalAlignment="Top" Width="600" />
+                    <Rectangle Height="25" HorizontalAlignment="Left" Margin="0,175,0,0" Name="rectangle5" Stroke="Black" VerticalAlignment="Top" Width="600" />
+                    <Rectangle Height="25" HorizontalAlignment="Left" Margin="0,225,0,0" Name="rectangle6" Stroke="Black" VerticalAlignment="Top" Width="600" />
+                </Grid>
+                <Grid Height="250" HorizontalAlignment="Left" Margin="75,24,0,0" Name="barGrid" VerticalAlignment="Top" Width="600">
+                    
+                </Grid>
+                <TextBlock Height="35" HorizontalAlignment="Left" Margin="6,147,0,0" Name="scaleLabel" Text="Score" TextWrapping="Wrap" VerticalAlignment="Top" Width="47" />
+            </Grid>
+            <Button Content="Set Weights" Height="23" IsEnabled="False" HorizontalAlignment="Left" Margin="712,168,0,0" Name="setWeightsButton" VerticalAlignment="Top" Width="120" Click="setWeightsButton_Click" />
+            <Button Content="Next Set" Height="23" IsEnabled="False" HorizontalAlignment="Left" Margin="712,344,0,0" Name="nextSetButton" VerticalAlignment="Top" Width="120" Click="nextSetButton_Click" />
+        </Grid>
+        <TextBlock Height="44" HorizontalAlignment="Left" Margin="12,365,0,0" Name="setRepListTitle" Text="Select a Set or Rep:" TextAlignment="Center" FontSize="28" VerticalAlignment="Top" Width="315" TextWrapping="Wrap" />
+        <ListBox Height="267" HorizontalAlignment="Left" Margin="12,86,0,0" Name="dateWorkoutList" VerticalAlignment="Top" Width="315" />
+        <TextBlock FontSize="28" Height="44" HorizontalAlignment="Left" Margin="12,36,0,0" Name="dateWorkoutText" Text="Select a Date/Workout:" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Width="315" />
+    </Grid>
+</Page>

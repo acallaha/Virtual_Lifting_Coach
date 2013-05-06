@@ -15,21 +15,23 @@ using System.Windows.Shapes;
 namespace VLT
 {
     /// <summary>
-    /// Interaction logic for Page1.xaml
+    /// Interaction logic for SortByProgressPage.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class SortByProgressPage : Page
     {
-        public Page1()
+        public SortByProgressPage()
         {
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
+        private void dateButton_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.session.username = "Matt";
-            MainWindow.data.sessions.Add(MainWindow.session);
-            MainWindow.SerializeToXML(MainWindow.data);
-           
+            this.NavigationService.Navigate(new SelectDateProgressPage());
+        }
+
+        private void exerciseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new SelectExerciseProgressPage());
         }
     }
 }
