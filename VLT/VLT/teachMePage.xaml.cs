@@ -815,10 +815,11 @@ namespace VLT
         }
 
         /* TODO: please add a hook to navigate teto the quick lift page below */
+        /* I beleive that this works even though you commented it out ... */
         private void quickLiftSwitch()
         {
-            //quickLiftPage qlPage = new quickLiftPage();
-            //this.NavigationService.Navigate(qlPage);
+            quickLiftPage qlPage = new quickLiftPage();
+            this.NavigationService.Navigate(qlPage);
         }
 
     }
