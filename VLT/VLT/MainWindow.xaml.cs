@@ -118,7 +118,7 @@ namespace VLT
             for (int i = 0; i < n; i++)
             {
                 Session s = new Session();
-                s.date = s.date.AddDays((double)MainWindow.rand.Next(20));
+                s.date = s.date.AddDays(i);
                 s.username = "Guest";
                 s.workouts = fakeWorkoutList(1);
                 sessionList.Add(s);

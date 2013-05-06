@@ -31,7 +31,7 @@ namespace VLT
 
         private void exerciseButton_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new SelectExerciseProgressPage());
+            //this.NavigationService.Navigate(new SelectExerciseProgressPage());
         }
     }
 }

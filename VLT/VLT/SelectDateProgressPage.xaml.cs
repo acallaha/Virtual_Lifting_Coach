@@ -25,7 +25,7 @@ namespace VLT
         public SelectDateProgressPage()
         {
             InitializeComponent();
-            curUser = "MattAdam";
+            curUser = MainWindow.session.username;
             loadSessions();
             
         }
@@ -47,6 +47,7 @@ namespace VLT
                 }
                 i++;
             }
+
         }
 
         private void goToProgressPage(object sender, RoutedEventArgs e)

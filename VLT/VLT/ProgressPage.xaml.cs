@@ -59,6 +59,7 @@ namespace VLT
             scaleText.Enqueue(scale9);
             scaleText.Enqueue(scale10);
             adviceText.Text = "";
+            graphTitle.Text = "";
         }
 
         /// <summary>

@@ -25,6 +25,7 @@
 
         <TextBlock Height="35" HorizontalAlignment="Left" Margin="583,741,0,0" Name="enterWeightText" Text="Enter weight to be used for set:" FontSize="24"  VerticalAlignment="Top" Width="340" />
         <TextBox Height="35" HorizontalAlignment="Right" Margin="0,741,195,0" TextAlignment="Left" FontSize="22" Name="enterWeightBox" VerticalAlignment="Top" Width="76" />
+        <TextBlock Height="35" HorizontalAlignment="Left" Margin="813,28,0,0" Name="setTip" Text="Step out of the frame to end your set." FontSize="20" VerticalAlignment="Top" Width="348" />
     </Grid>
 
 </Page>
