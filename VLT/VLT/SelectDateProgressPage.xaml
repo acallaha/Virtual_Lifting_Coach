@@ -11,6 +11,5 @@
         <TextBlock Height="100" HorizontalAlignment="Left" Margin="300,100,0,0" Name="chooseDateText" TextAlignment="Center" Text="Choose a Date:" FontSize="72" VerticalAlignment="Top" Width="600" />
         <Border BorderBrush="Black" BorderThickness="1" Height="100" HorizontalAlignment="Left" Margin="300,100,0,0" Name="border1" VerticalAlignment="Top" Width="600" />
         <ListBox Height="400" HorizontalAlignment="Left" Margin="350,295,0,0" Name="dateSelection" VerticalAlignment="Top" Width="500" />
-        <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="1025,283,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" />
     </Grid>
 </Page>
