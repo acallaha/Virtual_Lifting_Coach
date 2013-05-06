@@ -59,6 +59,12 @@ namespace VLT
         bool moveToNextState_INTEGRATE = false;
         bool moveToNextState_DONE = false;
 
+        bool isComplete_FEET = false;
+        bool isComplete_BOTTOM = false;
+        bool isComplete_INTEGRATE = false;
+        bool isComplete_DONE = false;
+        bool isComplete_INTRO = false;
+
         SquatTeachState curSTState = SquatTeachState.ST_INTRO;
 
         /// <summary>
@@ -228,7 +234,7 @@ namespace VLT
 
             // Blank the text used in editing the screen
             this.currentFeedback.Text = "";
-            this.currentInstruction.Text = "Please Stand in Front of the Kinect";
+            this.currentInstruction.Text = "Please Stand in Front of the Kinect. Move back until your skeleton appears on screen";
             this.goodRepsLabel.Text = "";
             this.goodRepsText.Text = "";
 
@@ -357,16 +363,28 @@ namespace VLT
                         switch (this.curSTState)
                                 {
                         case SquatTeachState.ST_INTRO:
-                                    moveToNextState_FEET = true;
+                                    if (isComplete_INTRO)
+                                    {
+                                        moveToNextState_FEET = true;
+                                    }
                                     break;
                         case SquatTeachState.ST_FEET:
-                                    moveToNextState_BOTTOM = true;
+                                    if (isComplete_FEET)
+                                    {
+                                        moveToNextState_BOTTOM = true;
+                                    }
                                     break;
                         case SquatTeachState.ST_BOTTOM:
-                                    moveToNextState_INTEGRATE = true;
+                                    if (isComplete_BOTTOM)
+                                    {
+                                        moveToNextState_INTEGRATE = true;
+                                    }
                                     break;
                         case SquatTeachState.ST_INTEGRATE:
-                                    moveToNextState_DONE = true;
+                                    if (isComplete_INTEGRATE)
+                                    {
+                                        moveToNextState_DONE = true;
+                                    }
                                     break;
                         default:
                                     break;
@@ -593,8 +611,10 @@ namespace VLT
         {
             this.currentInstruction.Text = "Welcome! We're going to teach you how to do a proper squat, one step at a time. Say \"Next Step\" when you're ready to continue";
             // System.Threading.Thread.Sleep(2000); TODO: check time each time we're called, don't sleep in UI
+            isComplete_INTRO = true;
             if (moveToNextState_FEET)
             {
+                
                 curSTState = SquatTeachState.ST_FEET;
             }
         }
@@ -623,6 +643,7 @@ namespace VLT
             {
                 this.currentFeedback.Text = "Nice Job! Your knees are in the correct position. Onto the next step";
                 this.currentInstruction.Text = "Say \"Next Step\" to continue";
+                isComplete_FEET = true;
                 if (moveToNextState_BOTTOM)
                 {
                     curSTState = SquatTeachState.ST_BOTTOM;
@@ -664,6 +685,7 @@ namespace VLT
             {
                 this.currentFeedback.Text = "Nice Job! Your squat is deep enough and your knees are in the correct position. Onto the next step";
                 this.currentInstruction.Text = "Say \"Next Step\" to continue";
+                isComplete_BOTTOM = true;
                 if (moveToNextState_INTEGRATE)
                 {
                     curSTState = SquatTeachState.ST_INTEGRATE;
@@ -691,6 +713,7 @@ namespace VLT
             {
                 this.currentFeedback.Text = "All done!";
                 this.currentInstruction.Text = "Say \"Next Step\" to continue";
+                isComplete_INTEGRATE = true;
                 if (moveToNextState_DONE)
                 {
                     curSTState = SquatTeachState.ST_DONE;
