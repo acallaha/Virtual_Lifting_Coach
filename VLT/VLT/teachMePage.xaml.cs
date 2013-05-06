@@ -679,11 +679,11 @@ namespace VLT
             setState(skeleton);
             this.goodRepsLabel.Text = "Good Reps Count:   ";
             this.goodRepsText.Text = goodReps.ToString();
-            this.currentFeedback.Text = "";
-            if (goodReps == 1) {
-                this.currentInstruction.Text = "Please do three good reps to continue";
-            }
-            else if (goodReps == 2)
+            this.currentFeedback.Text = "Please do 3 good reps to continue";
+            //if (goodReps == 1) {
+            //    this.currentInstruction.Text = "Please do three good reps to continue";
+            //}
+            if (goodReps == 2)
             {
                 this.currentInstruction.Text = "Almost there! One more";
             }
