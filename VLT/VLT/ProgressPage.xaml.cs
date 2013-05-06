@@ -121,7 +121,7 @@ namespace VLT
                 c.A = 127; 
                 Label setLbl = new Label() {
                     Name = "set" + i,
-                    Content = "Set " + (i+1) + " --------------------------------------------------",
+                    Content = "Set " + (i+1) + " -------------------- " + setWeights[i] + " lbs. ------------------",
                     Background = new SolidColorBrush(c)
                 };
                 setLbl.MouseLeftButtonDown += openSet;

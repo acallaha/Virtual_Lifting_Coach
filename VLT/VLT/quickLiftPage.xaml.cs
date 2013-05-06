@@ -81,10 +81,6 @@ namespace VLT
                     setWeight = 0;
                 else
                     setWeight = Convert.ToInt32(weightStr);
-<<<<<<< HEAD
-
-=======
->>>>>>> 7e733e50df1838dd0f8f5b1e3f5968987acb7708
             }
             currentRep++;
             position++;
