@@ -119,6 +119,9 @@ namespace VLT
             {
                 Session s = new Session();
                 s.date = s.date.AddDays(i);
+                s.date = s.date.AddYears(2012);
+                s.date = s.date.AddMonths(4);
+                s.date = s.date.AddMinutes(MainWindow.rand.Next(0, 90));
                 s.username = "Guest";
                 s.workouts = fakeWorkoutList(1);
                 sessionList.Add(s);
