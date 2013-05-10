@@ -42,7 +42,7 @@ namespace VLT
 
             if (scores[0] > 95)
             {
-                adviceList.Add("Good job with you knee depth!");
+                adviceList.Add("Good job with you depth!");
             }
             else
             {
@@ -135,7 +135,7 @@ namespace VLT
                 c = Colors.Green;
                 c.A = 127;
                 l.Background = new SolidColorBrush(c);
-                l.Content = "Good Job with your knee depth!";
+                l.Content = "Good Job with your depth!";
                 l.Tag = "Nice job!";
                 probs.Add(l);
             }
