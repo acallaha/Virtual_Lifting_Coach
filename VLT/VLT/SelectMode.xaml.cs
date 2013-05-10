@@ -27,9 +27,20 @@ namespace VLT
 
         private void quickLift_Click(object sender, RoutedEventArgs e)
         {
-            quickLiftPage quickLiftPage = new quickLiftPage();
-            this.NavigationService.Navigate(quickLiftPage);
-            quickLiftPage.exerciseName.Content = this.exerciseName.Text;
+            if (MainWindow.session.username.Equals("Guest"))
+            {
+                TipsPage tp = new TipsPage();
+                this.NavigationService.Navigate(tp);
+                tp.exerciseName = (String)((Button)sender).Content;
+            }
+            else
+            {
+                quickLiftPage quickLiftPage = new quickLiftPage();
+                this.NavigationService.Navigate(quickLiftPage);
+                quickLiftPage.exerciseName.Content = this.exerciseName.Text;
+            }
+
+
 
         }
 

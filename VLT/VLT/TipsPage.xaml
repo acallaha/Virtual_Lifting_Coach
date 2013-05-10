@@ -1,0 +1,17 @@
+﻿<Page x:Class="VLT.TipsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="1200"
+	Title="tipsPage">
+
+    <Grid>
+        <TextBlock Height="72" HorizontalAlignment="Left" Margin="347,99,0,0" Name="tipsTitle" Text="Tips" VerticalAlignment="Top" Width="438" FontSize="44" TextAlignment="Center"/>
+        <TextBlock Height="164" HorizontalAlignment="Left" Margin="234,200,0,0" Name="tipsContent" Text="Be sure to stand at least 6 feet away from the Kinect sensor. Move completely out of the frame to end your set." VerticalAlignment="Top" Width="677" FontSize="36" TextAlignment="Justify" TextWrapping="Wrap" />
+        <TextBlock Height="164" HorizontalAlignment="Left" Margin="234,400,0,0" Name="tipsContent2" Text="Also, be sure to create an account in order to track your progress and hide this page." VerticalAlignment="Top" Width="677" FontSize="36" TextAlignment="Justify" TextWrapping="Wrap" />
+        <Button Content="Got it!" FontSize="36" Height="90" HorizontalAlignment="Left" Margin="404,600,0,0" Name="ok" VerticalAlignment="Top" Width="336" Click="ok_Click" />
+        <Rectangle Height="72" HorizontalAlignment="Left" Margin="347,99,0,0" Name="rectangle1" Stroke="Black" VerticalAlignment="Top" Width="438" />
+    </Grid>
+</Page>
