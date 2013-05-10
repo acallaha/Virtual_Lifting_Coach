@@ -8,7 +8,7 @@
 	Title="systemInformationPage">
 
     <Grid>
-        <Label Content="System Information" Height="37" HorizontalAlignment="Left" Margin="304,38,0,0" Name="label1" VerticalAlignment="Top" Width="131" />
-        <TextBlock Height="229" HorizontalAlignment="Left" Margin="74,163,0,0" Name="textBlock1" Text="This is a virtual lifting trainer." VerticalAlignment="Top" Width="651" />
+        <Label Content="System Information" Height="51" HorizontalAlignment="Left" Margin="304,38,0,0" Name="label1" VerticalAlignment="Top" Width="324" FontSize="32" FontWeight="Bold" />
+        <TextBlock Height="229" HorizontalAlignment="Left" Margin="74,163,0,0" Name="textBlock1" Text="This is a virtual lifting trainer. This system was designed by four Princeton University Computer Science Engineers to help you learn to lift with proper form. Simply select the exercise you are interested in, then choose 'Teach Me' if you are unfamiliar with the lift, or 'Quick Lift' if you want to lift while the system watches your form. Create an account and log in to track your progress between workouts." VerticalAlignment="Top" Width="651" TextWrapping="Wrap" FontSize="24" />
     </Grid>
 </Page>
