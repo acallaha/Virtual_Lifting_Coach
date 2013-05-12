@@ -24,11 +24,12 @@ namespace VLT
     /// </summary>
     public partial class ProgressPage : Page
     {
+        // Used for graphing and coloring
         private static int MAX_BAR_HEIGHT = 250; // pixels
         private static int MAX_GRAPH_WIDTH = 600; // pixels
         private static int NUM_OF_TICK_MARKS = 11;
         private static int DECENT = 40;
-        private static int GOOD = 80;
+        private static int GOOD = 90;
         private static int MIN_SCALE_VAL = 0;
         private static int INTERVAL = 1;
         private static int MAX_SCALE_VAL = 2;

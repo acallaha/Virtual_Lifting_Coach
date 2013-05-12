@@ -28,7 +28,7 @@ namespace VLT
         private int currentRep = 0;
         private int currentSetPos = 0;
         private static int DECENT = 40;
-        private static int GOOD = 80;
+        private static int GOOD = 90;
         private int cumlativeScore = 0;
         private int position;
         private Set my_set;
