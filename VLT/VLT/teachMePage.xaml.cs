@@ -859,8 +859,7 @@ namespace VLT
         /* I beleive that this works even though you commented it out ... */
         private void quickLiftSwitch()
         {
-            quickLiftPage qlPage = new quickLiftPage();
-            this.NavigationService.Navigate(qlPage);
+            this.NavigationService.Navigate(new quickLiftPage());
         }
 
         private void goToJustLift_Click(object sender, RoutedEventArgs e)
