@@ -27,7 +27,7 @@ namespace VLT
         private int currentSet = 1;
         private int currentRep = 0;
         private int currentSetPos = 0;
-        private static int DECENT = 40;
+        private static int DECENT = 50;
         private static int GOOD = 90;
         private int cumlativeScore = 0;
         private int position;
@@ -106,8 +106,8 @@ namespace VLT
             setLabel = (Label)setRepList.Items.GetItemAt(currentSetPos);
             setLabel.Background = new SolidColorBrush(c);
             Console.WriteLine("Increase current Rep: " + currentRep);
-            int knee_wider = (new_rep.scores[0] < 50);
-            int go_lower = (new_rep.scores[1] < 50);
+            bool knee_wider = (new_rep.scores[0] < DECENT);
+            bool go_lower = (new_rep.scores[1] < DECENT);
             if (this.audioCues && knee_wider && go_lower) {
                 this.speak.SpeakAsync("Get your knees wider and get down lower!");
             }

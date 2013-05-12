@@ -9,16 +9,15 @@
       Loaded="PageLoaded">
 
     <Grid>
-        <Label Content="Label" Height="34" HorizontalAlignment="Left" Margin="202,30,0,0" Name="exerciseName" VerticalAlignment="Top" Width="212" />
-        <Label Content="Video Demonstration" Height="32" HorizontalAlignment="Left" Margin="790,12,0,0" Name="videoLabel" VerticalAlignment="Top" Width="188" />
-        <Viewbox Height="662" HorizontalAlignment="Left" Margin="646,87,0,0" Name="viewbox1" VerticalAlignment="Top" Width="516">
+        <Label Content="Label" Height="52" HorizontalAlignment="Left" Margin="202,12,0,0" Name="exerciseName" VerticalAlignment="Top" FontSize="30" Width="212" />
+        <Viewbox Height="662" HorizontalAlignment="Left" Margin="646,61,0,0" Name="viewbox1" VerticalAlignment="Top" Width="516">
             <Image Height="408" Name="Image" Stretch="Fill" Width="319" />
         </Viewbox>
         <TextBlock Text="current instruction text block" HorizontalAlignment="Left" Margin="33,87,0,0" Name="currentInstruction" FontSize="36" TextWrapping="Wrap" Width="557" Height="342" VerticalAlignment="Top" />
         <TextBlock Height="286" HorizontalAlignment="Left" Margin="33,463,0,0" Name="currentFeedback" Text="current feedback textblock" FontSize="40" VerticalAlignment="Top" Width="557" TextWrapping="Wrap" />
         <TextBlock HorizontalAlignment="Left" Margin="33,749,0,0" Name="goodRepsLabel"  FontSize="36" TextWrapping="Wrap" Text="Good reps:" Width="191" Height="51" VerticalAlignment="Top" />
         <TextBlock HorizontalAlignment="Left" Margin="224,751,0,0" Name="goodRepsText" FontSize="36" TextWrapping="Wrap" Text="b" Width="366" Height="39" VerticalAlignment="Top" />
-        <Button Content="Go to 'Just Lift'" Height="26" HorizontalAlignment="Left" Margin="1038,764,0,0" Name="goToJustLift" VerticalAlignment="Top" Width="124" Visibility="Hidden" Click="goToJustLift_Click" />
-        <Button Content="Go Home" Height="26" HorizontalAlignment="Left" Margin="902,764,0,0" Name="goHomeButton" VerticalAlignment="Top" Width="124" Visibility="Hidden" Click="goHomeButton_Click" />
+        <Button Content="Go to 'Just Lift'" Height="26" HorizontalAlignment="Left" Margin="1038,738,0,0" Name="goToJustLift" VerticalAlignment="Top" Width="124" Visibility="Hidden" Click="goToJustLift_Click" />
+        <Button Content="Go Home" Height="26" HorizontalAlignment="Left" Margin="895,738,0,0" Name="goHomeButton" VerticalAlignment="Top" Width="124" Visibility="Hidden" Click="goHomeButton_Click" />
     </Grid>
 </Page>
