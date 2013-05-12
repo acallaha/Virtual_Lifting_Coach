@@ -778,6 +778,13 @@ namespace VLT
                 {
                     goodReps++;
                 }
+                if (curRep.scores[0] < 90) {
+                    this.speak.SpeakAsync("Get your knees wider!");
+                }
+                if (curRep.scores[1] < 90){
+                    this.speak.SpeakAsync("Get lower!");
+                }
+ 
             }
 
         }
@@ -796,16 +803,11 @@ namespace VLT
             if (kneeScore > curRep.scores[0])
             {
                 curRep.scores[0] = kneeScore;
-                if (this.audioCues && (kneeScore < 90)) {
-                    this.speak.SpeakAsync("Get your knees wider!");
-                }
             }
             if (depthScore > curRep.scores[1])
             {
                 curRep.scores[1] = depthScore;
-                if (this.audioCues && (depthScore < 90)) {
-                    this.speak.SpeakAsync("Get lower!");
- 
+
             }
 
         }
