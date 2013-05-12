@@ -46,6 +46,7 @@ namespace VLT
             this.my_set = new Set();
             this.my_workout.exercise = (String)this.exerciseName.Content;
             this.audioCues = true;
+            this.speak = new SpeechSynthesizer();
 
         }
 

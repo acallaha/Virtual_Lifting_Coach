@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Speech.Synthesis;
 
 namespace VLT
 {
@@ -25,8 +26,11 @@ namespace VLT
     {
         public teachMePage()
         {
+            this.speak = new SpeechSynthesizer();
             InitializeComponent();
         }
+        
+        private SpeechSynthesizer speak;
 
         /// <summary>
         /// Speech recognition engine using audio data from Kinect.
@@ -791,10 +795,16 @@ namespace VLT
             if (kneeScore > curRep.scores[0])
             {
                 curRep.scores[0] = kneeScore;
+                if (this.audioCues && (kneeScore < 90)) {
+                    this.speak.SpeakAsync("Get your knees wider!");
+                }
             }
             if (depthScore > curRep.scores[1])
             {
                 curRep.scores[1] = depthScore;
+                if (this.audioCues && (depthScore < 90)) {
+                    this.speak.SpeakAsync("Get lower!");
+ 
             }
 
         }
