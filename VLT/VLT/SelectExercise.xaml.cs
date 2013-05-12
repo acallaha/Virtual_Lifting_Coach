@@ -29,7 +29,7 @@ namespace VLT
             InitializeComponent();
             // TODO: Login
             //MainWindow.session.username = "AdamMatt";
-            loginSetUp();
+            if (MainWindow.session.workouts.Count > 0) loginSetUp();
             
         }
 
@@ -65,7 +65,7 @@ namespace VLT
 
         private void logoutButton_Click(object sender, RoutedEventArgs e)
         {
-            logoutUser();
+            writeData();
             MainWindow.session.username = "Guest";
             instructionText.Text = enterName;
             welcomeText.Text = "Welcome, " + MainWindow.session.username + "!";
@@ -93,24 +93,13 @@ namespace VLT
             this.NavigationService.Navigate(new SortByProgressPage());
         }
 
-        private void logoutUser()
+        private void writeData()
         {
             // Save the workout
-            Console.WriteLine(MainWindow.session.workouts.Count);
-            Console.WriteLine(MainWindow.session.workouts[0].sets.Count);
-            Console.WriteLine(MainWindow.session.workouts[0].sets[0].reps.Count);
             MainWindow.data.sessions.Add(MainWindow.session);
             MainWindow.SerializeToXML(MainWindow.data);
+            MainWindow.DeserializeFromXML();
+            MainWindow.session = new Session();
         }
-
-        private void makeFakeData_Click(object sender, RoutedEventArgs e)
-        {
-            //MainWindow.writeFakeData();
-            this.logoutUser();
-        }
-
-
-
-
     }
 }

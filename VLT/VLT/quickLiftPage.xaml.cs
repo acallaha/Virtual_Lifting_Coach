@@ -44,7 +44,7 @@ namespace VLT
             this.speak = new SpeechSynthesizer();
             this.my_workout = new Workout();
             this.my_set = new Set();
-            this.my_workout.exercise = (String)this.exerciseName.Content;
+            
             this.audioCues = false;
             this.speak = new SpeechSynthesizer();
 
@@ -70,12 +70,15 @@ namespace VLT
             if (currentRep == 0) {
                 currentSetPos = position; // save location of set label
                  // Get and save set weight 
-                String weightStr = enterWeightBox.Text;
+                String weightStr = lbsText.Text;
+                Console.WriteLine("Weight: " + weightStr);
                 weightStr = Regex.Match(weightStr, @"\d+").Value;
+                Console.WriteLine("Weight: " + weightStr);
                 if (weightStr.Equals(""))
                     setWeight = 0;
                 else
                     setWeight = Convert.ToInt32(weightStr);
+                Console.WriteLine("Weight: " + setWeight);
                 // Make set row
                 Console.WriteLine("Making new set row");
                 setLabel = new Label() {
@@ -131,9 +134,9 @@ namespace VLT
             {
                 currentRep = 0;
                 currentSet++;
+                Console.WriteLine(setWeight);
                 my_set.weight = setWeight;
                 this.setWeight = 0;
-                enterWeightBox.Text = "";
 
                 // Add set to workout
                 this.my_workout.sets.Add(my_set);
@@ -325,6 +328,7 @@ namespace VLT
         {
             this.audioCues = false;
             this.endSet();
+            this.my_workout.exercise = (String)this.exerciseName.Content;
             // Add workout to session
             Console.WriteLine(this.my_workout.sets.Count);
             if (!(this.currentSet == 1 && this.currentRep == 0))
@@ -736,6 +740,13 @@ namespace VLT
         {
             LiftData ld = new LiftData();
             ld.writeLine("Adam", "back squat", 3, 30, 82);
+        }
+
+
+        private void audioCuesCB_Click(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("changing cb");
+            this.audioCues = (bool)audioCuesCB.IsChecked;
         }
 
 

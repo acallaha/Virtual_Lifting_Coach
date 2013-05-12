@@ -322,7 +322,10 @@ namespace VLT
             int offset = (MAX_GRAPH_WIDTH % numOfSpaces) / 2;
             for (int i = 0; i < score.Length; i++)
             {
-                double fract = ((double)score[i]) / 100;
+                int scoreVal = score[i];
+                if (scoreVal == 0) scoreVal++;
+                else if (scoreVal == 100) scoreVal--;
+                double fract = ((double)scoreVal) / 100;
                 double height = fract * MAX_BAR_HEIGHT;
                 double margin = (double)((2 * i * width) + width + offset);
                 Color c; // set the color of the bar

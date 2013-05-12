@@ -12,7 +12,7 @@
     <Grid Height="800" Width="1200">
         <Label  Content="Label" Height="52" HorizontalAlignment="Left" Margin="177,12,0,0" Name="exerciseName" FontSize="30" VerticalAlignment="Top" Width="419" />
         <ListBox Height="656" HorizontalAlignment="Left" Margin="12,71,0,0" Name="setRepList" VerticalAlignment="Top" Width="220" />
-        <CheckBox Content="Audio Cues" Height="16" HorizontalAlignment="Left" Margin="1084,749,0,0" Name="audioCuesCB" VerticalAlignment="Top" />
+        <CheckBox Content="Audio Cues" Height="16" HorizontalAlignment="Left" Margin="1084,749,0,0" Name="audioCuesCB" VerticalAlignment="Top" Click="audioCuesCB_Click" />
         <Grid Height="657" HorizontalAlignment="Left" Margin="255,70,0,0" Name="quickLiftGrid" VerticalAlignment="Top" Width="906">
             <ListBox Height="410" HorizontalAlignment="Left" Margin="6,52,0,0" Name="issueBox" VerticalAlignment="Top" Width="286" BorderThickness="1" />
             <TextBlock Height="49" HorizontalAlignment="Left" Margin="6,468,0,0" Name="advicelabelBox" Text="Advice:" VerticalAlignment="Top" Width="558" FontSize="36" FontWeight="Bold" />
@@ -27,7 +27,6 @@
         <TextBox Height="35" HorizontalAlignment="Right" Margin="0,741,195,0" TextAlignment="Left" FontSize="22" Name="enterWeightBox" VerticalAlignment="Top" Width="76" />
         <TextBlock Height="51" HorizontalAlignment="Left" Margin="553,21,0,0" Name="setTip" Text="Step completely out of the frame to end a set." FontSize="28" VerticalAlignment="Top" Width="608" FontWeight="Bold" Foreground="#FF626262" />
         <TextBox Height="35" HorizontalAlignment="Right" Margin="0,741,195,0" TextAlignment="Left" FontSize="22"  Name="lbsText" VerticalAlignment="Top" Width="76" />
-        <TextBlock FontSize="24" Height="35" HorizontalAlignment="Left" Margin="1011,0,0,24" Name="textBlock2" Text="lbs" VerticalAlignment="Bottom" Width="340" />
     </Grid>
 
 </Page>
