@@ -41,7 +41,7 @@ namespace VLT
         public quickLiftPage()
         {
             InitializeComponent();
-
+            this.speak = new SpeechSynthesizer();
             this.my_workout = new Workout();
             this.my_set = new Set();
             this.my_workout.exercise = (String)this.exerciseName.Content;
@@ -106,6 +106,12 @@ namespace VLT
             setLabel = (Label)setRepList.Items.GetItemAt(currentSetPos);
             setLabel.Background = new SolidColorBrush(c);
             Console.WriteLine("Increase current Rep: " + currentRep);
+            if (this.audioCues && (new_rep.scores[0] < 50)) {
+                    this.speak.SpeakAsync("Get your knees wider!");
+            }
+            if (this.audioCues && (new_rep.scores[1] < 50)) {
+                this.speak.SpeakAsync("Get down lower");
+            }
         }
 
         public void endSet()
@@ -657,16 +663,10 @@ namespace VLT
             if (kneeScore > curRep.scores[0])
             {
                 curRep.scores[0] = kneeScore;
-                if (this.audioCues && (kneeScore < 50)) {
-                    this.speak.SpeakAsync("Get your knees wider!");
-                }
             }
             if (depthScore > curRep.scores[1])
             {
                 curRep.scores[1] = depthScore;
-                if (this.audioCues && (depthScore < 50)) {
-                    this.speak.SpeakAsync("Get down lower");
-                }
             }
 
             //Console.WriteLine("Scores: " + kneeScore + " " + depthScore);
