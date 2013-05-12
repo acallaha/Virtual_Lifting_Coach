@@ -45,7 +45,7 @@ namespace VLT
             this.my_workout = new Workout();
             this.my_set = new Set();
             this.my_workout.exercise = (String)this.exerciseName.Content;
-            this.audioCues = true;
+            this.audioCues = false;
             this.speak = new SpeechSynthesizer();
 
         }
@@ -322,6 +322,7 @@ namespace VLT
 
         private void PageUnloaded(object sender, RoutedEventArgs e)
         {
+            this.audioCues = false;
             // Add workout to session
             if (this.currentSet != 1 && this.currentRep != 0)
             {
