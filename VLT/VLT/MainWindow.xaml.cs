@@ -27,6 +27,7 @@ namespace VLT
     {
         public static Session session;
         public static AllData data;
+        public static Boolean loggedIn = false;
         //public static String data_filepath;
         private static Random rand; // for making fake data
 
