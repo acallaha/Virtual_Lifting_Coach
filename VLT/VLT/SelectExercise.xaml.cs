@@ -96,14 +96,17 @@ namespace VLT
         private void logoutUser()
         {
             // Save the workout
+            Console.WriteLine(MainWindow.session.workouts.Count);
+            Console.WriteLine(MainWindow.session.workouts[0].sets.Count);
+            Console.WriteLine(MainWindow.session.workouts[0].sets[0].reps.Count);
             MainWindow.data.sessions.Add(MainWindow.session);
             MainWindow.SerializeToXML(MainWindow.data);
         }
 
         private void makeFakeData_Click(object sender, RoutedEventArgs e)
         {
-            MainWindow.writeFakeData();
-            //this.logoutUser();
+            //MainWindow.writeFakeData();
+            this.logoutUser();
         }
 
 

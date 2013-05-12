@@ -69,29 +69,30 @@ namespace VLT
             // Also get the weight of the set if available
             if (currentRep == 0) {
                 currentSetPos = position; // save location of set label
-                // Make set row
-                Console.WriteLine("Making new set row");
-                setLabel = new Label() {
-                    Background = new SolidColorBrush(c), // paint the set
-                    Content = "Set " + currentSet + "\t",
-                    Name = "Set" + currentSet
-                };
-                setLabel.MouseLeftButtonDown += showData;
-                setRepList.Items.Add(setLabel);
-                position++;
-                // Get and save set weight 
+                 // Get and save set weight 
                 String weightStr = enterWeightBox.Text;
                 weightStr = Regex.Match(weightStr, @"\d+").Value;
                 if (weightStr.Equals(""))
                     setWeight = 0;
                 else
                     setWeight = Convert.ToInt32(weightStr);
+                // Make set row
+                Console.WriteLine("Making new set row");
+                setLabel = new Label() {
+                    Background = new SolidColorBrush(c), // paint the set
+                    Content = "Set " + currentSet + " -------------- " + setWeight + " lbs. -----------",
+                    Name = "Set" + currentSet
+                };
+                setLabel.MouseLeftButtonDown += showData;
+                setRepList.Items.Add(setLabel);
+                position++;
+
             }
             currentRep++;
             position++;
             Label repLabel = new Label() {
                 Tag = this.curRep,
-                Content = "\tRep " + currentRep + "\t\t",
+                Content = "\tRep " + currentRep + "\t\t-->",
                 Background = new SolidColorBrush(c), // paint the set
                 Name = "Rep" + currentRep
             };
@@ -117,7 +118,7 @@ namespace VLT
             else if (this.audioCues && go_lower) {
                 this.speak.SpeakAsync("Get down lower!");
             }
-            else {
+            else if (this.audioCues) {
                 this.speak.SpeakAsync("Pretty Good!");
             }
  
@@ -323,12 +324,15 @@ namespace VLT
         private void PageUnloaded(object sender, RoutedEventArgs e)
         {
             this.audioCues = false;
+            this.endSet();
             // Add workout to session
-            if (this.currentSet != 1 && this.currentRep != 0)
+            Console.WriteLine(this.my_workout.sets.Count);
+            if (!(this.currentSet == 1 && this.currentRep == 0))
             {
                 MainWindow.session.workouts.Add(my_workout);
                 this.my_workout = new Workout();
             }
+            //Console.WriteLine(this.my_workout.sets.Count);
         }
 
         /// <summary>
