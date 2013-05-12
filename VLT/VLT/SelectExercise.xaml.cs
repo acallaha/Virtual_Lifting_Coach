@@ -90,11 +90,6 @@ namespace VLT
             this.NavigationService.Navigate(new SortByProgressPage());
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new Page1());
-        }
-
         private void logoutUser()
         {
             // Save the workout

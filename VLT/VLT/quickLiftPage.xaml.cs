@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.IO;
+using System.Speech.Synthesis;
 using Microsoft.Kinect;
 using System.Text.RegularExpressions;
 
@@ -32,8 +33,8 @@ namespace VLT
         private int position;
         private Set my_set;
         private Workout my_workout;
-        private int setWeight = 0; 
-
+        private int setWeight = 0;
+        private SpeechSynthesizer speak;
 
         public quickLiftPage()
         {
