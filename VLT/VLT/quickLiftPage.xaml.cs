@@ -33,8 +33,10 @@ namespace VLT
         private int position;
         private Set my_set;
         private Workout my_workout;
-        private int setWeight = 0;
         private SpeechSynthesizer speak;
+        private int setWeight = 0; 
+        private bool audioCues;
+
 
         public quickLiftPage()
         {
@@ -43,6 +45,7 @@ namespace VLT
             this.my_workout = new Workout();
             this.my_set = new Set();
             this.my_workout.exercise = (String)this.exerciseName.Content;
+            this.audioCues = true;
 
         }
 
@@ -653,10 +656,16 @@ namespace VLT
             if (kneeScore > curRep.scores[0])
             {
                 curRep.scores[0] = kneeScore;
+                if (this.audioCues && (kneeScore < 50)) {
+                    this.speak.SpeakAsync("Get your knees wider!");
+                }
             }
             if (depthScore > curRep.scores[1])
             {
                 curRep.scores[1] = depthScore;
+                if (this.audioCues && (depthScore < 50)) {
+                    this.speak.SpeakAsync("Get down lower");
+                }
             }
 
             //Console.WriteLine("Scores: " + kneeScore + " " + depthScore);
