@@ -29,12 +29,13 @@ namespace VLT
             InitializeComponent();
             // TODO: Login
             //MainWindow.session.username = "AdamMatt";
-            if (!MainWindow.loggedIn) loginSetUp();
+            loginSetUp();
+            
         }
 
         private void loginSetUp()
         {
-            MainWindow.session.username = "Guest";
+            if (!MainWindow.loggedIn) { MainWindow.session.username = "Guest"; }
             instructionText.Text = enterName;
             welcomeText.Text = "Welcome, " + MainWindow.session.username + "!";
         }
