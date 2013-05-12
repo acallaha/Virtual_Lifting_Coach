@@ -29,7 +29,7 @@ namespace VLT
             InitializeComponent();
             // TODO: Login
             //MainWindow.session.username = "AdamMatt";
-            loginSetUp();
+            if (!MainWindow.loggedIn) loginSetUp();
         }
 
         private void loginSetUp()
@@ -58,6 +58,7 @@ namespace VLT
                 usernameBox.Text = "";
                 welcomeText.Text = "Welcome, " + MainWindow.session.username + "!";
                 instructionText.Text = "";
+                MainWindow.loggedIn = true;
             }
         }
 
@@ -67,6 +68,7 @@ namespace VLT
             MainWindow.session.username = "Guest";
             instructionText.Text = enterName;
             welcomeText.Text = "Welcome, " + MainWindow.session.username + "!";
+            MainWindow.loggedIn = false;
         }
 
         private void exerciseButtonClick(object sender, RoutedEventArgs e)
