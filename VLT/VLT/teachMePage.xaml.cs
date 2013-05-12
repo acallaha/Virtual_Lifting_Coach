@@ -777,12 +777,16 @@ namespace VLT
                 if (curRep.scores[0] > 90 && curRep.scores[1] > 90)
                 {
                     goodReps++;
+                    this.speak.SpeakAsync("Fantastic job!");
                 }
-                if (curRep.scores[0] < 90) {
-                    this.speak.SpeakAsync("Get your knees wider!");
+                else if (curRep.scores[0] < 90 && curRep.scores[1] < 90) {
+                    this.speak.SpeakAsync("Get your knees wider and get down lower!");
                 }
-                if (curRep.scores[1] < 90){
-                    this.speak.SpeakAsync("Get lower!");
+                else if (curRep.scores[1] < 90){
+                    this.speak.SpeakAsync("Get down lower!");
+                }
+                else {
+                    this.speak.SpeakAsync("Get you knees wider!");
                 }
  
             }

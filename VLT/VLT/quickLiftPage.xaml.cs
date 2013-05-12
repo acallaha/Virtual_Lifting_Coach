@@ -106,12 +106,21 @@ namespace VLT
             setLabel = (Label)setRepList.Items.GetItemAt(currentSetPos);
             setLabel.Background = new SolidColorBrush(c);
             Console.WriteLine("Increase current Rep: " + currentRep);
-            if (this.audioCues && (new_rep.scores[0] < 50)) {
-                    this.speak.SpeakAsync("Get your knees wider!");
+            int knee_wider = (new_rep.scores[0] < 50);
+            int go_lower = (new_rep.scores[1] < 50);
+            if (this.audioCues && knee_wider && go_lower) {
+                this.speak.SpeakAsync("Get your knees wider and get down lower!");
             }
-            if (this.audioCues && (new_rep.scores[1] < 50)) {
-                this.speak.SpeakAsync("Get down lower");
+            else if (this.audioCues && knee_wider) {
+                this.speak.SpeakAsync("Get your knees wider!");
             }
+            else if (this.audioCues && go_lower) {
+                this.speak.SpeakAsync("Get down lower!");
+            }
+            else {
+                this.speak.SpeakAsync("Pretty Good!");
+            }
+ 
         }
 
         public void endSet()
