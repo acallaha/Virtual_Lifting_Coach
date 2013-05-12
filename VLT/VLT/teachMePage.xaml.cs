@@ -723,6 +723,7 @@ namespace VLT
 
         private void teachSquatDone(Skeleton skeleton)
         {
+            this.goToJustLift.Visibility = System.Windows.Visibility.Visible;
             this.currentInstruction.Text = "Congratulations! Now you know how to squat. Why don't you try a quick lift?";
             this.currentFeedback.Text = "Say \"Try quick lift\" to give it a shot!";
             // TODO: voice instruction to return to home?
@@ -843,6 +844,11 @@ namespace VLT
         {
             quickLiftPage qlPage = new quickLiftPage();
             this.NavigationService.Navigate(qlPage);
+        }
+
+        private void goToJustLift_Click(object sender, RoutedEventArgs e)
+        {
+            quickLiftSwitch();
         }
 
     }

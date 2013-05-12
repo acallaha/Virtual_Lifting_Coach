@@ -476,9 +476,7 @@ namespace VLT
             {
                 makeWeightBars(setWeights);
                 graphTitle.Text = "Set Weights";
-            }
-
-            
+            }  
         }
 
         /// <summary>
