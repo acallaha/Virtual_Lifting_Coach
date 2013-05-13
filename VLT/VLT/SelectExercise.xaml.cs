@@ -29,15 +29,23 @@ namespace VLT
             InitializeComponent();
             // TODO: Login
             //MainWindow.session.username = "AdamMatt";
-            if (MainWindow.session.workouts.Count > 0) loginSetUp();
+            //if (MainWindow.session.workouts.Count > 0) 
+            loginSetUp();
             
         }
 
         private void loginSetUp()
         {
-            if (!MainWindow.loggedIn) { MainWindow.session.username = "Guest"; }
-            instructionText.Text = enterName;
-            welcomeText.Text = "Welcome, " + MainWindow.session.username + "!";
+            if (!MainWindow.loggedIn)
+            {
+                MainWindow.session.username = "Guest";
+                instructionText.Text = enterName;
+                welcomeText.Text = "Welcome, " + MainWindow.session.username + "!";
+            }
+            else
+            {
+                welcomeText.Text = "Welcome, " + MainWindow.session.username + "!";
+            }
         }
 
         private void loginButton_Click(object sender, RoutedEventArgs e)
