@@ -51,7 +51,7 @@
                     
                 </Grid>
                 <TextBlock Height="35" HorizontalAlignment="Left" Margin="6,147,0,0" Name="scaleLabel" Text="Score" TextWrapping="Wrap" VerticalAlignment="Top" Width="47" />
-                <Label Content="XaxisLabel" Height="28" HorizontalAlignment="Left" Margin="75,286,0,0" Name="XaxisLabel" VerticalAlignment="Top" Width="600" HorizontalContentAlignment="Center" />
+                <Label Height="28" HorizontalAlignment="Left" Margin="75,286,0,0" Name="XaxisLabel" VerticalAlignment="Top" Width="600" HorizontalContentAlignment="Center" />
             </Grid>
             <Button Content="Set Weights" Height="23" IsEnabled="False" HorizontalAlignment="Left" Margin="712,168,0,0" Name="setWeightsButton" VerticalAlignment="Top" Width="120" Click="setWeightsButton_Click" />
             <Button Content="Next Set" Height="23" IsEnabled="False" HorizontalAlignment="Left" Margin="712,269,0,0" Name="nextSetButton" VerticalAlignment="Top" Width="120" Click="nextSetButton_Click" />

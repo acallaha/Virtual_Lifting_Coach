@@ -36,7 +36,7 @@ namespace VLT
         private SpeechSynthesizer speak;
         private int setWeight = 0; 
         private bool audioCues;
-        private String[] advice = { "Good Job, boss!", "Fantastic Squat!", "Lord Almighty! Impressive Squat!", "You're the squat master!" };
+        private String[] advice = { "You're the squat master!", "Good Job boss!", "Fantastic Squat!", "Lord Almighty! Impressive Squat!"  };
         private String[] comments = { "Do you even lift?", "Don't you want to get big?", "My motherboard squats lower than that!", "Ain't nobody got time for squats like that", "Beep beep bop. I am a computer." };
         //private Random rand;
         private int joke_index = 0;
