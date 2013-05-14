@@ -12,16 +12,20 @@
     <Grid>
         <ListBox Height="373" HorizontalAlignment="Left" Margin="12,415,0,0" Name="setRepList" VerticalAlignment="Top" Width="315" />
         <TextBlock Height="69" HorizontalAlignment="Left" Margin="350,24,0,0" Name="titleText" FontSize="40" TextAlignment="Center" Text="Date + Exercise" VerticalAlignment="Top" Width="838" />
-        <Grid Height="323" HorizontalAlignment="Left" Margin="350,86,0,0" Name="grid1" VerticalAlignment="Top" Width="838">
-            <TextBlock Height="227" HorizontalAlignment="Right" Margin="0,60,6,0" TextWrapping="Wrap" Name="adviceText" FontSize="24" Text="Advice Goes Here" VerticalAlignment="Top" Width="561" />
-            <ListBox Height="233" HorizontalAlignment="Left" Margin="6,60,0,0" Name="feedbackList" VerticalAlignment="Top" Width="247" />
-            <TextBlock Height="48" HorizontalAlignment="Left" Margin="6,6,0,0" Name="feedbackTitle" FontSize="32" Text=" Feedback:" VerticalAlignment="Top" Width="247" />
-            <TextBlock Height="48" HorizontalAlignment="Left" Margin="271,6,0,0" TextWrapping="Wrap"  Name="adviceTitle" FontSize="32" Text=" Advice:" VerticalAlignment="Top" Width="561" />
-            <Border BorderBrush="DarkGray" BorderThickness="1" Height="233" HorizontalAlignment="Left" Margin="271,60,0,0" Name="border1" VerticalAlignment="Top" Width="561" />
+        <Grid Height="323" HorizontalAlignment="Left" Margin="350,465,0,0" Name="grid1" VerticalAlignment="Top" Width="838">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="56*" />
+                <ColumnDefinition Width="782*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Height="227" HorizontalAlignment="Right" Margin="0,60,6,0" TextWrapping="Wrap" Name="adviceText" FontSize="24" Text="Advice Goes Here" VerticalAlignment="Top" Width="561" Grid.Column="1" />
+            <ListBox Height="233" HorizontalAlignment="Left" Margin="6,60,0,0" Name="feedbackList" VerticalAlignment="Top" Width="247" Grid.ColumnSpan="2" />
+            <TextBlock Height="48" HorizontalAlignment="Left" Margin="6,6,0,0" Name="feedbackTitle" FontSize="32" Text=" Feedback:" VerticalAlignment="Top" Width="247" Grid.ColumnSpan="2" />
+            <TextBlock Height="48" HorizontalAlignment="Left" Margin="215,6,0,0" TextWrapping="Wrap"  Name="adviceTitle" FontSize="32" Text=" Advice:" VerticalAlignment="Top" Width="561" Grid.Column="1" />
+            <Border BorderBrush="DarkGray" BorderThickness="1" Height="233" HorizontalAlignment="Left" Margin="215,60,0,0" Name="border1" VerticalAlignment="Top" Width="561" Grid.Column="1" />
         </Grid>
-        <Grid Height="373" HorizontalAlignment="Left" Margin="350,415,0,0" Name="grid2" VerticalAlignment="Top" Width="838">
+        <Grid Height="373" HorizontalAlignment="Left" Margin="350,86,0,0" Name="grid2" VerticalAlignment="Top" Width="838">
             <Button Content="Set Avg. Scores" IsEnabled="False"  Height="23" HorizontalAlignment="Left" Margin="712,117,0,0" Name="setAvgButton" VerticalAlignment="Top" Width="120" Click="setAvgButton_Click" />
-            <Button Content="Rep Scores" IsEnabled="False"  Height="23" HorizontalAlignment="Left" Margin="712,219,0,0" Name="repScoresButton" VerticalAlignment="Top" Width="120" Click="repScoresButton_Click" />
+            <Button Content="Rep Scores" IsEnabled="False"  Height="23" HorizontalAlignment="Left" Margin="712,218,0,0" Name="repScoresButton" VerticalAlignment="Top" Width="120" Click="repScoresButton_Click" />
             <TextBlock Height="34" HorizontalAlignment="Left" Margin="6,6,0,0" TextAlignment="Center" Name="graphTitle" Text="Graph title goes here" FontSize="22" VerticalAlignment="Top" Width="700" />
             <Grid Height="320" HorizontalAlignment="Left" Margin="6,46,0,0" Name="grid3" VerticalAlignment="Top" Width="700">
                 <TextBlock Height="19" HorizontalAlignment="Left" Margin="47,263,0,0" Name="scale0" Text="0" TextAlignment="Center" VerticalAlignment="Top" Width="22" DataContext="{Binding}" />
@@ -47,9 +51,10 @@
                     
                 </Grid>
                 <TextBlock Height="35" HorizontalAlignment="Left" Margin="6,147,0,0" Name="scaleLabel" Text="Score" TextWrapping="Wrap" VerticalAlignment="Top" Width="47" />
+                <Label Content="XaxisLabel" Height="28" HorizontalAlignment="Left" Margin="75,286,0,0" Name="XaxisLabel" VerticalAlignment="Top" Width="600" HorizontalContentAlignment="Center" />
             </Grid>
             <Button Content="Set Weights" Height="23" IsEnabled="False" HorizontalAlignment="Left" Margin="712,168,0,0" Name="setWeightsButton" VerticalAlignment="Top" Width="120" Click="setWeightsButton_Click" />
-            <Button Content="Next Set" Height="23" IsEnabled="False" HorizontalAlignment="Left" Margin="712,344,0,0" Name="nextSetButton" VerticalAlignment="Top" Width="120" Click="nextSetButton_Click" />
+            <Button Content="Next Set" Height="23" IsEnabled="False" HorizontalAlignment="Left" Margin="712,269,0,0" Name="nextSetButton" VerticalAlignment="Top" Width="120" Click="nextSetButton_Click" />
         </Grid>
         <TextBlock Height="44" HorizontalAlignment="Left" Margin="12,365,0,0" Name="setRepListTitle" Text="Select a Set or Rep:" TextAlignment="Center" FontSize="28" VerticalAlignment="Top" Width="315" TextWrapping="Wrap" />
         <ListBox Height="267" HorizontalAlignment="Left" Margin="12,86,0,0" Name="dateWorkoutList" VerticalAlignment="Top" Width="315" />

@@ -36,18 +36,25 @@ namespace VLT
         private SpeechSynthesizer speak;
         private int setWeight = 0; 
         private bool audioCues;
+        private String[] advice = { "Good Job, boss!", "Fantastic Squat!", "Lord Almighty! Impressive Squat!", "You're the squat master!" };
+        private String[] comments = { "Do you even lift?", "Don't you want to get big?", "My motherboard squats lower than that!", "Ain't nobody got time for squats like that", "Beep beep bop. I am a computer." };
+        //private Random rand;
+        private int joke_index = 0;
+        private int advice_index = 0;
 
 
         public quickLiftPage()
         {
             InitializeComponent();
-            this.speak = new SpeechSynthesizer();
-            this.my_workout = new Workout();
-            this.my_set = new Set();
-            
             this.audioCues = false;
             this.speak = new SpeechSynthesizer();
+            //rand = new Random();
+        }
 
+        public void createNewWorkout()
+        {
+            this.my_workout = new Workout();
+            this.my_set = new Set();
         }
 
         /// <summary>
@@ -112,17 +119,24 @@ namespace VLT
             Console.WriteLine("Increase current Rep: " + currentRep);
             bool knee_wider = (new_rep.scores[0] < DECENT);
             bool go_lower = (new_rep.scores[1] < DECENT);
+            //int randNum = rand.Next(0, comments.Length);
+            String joke = comments[joke_index];
             if (this.audioCues && knee_wider && go_lower) {
-                this.speak.SpeakAsync("Get your knees wider and get down lower!");
+                this.speak.SpeakAsync("Get your knees wider and get down lower! " + joke);
+                joke_index = (joke_index + 1) % comments.Length;
             }
             else if (this.audioCues && knee_wider) {
-                this.speak.SpeakAsync("Get your knees wider!");
+                this.speak.SpeakAsync("Get your knees wider! " + joke);
+                joke_index = (joke_index + 1) % comments.Length;
             }
             else if (this.audioCues && go_lower) {
-                this.speak.SpeakAsync("Get down lower!");
+                this.speak.SpeakAsync("Get down lower! " + joke);
+                joke_index = (joke_index + 1) % comments.Length;
             }
             else if (this.audioCues) {
-                this.speak.SpeakAsync("Pretty Good!");
+                //int randAdvice = rand.Next(0, advice.Length);
+                this.speak.SpeakAsync(advice[advice_index]);
+                advice_index = (advice_index + 1) % advice.Length;
             }
  
         }
@@ -735,13 +749,6 @@ namespace VLT
             else
                 return (int)((.35 - squatDepth) * 100.0 / .15);
         }
-
-        private void logData_Click(object sender, RoutedEventArgs e)
-        {
-            LiftData ld = new LiftData();
-            ld.writeLine("Adam", "back squat", 3, 30, 82);
-        }
-
 
         private void audioCuesCB_Click(object sender, RoutedEventArgs e)
         {

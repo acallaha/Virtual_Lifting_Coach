@@ -32,6 +32,7 @@ namespace VLT
             quickLiftPage qp = new quickLiftPage();
             this.NavigationService.Navigate(qp);
             qp.exerciseName.Content = this.exerciseName;
+            qp.createNewWorkout();
 
         }
     }

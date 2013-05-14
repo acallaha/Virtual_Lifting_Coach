@@ -164,6 +164,7 @@ namespace VLT
             // Display graph of this set's rep scores
             makeScoreBars(repScores[curSet]);
             graphTitle.Text = "Set " + (curSet+1) + " Rep Score Averages";
+            XaxisLabel.Content = "Set";
         }
 
         /// <summary>
@@ -193,6 +194,7 @@ namespace VLT
                 l.MouseLeftButtonDown += showAdvice;
                 feedbackList.Items.Add(l);
             }
+            XaxisLabel.Content = "Rep";
         }
 
         /// <summary>
@@ -425,6 +427,7 @@ namespace VLT
             else curSet++;
             makeScoreBars(repScores[curSet]);
             graphTitle.Text = "Set " + (curSet+1) + " Rep Score Averages";
+            XaxisLabel.Content = "Rep";
         }
 
         /// <summary>
@@ -438,6 +441,7 @@ namespace VLT
             // get the currently selected set
             makeScoreBars(repScores[curSet]);
             graphTitle.Text = "Set " + (curSet+1) + " Rep Score Averages";
+            XaxisLabel.Content = "Rep";
         }
 
         /// <summary>
@@ -449,6 +453,7 @@ namespace VLT
         private void setWeightsButton_Click(object sender, RoutedEventArgs e)
         {
             Boolean noData = true;
+            XaxisLabel.Content = "Set";
             for (int i = 0; i < setWeights.Length; i++)
             {
                 if (setWeights[i] != 0)
@@ -490,6 +495,7 @@ namespace VLT
         private void setAvgButton_Click(object sender, RoutedEventArgs e)
         {
             // Display a bar for each set, sized by the score (0-100)
+            XaxisLabel.Content = "Set";
             makeScoreBars(cumSetScores);
             graphTitle.Text = "Set Score Averages";
         }

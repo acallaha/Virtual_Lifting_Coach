@@ -19,38 +19,6 @@ namespace VLT
             scores[1] = -1;
         }
 
-        public string getFeedback()
-        {
-            string advice = "Feeback: ";
-
-            return advice;
-        }
-
-
-        public List<String> getFeedbackList()
-        {
-            List<String> adviceList = new List<String>();
-
-            if (scores[0] > 95)
-            {
-                adviceList.Add("Good job with you knee width!");
-            }
-            else
-            {
-                adviceList.Add("Knees too close");
-            }
-
-            if (scores[0] > 95)
-            {
-                adviceList.Add("Good job with you depth!");
-            }
-            else
-            {
-                adviceList.Add("Insufficient Depth");
-            }
-
-            return adviceList;      
-        }
 
         public List<String> getAdviceList()
         {
@@ -96,7 +64,7 @@ namespace VLT
                     c.A = 127;
                     l.Background = new SolidColorBrush(c);
                 }
-                l.Content = "Knees too close";
+                l.Content = "Knees too close\t\t\t-->";
                 l.Tag = "Your knees are not far out enough at the bottom of the rep - you need to focus on pushing them out at the bottom. ";
                 probs.Add(l);
             }
@@ -106,7 +74,7 @@ namespace VLT
                 c = Colors.Green;
                 c.A = 127;
                 l.Background = new SolidColorBrush(c);
-                l.Content = "Good Job with your knee width!";
+                l.Content = "Good job with your knee width!\t-->";
                 l.Tag = "Nice job!";
                 probs.Add(l);
             }
@@ -125,7 +93,7 @@ namespace VLT
                     c.A = 127;
                     l.Background = new SolidColorBrush(c);
                 }
-                l.Content = "Insufficient Depth";
+                l.Content = "Insufficient depth\t\t\t-->";
                 l.Tag = "You aren't getting deep enough at the bottom of your squat - try to get your hips below your knees. ";
                 probs.Add(l);
             }
@@ -135,7 +103,7 @@ namespace VLT
                 c = Colors.Green;
                 c.A = 127;
                 l.Background = new SolidColorBrush(c);
-                l.Content = "Good Job with your depth!";
+                l.Content = "Good job with your depth!\t\t-->";
                 l.Tag = "Nice job!";
                 probs.Add(l);
             }

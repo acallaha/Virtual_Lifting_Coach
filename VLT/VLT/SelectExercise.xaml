@@ -18,7 +18,7 @@
         <Rectangle Height="72" HorizontalAlignment="Left" Margin="347,99,0,0" Name="rectangle1" Stroke="Black" VerticalAlignment="Top" Width="438" />
         <Button Content="System Information" Height="40" HorizontalAlignment="Left" Margin="955,728,0,0" Name="systemInfo" VerticalAlignment="Top" Width="205" Click="systemInfo_Click" FontSize="20"/>
         <Button Content="My Progress" Height="55" HorizontalAlignment="Left" Margin="435,600,0,0" Name="myProgress" VerticalAlignment="Top" Width="270" Click="progressPage_Click" FontSize="24"/>
-        <Button Content="Make Data" Height="23" HorizontalAlignment="Left" Margin="80,678,0,0" Name="makeFakeData" VerticalAlignment="Top" Width="75" />
+        <Button Content="Make Data" Height="23" Visibility="Hidden" HorizontalAlignment="Left" Margin="80,678,0,0" Name="makeFakeData" VerticalAlignment="Top" Width="75" />
         <Button Content="Login" Height="23" HorizontalAlignment="Left" Margin="978,120,0,0" Name="loginButton" VerticalAlignment="Top" Width="75" Click="loginButton_Click" />
         <Button Content="Logout" Height="23" HorizontalAlignment="Left" Margin="1098,120,0,0" Name="logoutButton" VerticalAlignment="Top" Width="75" Click="logoutButton_Click" />
         <TextBlock Height="43" HorizontalAlignment="Left" FontSize="24" Margin="701,12,0,0" TextAlignment="Right" Text="Welcome message" Name="welcomeText" VerticalAlignment="Top" Width="472" />

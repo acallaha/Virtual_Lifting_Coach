@@ -863,7 +863,10 @@ namespace VLT
         /* I beleive that this works even though you commented it out ... */
         private void quickLiftSwitch()
         {
-            this.NavigationService.Navigate(new quickLiftPage());
+            quickLiftPage quickLiftPage = new quickLiftPage();
+            this.NavigationService.Navigate(quickLiftPage);
+            quickLiftPage.exerciseName.Content = this.exerciseName.Content;
+            quickLiftPage.createNewWorkout();
         }
 
         private void goToJustLift_Click(object sender, RoutedEventArgs e)

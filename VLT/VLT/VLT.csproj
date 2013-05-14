@@ -80,7 +80,6 @@
     <Compile Include="TipsPage.xaml.cs">
       <DependentUpon>TipsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="LiftData.cs" />
     <Compile Include="ProgressPage.xaml.cs">
       <DependentUpon>ProgressPage.xaml</DependentUpon>
     </Compile>
@@ -192,7 +191,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="LiftData.xml" />
-    <Resource Include="LiftData.txt" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">

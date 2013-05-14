@@ -15,7 +15,8 @@ namespace VLT
         public Session() {
             this.username = "";
             this.workouts = new List<Workout>();
-            this.date = new DateTime();
+            this.date = DateTime.Now;
+
         }
     }
 }
