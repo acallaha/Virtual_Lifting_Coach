@@ -670,7 +670,7 @@ namespace VLT
 
             this.currentInstruction.Text = "Now we'll focus on the bottom of the squat. Begin by lowering your hips and pushing your knees out. Keep your back straight. Your hips should be lower than your knees. Be careful not to rock up onto your toes";
 
-            if (squatDepth > 0.25)
+            if (squatDepth > 0.35)
             {
                 this.currentFeedback.Text = "You need to go lower. Be sure your hips are at least as low as your knees";
                 return;
@@ -851,12 +851,12 @@ namespace VLT
             double squatDepth = hipHeight - kneeHeight;
             double hipZCoord = skeleton.Joints[JointType.HipCenter].Position.Z;
 
-            if (squatDepth < .2)
+            if (squatDepth < .25)
                 return 100;
-            else if (squatDepth > .35)
+            else if (squatDepth > .40)
                 return 0;
             else
-                return (int)((.35 - squatDepth) * 100.0 / .15);
+                return (int)((.40 - squatDepth) * 100.0 / .15);
         }
 
         /* TODO: please add a hook to navigate teto the quick lift page below */
