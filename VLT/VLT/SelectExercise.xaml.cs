@@ -83,6 +83,7 @@ namespace VLT
         private void exerciseButtonClick(object sender, RoutedEventArgs e)
         {
             // open the selectmode page
+            MainWindow.curExercise = (String)((Button)sender).Content;
             if (((String)((Button)sender).Content).Equals("Back Squat"))
             {
                 SelectMode selectMode = new SelectMode();

@@ -48,6 +48,7 @@ namespace VLT
             InitializeComponent();
             this.audioCues = false;
             this.speak = new SpeechSynthesizer();
+            this.exerciseName.Content = MainWindow.curExercise;
             //rand = new Random();
         }
 
